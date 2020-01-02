@@ -5,5 +5,4 @@ class SettingsLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text("Noch nicht implementiert");
   }
-  
 }
