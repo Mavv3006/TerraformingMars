@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:terraforming_mars/components/myColors.dart';
 import 'package:terraforming_mars/layout/inheritedLayout.dart';
+import 'package:terraforming_mars/theme/button.dart';
+import 'package:terraforming_mars/theme/colors.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,9 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        accentColor: AppColors.secondaryLight,
         fontFamily: 'Prototype',
-        buttonColor: MyColors.lightAccentColor,
-        disabledColor: MyColors.disabledButtonColor,
+//        disabledColor: AppColors.disabledButtonColor,
+        buttonTheme: globalButtonTheme,
+
       ),
       debugShowCheckedModeBanner: false,
       home: InheritedLayout(),

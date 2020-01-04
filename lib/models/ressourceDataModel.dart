@@ -1,37 +1,56 @@
 import 'package:scoped_model/scoped_model.dart';
 
 class RessourceDataModel extends Model {
-  final terraFormingValue = new _TerraformingValue();
-  final megaCredits = new _RessourceValue.startBy(20);
-  final titan = new _RessourceValue();
-  final heat = new _RessourceValue();
-  final crop = new _RessourceValue();
-  final energy = new _RessourceValue();
-  final steel = new _RessourceValue();
+  final terraFormingValue = new TerraformingValue("Terraforming Wert");
+  final megaCredits =
+      new RessourceValue.startBy(title: "Megacredits", startBy: 20);
+  final titan = new RessourceValue("Titan");
+  final heat = new RessourceValue("Wärme");
+  final crop = new RessourceValue("Pflanze");
+  final energy = new RessourceValue("Energie");
+  final steel = new RessourceValue("Stahl");
 }
 
-class _TerraformingValue {
+class TerraformingValue {
+  TerraformingValue(this._title);
+
+  final String _title;
   int _value = 20;
 
-  get value {
-    return _value;
-  }
+  int get value => _value;
 
-  increment() {
+  String get title => _title;
+
+  String get valueToString => "${_value}";
+
+  incrementValue() {
     _value++;
   }
 
-  decrement() {
+  decrementValue() {
     _value--;
   }
 }
 
-class _RessourceValue extends _TerraformingValue {
-  _RessourceValue.startBy(int value) {
+class RessourceValue extends TerraformingValue {
+  RessourceValue.startBy({int startBy, String title}) : super(title) {
     _value = value;
   }
 
-  _RessourceValue() {
+  RessourceValue(String title) : super(title) {
     _value = 0;
+  }
+
+  int _production = 1;
+
+  int get production => _production;
+  String get productionToString => "${_production}";
+
+  incrementProduction() {
+    _production++;
+  }
+
+  decrementProduction() {
+    _production--;
   }
 }

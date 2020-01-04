@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:terraforming_mars/components/myColors.dart';
+import 'package:terraforming_mars/components/bottomNavBar.dart';
 import 'package:terraforming_mars/layout/ressourceLayout.dart';
+import 'package:terraforming_mars/theme/colors.dart';
 
 class InheritedLayout extends StatelessWidget {
   final Radius _appBarRadius = Radius.circular(45);
@@ -8,78 +9,30 @@ class InheritedLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundColor,
+      backgroundColor: AppColors.secondaryColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
           centerTitle: true,
-          elevation: 20,
+          elevation: 15,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: _appBarRadius,
               bottomRight: _appBarRadius,
             ),
           ),
-          backgroundColor: MyColors.lightAccentColor,
+          backgroundColor: AppColors.primaryColor,
           title: Text(
             "Terraforming Mars",
-            style: TextStyle(
-              letterSpacing: 1.3,
-              color: MyColors.lightBackgroundColor,
-              fontSize: 30,
-            ),
+            style: Theme.of(context).textTheme.display1.copyWith(
+                  letterSpacing: 1.25,
+                  color: AppColors.secondaryLight,
+                ),
           ),
         ),
       ),
-      body: Center(child: RessourceLayout()),
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x20000000),
-              blurRadius: 2,
-              spreadRadius: 1,
-              offset: Offset(
-                0,
-                -3,
-              ),
-            ),
-          ],
-          color: MyColors.lightAccentColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(
-              "Ressourcen",
-              style: Theme.of(context).textTheme.title.copyWith(
-                    color: MyColors.darkAccentColor,
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 7,
-                  ),
-            ),
-            Text("Aktionen",
-                style: Theme.of(context).textTheme.title.copyWith(
-                      color: MyColors.lightBackgroundColor,
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 7,
-                    )),
-            Text(
-              "Einstellungen",
-              style: Theme.of(context).textTheme.title.copyWith(
-                    color: MyColors.lightBackgroundColor,
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 7,
-                  ),
-            ),
-          ],
-        ),
-      ),
+      body: RessourceLayout(),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

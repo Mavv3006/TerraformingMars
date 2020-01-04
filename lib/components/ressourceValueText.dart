@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terraforming_mars/components/myColors.dart';
+import 'package:terraforming_mars/theme/colors.dart';
 
 class RessourceValueText extends StatelessWidget {
   final String title;
@@ -11,17 +11,14 @@ class RessourceValueText extends StatelessWidget {
     return Text(
       title,
       style: Theme.of(context).textTheme.body2.copyWith(
-        color: MyColors.darkAccentColor,
-        shadows: <Shadow>[
-          Shadow(
-            color: MyColors.shadow,
-            blurRadius: 2,
-            offset: Offset(
-              0,
-              3,
+        color: AppColors.accentColor,
+          shadows: <Shadow>[
+            Shadow(
+              color: AppColors.shadow,
+              blurRadius: 2,
+              offset: Offset(0, 2),
             ),
-          ),
-        ],
+          ],
       ),
     );
   }

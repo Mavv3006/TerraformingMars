@@ -1,27 +1,64 @@
-import 'package:flutter/cupertino.dart';
-import 'package:terraforming_mars/components/myColors.dart';
+import 'package:flutter/material.dart';
+import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
+import 'package:terraforming_mars/models/ressourceDataModel.dart';
+import 'package:terraforming_mars/theme/colors.dart';
 
 class ResLayout extends StatelessWidget {
-  final String title;
+  final RessourceValue ressourceValue;
 
-  const ResLayout(this.title, {Key key}) : super(key: key);
+  final BoxDecoration _boxDecoration = BoxDecoration(
+    color: AppColors.secondaryLight,
+    border: Border.all(
+      width: 3,
+      color: AppColors.accentColor,
+    ),
+    borderRadius: BorderRadius.all(
+      Radius.circular(10),
+    ),
+  );
+
+  ResLayout(this.ressourceValue, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MyColors.lightBackgroundColor,
+      decoration: _boxDecoration,
       child: Column(
         children: <Widget>[
+          Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              RessourceValueText("c.V."),
-              RessourceValueText(title),
-              RessourceValueText("c.V."),
+              RessourceValueText(ressourceValue.valueToString),
+              RessourceValueText(ressourceValue.title),
+              RessourceValueText(ressourceValue.productionToString),
             ],
           ),
-          Row(),
+          Row(
+            children: <Widget>[
+              AddButton(
+                onPressed: () {},
+              ),
+              SubButton(
+                onPressed: () {},
+              ),
+              TextButton(
+                onPressed: () {},
+                text: "Credits",
+              ),
+              AddButton(
+                onPressed: null,
+              ),
+              SubButton(
+                onPressed: null,
+              ),
+              TextButton(
+                onPressed: null,
+                text: "Credits",
+              ),
+            ],
+          ),
         ],
       ),
     );
