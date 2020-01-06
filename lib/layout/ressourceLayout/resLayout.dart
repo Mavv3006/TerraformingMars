@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/components/customButton.dart';
+import 'package:terraforming_mars/components/divider.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
 import 'package:terraforming_mars/models/ressourceDataModel.dart';
 import 'package:terraforming_mars/theme/colors.dart';
@@ -22,44 +23,49 @@ class ResLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: _boxDecoration,
-      child: Column(
-        children: <Widget>[
-          Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              RessourceValueText(ressourceValue.valueToString),
-              RessourceValueText(ressourceValue.title),
-              RessourceValueText(ressourceValue.productionToString),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              AddButton(
-                onPressed: () {},
-              ),
-              SubButton(
-                onPressed: () {},
-              ),
-              TextButton(
-                onPressed: () {},
-                text: "Credits",
-              ),
-              AddButton(
-                onPressed: null,
-              ),
-              SubButton(
-                onPressed: null,
-              ),
-              TextButton(
-                onPressed: null,
-                text: "Credits",
-              ),
-            ],
-          ),
-        ],
+    return Padding(
+      padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+      child: Container(
+        decoration: _boxDecoration,
+        child: Column(
+          children: <Widget>[
+            Seperator(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RessourceValueText(ressourceValue.valueToString),
+                RessourceValueText(ressourceValue.title),
+                RessourceValueText(ressourceValue.productionToString),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                AddButton(
+                  onPressed: () {},
+                ),
+                SubButton(
+                  onPressed: () {},
+                ),
+                TextButton(
+                  onPressed: () {},
+                  text: "Credits",
+                ),
+                AddButton(
+                  onPressed: null,
+                ),
+                SubButton(
+                  onPressed: null,
+                ),
+                TextButton(
+                  onPressed: null,
+                  text: "Credits",
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:terraforming_mars/components/elevatedCard.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -7,43 +6,35 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedCard(
-      child: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.only(
-            topLeft: _radius,
-            topRight: _radius,
+    return Container(
+      height: 60,
+      color: AppColors.primaryColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text(
+            "Ressourcen",
+            style: Theme.of(context).textTheme.title.copyWith(
+                  color: AppColors.accentColor,
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 7,
+                ),
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(
-              "Ressourcen",
-              style: Theme.of(context).textTheme.title.copyWith(
-                    color: AppColors.accentColor,
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 7,
-                  ),
-            ),
-            Text("Aktionen",
-                style: Theme.of(context).textTheme.title.copyWith(
-                      color: AppColors.secondaryLight,
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 7,
-                    )),
-            Text(
-              "Einstellungen",
+          Text("Aktionen",
               style: Theme.of(context).textTheme.title.copyWith(
                     color: AppColors.secondaryLight,
                     decoration: TextDecoration.underline,
                     decorationThickness: 7,
-                  ),
-            ),
-          ],
-        ),
+                  )),
+          Text(
+            "Einstellungen",
+            style: Theme.of(context).textTheme.title.copyWith(
+                  color: AppColors.secondaryLight,
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 7,
+                ),
+          ),
+        ],
       ),
     );
   }

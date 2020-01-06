@@ -15,12 +15,6 @@ class InheritedLayout extends StatelessWidget {
         child: AppBar(
           centerTitle: true,
           elevation: 15,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: _appBarRadius,
-              bottomRight: _appBarRadius,
-            ),
-          ),
           backgroundColor: AppColors.primaryColor,
           title: Text(
             "Terraforming Mars",
