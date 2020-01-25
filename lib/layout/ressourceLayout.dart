@@ -4,6 +4,7 @@ import 'package:terraforming_mars/layout/ressourceLayout/energyLayout.dart';
 import 'package:terraforming_mars/layout/ressourceLayout/resLayout.dart';
 import 'package:terraforming_mars/layout/ressourceLayout/terraformingLayout.dart';
 import 'package:terraforming_mars/models/ressourceDataModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData.dart';
 
 class RessourceLayout extends StatelessWidget {
   @override

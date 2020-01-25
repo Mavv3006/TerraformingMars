@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
 import 'package:terraforming_mars/layout/ressourceLayout/ressourceButtonLayout.dart';
-import 'package:terraforming_mars/models/ressourceDataModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class ResLayout extends StatelessWidget {

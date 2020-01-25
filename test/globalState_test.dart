@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:terraforming_mars/models/ressourceDataModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData.dart';
 
 void main() {
   test('incrementing TerraformingValue', () {

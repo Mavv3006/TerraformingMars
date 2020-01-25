@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terraforming_mars/layout/inheritedLayout.dart';
+import 'package:terraforming_mars/layout/mainLayout.dart';
 import 'package:terraforming_mars/theme/button.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
