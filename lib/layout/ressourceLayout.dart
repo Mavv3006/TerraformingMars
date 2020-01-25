@@ -1,30 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:terraforming_mars/layout/ressourceLayout/energyLayout.dart';
 import 'package:terraforming_mars/layout/ressourceLayout/resLayout.dart';
+import 'package:terraforming_mars/layout/ressourceLayout/terraformingLayout.dart';
 import 'package:terraforming_mars/models/ressourceDataModel.dart';
 
 class RessourceLayout extends StatelessWidget {
-  static RessourceDataModel dataModel = new RessourceDataModel();
-  final List<ResLayout> _layoutList = [
-    ResLayout(dataModel.megaCredits),
-    ResLayout(dataModel.megaCredits),
-    ResLayout(dataModel.megaCredits),
-    ResLayout(dataModel.megaCredits),
-    ResLayout(dataModel.steel),
-    ResLayout(dataModel.steel),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 15, left: 10, right: 10),
-      child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return _layoutList[index];
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider();
-          },
-          itemCount: _layoutList.length),
-    );
+    return ListView.separated(
+        padding: EdgeInsets.only(top: 15, left: 10, right: 10, bottom: 10),
+        itemBuilder: (BuildContext context, int index) {
+          return <Widget>[
+            Consumer<MegaCredits>(builder: (context, data, child) {
+              return ResLayout(data);
+            }),
+            Consumer<Steel>(builder: (context, data, child) {
+              return ResLayout(data);
+            }),
+            Consumer<Heat>(builder: (context, data, child) {
+              return ResLayout(data);
+            }),
+            Consumer<RessourceDataModel>(builder: (context, dataModel, child) {
+              return EnergyLayout(dataModel);
+            }),
+            Consumer<Titan>(builder: (context, data, child) {
+              return ResLayout(data);
+            }),
+            Consumer<Crop>(builder: (context, data, child) {
+              return ResLayout(data);
+            }),
+            Consumer<RessourceDataModel>(builder: (context, dataModel, child) {
+              return Terraforminglayout(dataModel);
+            }),
+          ][index];
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(color: Colors.transparent);
+        },
+        itemCount: 7);
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
-import 'package:terraforming_mars/layout/ressourceLayout/ressourceButtonLayout.dart';
 import 'package:terraforming_mars/models/ressourceDataModel.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
-class ResLayout extends StatelessWidget {
+class Terraforminglayout extends StatelessWidget {
   final BoxDecoration _boxDecoration = BoxDecoration(
     color: AppColors.secondaryLight,
     border: Border.all(
@@ -16,9 +16,9 @@ class ResLayout extends StatelessWidget {
     ),
   );
 
-  final RessourceValue ressourceValue;
+  final RessourceDataModel dataModel;
 
-  ResLayout(this.ressourceValue);
+  Terraforminglayout(this.dataModel);
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +26,24 @@ class ResLayout extends StatelessWidget {
       decoration: _boxDecoration,
       padding: EdgeInsets.only(top: 6.0),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              RessourceValueText(ressourceValue.valueToString),
-              RessourceValueText(ressourceValue.title),
-              RessourceValueText(ressourceValue.productionToString),
+              RessourceValueText(RessourceDataModel.terraFormingValue.title),
+              AddButton(
+                onPressed: dataModel.incrementTerraformingValue,
+              ),
+              RessourceValueText(
+                  RessourceDataModel.terraFormingValue.valueToString),
+              SubButton(
+                onPressed:
+                    dataModel.isTerraformingValueGreaterThenZero
+                        ? dataModel.decrementTerraformingValue
+                        : null,
+              ),
             ],
-          ),
-          RessourceButtonLayout(
-            incValue: ressourceValue.incrementValue,
-            decValue: ressourceValue.decrementValue,
-            incProd: ressourceValue.incrementProduction,
-            decProd: ressourceValue.decrementProduction,
-            isProdGreaterZero: ressourceValue.isProductionGreaterThenZero,
-            isValueGreaterZero: ressourceValue.isValueGreaterThenZero,
           ),
         ],
       ),

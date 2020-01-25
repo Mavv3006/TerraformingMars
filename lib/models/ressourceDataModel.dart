@@ -1,56 +1,190 @@
-import 'package:scoped_model/scoped_model.dart';
+import 'package:flutter/material.dart';
 
-class RessourceDataModel extends Model {
-  final terraFormingValue = new TerraformingValue("Terraforming Wert");
-  final megaCredits =
-      new RessourceValue.startBy(title: "Megacredits", startBy: 20);
-  final titan = new RessourceValue("Titan");
-  final heat = new RessourceValue("Wärme");
-  final crop = new RessourceValue("Pflanze");
-  final energy = new RessourceValue("Energie");
-  final steel = new RessourceValue("Stahl");
+class RessourceDataModel extends ChangeNotifier {
+  static final _terraformingDefaultValue = 20;
+  static final _ressourceDefaultValue = 1;
+  static final _megacreditDefaultValue = 20;
+
+  static final terraFormingValue = new Terraforming();
+  static final energy = new Energy();
+
+  RessourceDataModel() {
+    _resetValue();
+  }
+
+  void nextRound() {
+    terraFormingValue._nextRound();
+    energy._nextRound();
+    notifyListeners();
+  }
+
+  void _resetValue() {
+    terraFormingValue.resetValue();
+    energy.resetValue();
+  }
+
+  void incrementTerraformingValue() {
+    terraFormingValue.incrementValue();
+    notifyListeners();
+  }
+
+  void decrementTerraformingValue() {
+    terraFormingValue.decrementValue();
+    notifyListeners();
+  }
+
+  void incrementEnergyValue() {
+    energy.incrementValue();
+    notifyListeners();
+  }
+
+  void decrementEnergyValue() {
+    energy.decrementValue();
+    notifyListeners();
+  }
+
+  void incrementEnergyProduction() {
+    energy.incrementProduction();
+    notifyListeners();
+  }
+
+  void decrementEnergyProduction() {
+    energy.decrementProduction();
+    notifyListeners();
+  }
+
+  bool get isTerraformingValueGreaterThenZero =>
+      terraFormingValue.isValueGreaterThenZero;
+
+  bool get isEnergyValueGreaterThenZero => energy.isValueGreaterThenZero;
+
+  bool get isEnergyProductionGreaterThenZero =>
+      energy.isProductionGreaterThenZero;
 }
 
-class TerraformingValue {
+class TerraformingValue extends ChangeNotifier {
   TerraformingValue(this._title);
 
   final String _title;
-  int _value = 20;
+  int _value = RessourceDataModel._terraformingDefaultValue;
 
   int get value => _value;
+
+  bool get isValueGreaterThenZero => _value > 0;
 
   String get title => _title;
 
   String get valueToString => "${_value}";
 
-  incrementValue() {
-    _value++;
+  void resetValue() {
+    _value = RessourceDataModel._terraformingDefaultValue;
   }
 
-  decrementValue() {
-    _value--;
+  void incrementValue() {
+    _value++;
+    notifyListeners();
+  }
+
+  void decrementValue() {
+    if (isValueGreaterThenZero) _value--;
+    notifyListeners();
+  }
+
+  void _nextRound() {
+    incrementValue();
   }
 }
 
 class RessourceValue extends TerraformingValue {
-  RessourceValue.startBy({int startBy, String title}) : super(title) {
+  RessourceValue.startBy({@required int startBy, @required String title})
+      : super(title) {
     _value = value;
   }
 
   RessourceValue(String title) : super(title) {
-    _value = 0;
+    _value = RessourceDataModel._ressourceDefaultValue;
   }
 
   int _production = 1;
 
+  bool get isProductionGreaterThenZero => _production > 0;
+
   int get production => _production;
+
   String get productionToString => "${_production}";
 
-  incrementProduction() {
-    _production++;
+  @override
+  void resetValue() {
+    _value = RessourceDataModel._ressourceDefaultValue;
   }
 
-  decrementProduction() {
-    _production--;
+  void incrementProduction() {
+    _production++;
+    notifyListeners();
+  }
+
+  void decrementProduction() {
+    if (isProductionGreaterThenZero) _production--;
+    notifyListeners();
+  }
+
+  @override
+  void _nextRound() {
+    _value += _production;
+  }
+}
+
+class Terraforming extends TerraformingValue {
+  Terraforming() : super("Terraforming Wert");
+}
+
+class Steel extends RessourceValue {
+  Steel() : super("Stahl");
+}
+
+class Heat extends RessourceValue {
+  RessourceValue energy;
+
+  Heat(this.energy) : super("Wärme");
+
+  @override
+  void _nextRound() {
+    _value += (energy._value + _production);
+  }
+}
+
+class Titan extends RessourceValue {
+  Titan() : super("Titan");
+}
+
+class Crop extends RessourceValue {
+  Crop() : super("Pflanze");
+}
+
+class Energy extends RessourceValue {
+  Energy() : super("Energie");
+
+  @override
+  void _nextRound() {
+    _value = _production;
+  }
+}
+
+class MegaCredits extends RessourceValue {
+  Terraforming terraformingValue;
+
+  MegaCredits(this.terraformingValue)
+      : super.startBy(
+            title: "Megacredits",
+            startBy: RessourceDataModel._megacreditDefaultValue);
+
+  @override
+  void _nextRound() {
+    _value += (terraformingValue.value + _production);
+  }
+
+  @override
+  void resetValue() {
+    _value = RessourceDataModel._megacreditDefaultValue;
   }
 }

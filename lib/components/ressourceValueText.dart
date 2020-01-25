@@ -16,7 +16,7 @@ class RessourceValueText extends StatelessWidget {
             Shadow(
               color: AppColors.shadow,
               blurRadius: 2,
-              offset: Offset(0, 2),
+              offset: Offset(0, 1.5),
             ),
           ],
       ),

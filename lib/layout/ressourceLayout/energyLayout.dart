@@ -4,7 +4,7 @@ import 'package:terraforming_mars/layout/ressourceLayout/ressourceButtonLayout.d
 import 'package:terraforming_mars/models/ressourceDataModel.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
-class ResLayout extends StatelessWidget {
+class EnergyLayout extends StatelessWidget {
   final BoxDecoration _boxDecoration = BoxDecoration(
     color: AppColors.secondaryLight,
     border: Border.all(
@@ -16,9 +16,9 @@ class ResLayout extends StatelessWidget {
     ),
   );
 
-  final RessourceValue ressourceValue;
+  final RessourceDataModel dataModel;
 
-  ResLayout(this.ressourceValue);
+  EnergyLayout(this.dataModel);
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +30,18 @@ class ResLayout extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              RessourceValueText(ressourceValue.valueToString),
-              RessourceValueText(ressourceValue.title),
-              RessourceValueText(ressourceValue.productionToString),
+              RessourceValueText(RessourceDataModel.energy.valueToString),
+              RessourceValueText(RessourceDataModel.energy.title),
+              RessourceValueText(RessourceDataModel.energy.productionToString),
             ],
           ),
           RessourceButtonLayout(
-            incValue: ressourceValue.incrementValue,
-            decValue: ressourceValue.decrementValue,
-            incProd: ressourceValue.incrementProduction,
-            decProd: ressourceValue.decrementProduction,
-            isProdGreaterZero: ressourceValue.isProductionGreaterThenZero,
-            isValueGreaterZero: ressourceValue.isValueGreaterThenZero,
+            incValue: dataModel.incrementEnergyValue,
+            decValue: dataModel.decrementEnergyValue,
+            incProd: dataModel.incrementEnergyProduction,
+            decProd: dataModel.decrementEnergyProduction,
+            isProdGreaterZero: dataModel.isEnergyProductionGreaterThenZero,
+            isValueGreaterZero: dataModel.isEnergyValueGreaterThenZero,
           ),
         ],
       ),
