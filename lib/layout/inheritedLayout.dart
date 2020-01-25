@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:terraforming_mars/components/elevatedCard.dart';
 import 'package:terraforming_mars/layout/actionsLayout.dart';
 import 'package:terraforming_mars/layout/ressourceLayout.dart';
 import 'package:terraforming_mars/layout/settingsLayout.dart';
@@ -16,7 +15,8 @@ class _MainLayoutState extends State<MainLayout> {
   final Radius _radius = Radius.circular(25);
   final Color _selectedColor = AppColors.accentColor;
   final Color _unselectedColor = AppColors.secondaryLight;
-  final Radius _appBarRadius = Radius.circular(45);
+  final double _bottomNavBarFontSize = 17;
+  final double _titleFontSize = 28;
 
   PageController _controller = PageController(initialPage: 0);
   Color _ressourceColor;
@@ -43,10 +43,15 @@ class _MainLayoutState extends State<MainLayout> {
           backgroundColor: AppColors.primaryColor,
           title: Text(
             "Terraforming Mars",
-            style: Theme.of(context).textTheme.display1.copyWith(
-                  letterSpacing: 1.25,
-                  color: AppColors.secondaryLight,
-                ),
+            style: Theme
+                .of(context)
+                .textTheme
+                .display1
+                .copyWith(
+              fontSize: _titleFontSize,
+              letterSpacing: 1.25,
+              color: AppColors.secondaryLight,
+            ),
           ),
         ),
       ),
@@ -58,7 +63,8 @@ class _MainLayoutState extends State<MainLayout> {
           ChangeNotifierProvider(create: (_) => Steel()),
           ChangeNotifierProvider(create: (_) => Titan()),
           ChangeNotifierProvider(create: (_) => Crop()),
-          ChangeNotifierProvider(create: (_) => Heat(RessourceDataModel.energy)),
+          ChangeNotifierProvider(
+              create: (_) => Heat(RessourceDataModel.energy)),
           ChangeNotifierProvider<MegaCredits>(
             create: (_) => MegaCredits(RessourceDataModel.terraFormingValue),
           ),
@@ -75,43 +81,56 @@ class _MainLayoutState extends State<MainLayout> {
           ],
         ),
       ),
-      bottomNavigationBar: ElevatedCard(
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
-            color: AppColors.primaryColor,
-            borderRadius: BorderRadius.only(
-              topLeft: _radius,
-              topRight: _radius,
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.only(
+            topLeft: _radius,
+            topRight: _radius,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text(
+              "Ressourcen",
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .title
+                  .copyWith(
+                fontSize: _bottomNavBarFontSize,
+                color: _ressourceColor,
+                decoration: TextDecoration.underline,
+                decorationThickness: 7,
+              ),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(
-                "Ressourcen",
-                style: Theme.of(context).textTheme.title.copyWith(
-                      color: _ressourceColor,
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 7,
-                    ),
+            Text("Aktionen",
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .title
+                    .copyWith(
+                  fontSize: _bottomNavBarFontSize,
+                  color: _actionColor,
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 7,
+                )),
+            Text(
+              "Einstellungen",
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .title
+                  .copyWith(
+                fontSize: _bottomNavBarFontSize,
+                color: _settingsColor,
+                decoration: TextDecoration.underline,
+                decorationThickness: 7,
               ),
-              Text("Aktionen",
-                  style: Theme.of(context).textTheme.title.copyWith(
-                        color: _actionColor,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 7,
-                      )),
-              Text(
-                "Einstellungen",
-                style: Theme.of(context).textTheme.title.copyWith(
-                      color: _settingsColor,
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 7,
-                    ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

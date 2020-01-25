@@ -13,8 +13,8 @@ class RessourceDataModel extends ChangeNotifier {
   }
 
   void nextRound() {
-    terraFormingValue._nextRound();
-    energy._nextRound();
+    terraFormingValue.nextRound();
+    energy.nextRound();
     notifyListeners();
   }
 
@@ -90,7 +90,7 @@ class TerraformingValue extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _nextRound() {
+  void nextRound() {
     incrementValue();
   }
 }
@@ -129,7 +129,7 @@ class RessourceValue extends TerraformingValue {
   }
 
   @override
-  void _nextRound() {
+  void nextRound() {
     _value += _production;
   }
 }
@@ -148,7 +148,7 @@ class Heat extends RessourceValue {
   Heat(this.energy) : super("Wärme");
 
   @override
-  void _nextRound() {
+  void nextRound() {
     _value += (energy._value + _production);
   }
 }
@@ -165,7 +165,7 @@ class Energy extends RessourceValue {
   Energy() : super("Energie");
 
   @override
-  void _nextRound() {
+  void nextRound() {
     _value = _production;
   }
 }
@@ -179,7 +179,7 @@ class MegaCredits extends RessourceValue {
             startBy: RessourceDataModel._megacreditDefaultValue);
 
   @override
-  void _nextRound() {
+  void nextRound() {
     _value += (terraformingValue.value + _production);
   }
 
