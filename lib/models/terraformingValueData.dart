@@ -108,6 +108,7 @@ class Energy extends RessourceValue {
   @override
   void nextRound() {
     _value = _production;
+    notifyListeners();
   }
 }
 
@@ -116,8 +117,8 @@ class MegaCredits extends RessourceValue {
 
   MegaCredits(this.terraformingValue)
       : super.startBy(
-      title: "Megacredits",
-      startBy: RessourceDataModel.megacreditDefaultValue);
+            title: "Megacredits",
+            startBy: RessourceDataModel.megacreditDefaultValue);
 
   @override
   void nextRound() {

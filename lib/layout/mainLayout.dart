@@ -14,7 +14,7 @@ class _MainLayoutState extends State<MainLayout> {
   final Radius _radius = Radius.circular(25);
   final Color _selectedColor = AppColors.accentColor;
   final Color _unselectedColor = AppColors.secondaryLight;
-  final double _bottomNavBarFontSize = 17;
+  final double _bottomNavBarFontSize = 16;
   final double _titleFontSize = 28;
 
   Color _ressourceColor;
@@ -49,22 +49,9 @@ class _MainLayoutState extends State<MainLayout> {
           ),
         ),
       ),
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => RessourceDataModel()),
-          ChangeNotifierProvider(create: (_) => Steel()),
-          ChangeNotifierProvider(create: (_) => Titan()),
-          ChangeNotifierProvider(create: (_) => Crop()),
-          ChangeNotifierProvider(
-              create: (_) => Heat(RessourceDataModel.energy)),
-          ChangeNotifierProvider<MegaCredits>(
-            create: (_) => MegaCredits(RessourceDataModel.terraFormingValue),
-          ),
-        ],
-        child: RessourceLayout(),
-      ),
+      body: RessourceLayout(),
       bottomNavigationBar: Container(
-        height: 60,
+        height: 50,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.only(
@@ -83,22 +70,26 @@ class _MainLayoutState extends State<MainLayout> {
                       decorationThickness: 7,
                     )),
             RaisedButton(
-              child: Text(
-                "Nächste Runde",
-                style: Theme.of(context).textTheme.title.copyWith(
-                      fontSize: _bottomNavBarFontSize,
-                      color: _ressourceColor,
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 7,
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Nächste Runde",
+                  style: Theme.of(context).textTheme.title.copyWith(
+                        fontSize: _bottomNavBarFontSize,
+                        color: _ressourceColor,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 7,
+                      ),
+                ),
               ),
               onPressed: () {
-                Provider.of<Heat>(context).nextRound();
-                Provider.of<RessourceDataModel>(context).nextRound();
-                Provider.of<MegaCredits>(context).nextRound();
-                Provider.of<Titan>(context).nextRound();
-                Provider.of<Steel>(context).nextRound();
-                Provider.of<Crop>(context).nextRound();
+                Provider.of<Crop>(context, listen: false).nextRound();
+                  Provider.of<Heat>(context, listen: false).nextRound();
+                  Provider.of<RessourceDataModel>(context, listen: false)
+                      .nextRound();
+                  Provider.of<MegaCredits>(context, listen: false).nextRound();
+                  Provider.of<Titan>(context, listen: false).nextRound();
+                  Provider.of<Steel>(context, listen: false).nextRound();
               },
             ),
             Text(
