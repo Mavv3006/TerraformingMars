@@ -12,13 +12,6 @@ class RessourceValueText extends StatelessWidget {
       title,
       style: Theme.of(context).textTheme.body2.copyWith(
         color: AppColors.accentColor,
-          shadows: <Shadow>[
-            Shadow(
-              color: AppColors.shadow,
-              blurRadius: 2,
-              offset: Offset(0, 1.5),
-            ),
-          ],
       ),
     );
   }

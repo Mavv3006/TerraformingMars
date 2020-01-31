@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/components/customButton.dart';
+import 'package:terraforming_mars/models/terraformingValueData.dart';
 
 class RessourceButtonLayout extends StatelessWidget {
-  final VoidCallback incValue;
-  final VoidCallback decValue;
-  final VoidCallback incProd;
-  final VoidCallback decProd;
-  final bool isValueGreaterZero;
-  final bool isProdGreaterZero;
+  final RessourceValue resValue;
 
-  RessourceButtonLayout(
-      {this.incValue,
-      this.decValue,
-      this.decProd,
-      this.incProd,
-      this.isProdGreaterZero,
-      this.isValueGreaterZero});
+  RessourceButtonLayout(this.resValue);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        AddButton(
-          onPressed: incValue,
-        ),
-        SubButton(
-          onPressed: isValueGreaterZero
-              ? decValue
-              : null,
-        ),
-        AddButton(
-          onPressed: incProd,
-        ),
-        SubButton(
-          onPressed: isProdGreaterZero
-              ? decProd
-              : null,
-        ),
+        AddButton(onPressed: resValue.incrementValue),
+        SubButton(onPressed: resValue.isValueGreaterThenZero ? resValue.decrementValue : null),
+        SizedBox(width: 25),
+        AddButton(onPressed: resValue.incrementProduction),
+        SubButton(onPressed: resValue.isProductionGreaterThenZero ? resValue.decrementProduction : null),
       ],
     );
   }

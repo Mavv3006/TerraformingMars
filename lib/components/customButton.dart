@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class AddButton extends IconButton {
@@ -9,7 +10,7 @@ class AddButton extends IconButton {
   }) : super(
           key: key,
           onPressed: onPressed,
-          icon: FontAwesomeIcons.plus,
+          icon: CustomIcons.plus,
         );
 }
 
@@ -20,7 +21,7 @@ class SubButton extends IconButton {
   }) : super(
           key: key,
           onPressed: onPressed,
-          icon: FontAwesomeIcons.minus,
+          icon: CustomIcons.minus,
         );
 }
 

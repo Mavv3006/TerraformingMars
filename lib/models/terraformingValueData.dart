@@ -85,6 +85,8 @@ class Steel extends RessourceValue {
 class Heat extends RessourceValue {
   RessourceValue energy;
 
+  Heat copy() => this;
+
   Heat(this.energy) : super("Wärme");
 
   @override
