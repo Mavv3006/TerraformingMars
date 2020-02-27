@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
-import 'package:terraforming_mars/layout/list_element.dart';
 import 'package:terraforming_mars/layout/ressourceLayout/ressourceButtonLayout.dart';
-import 'package:terraforming_mars/models/ressourceDataModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 class EnergyLayout extends StatelessWidget {
+  final Energy data;
+
+  EnergyLayout(this.data);
 
   @override
   Widget build(BuildContext context) {
-    return ListElement(
+    return CustomListElement(
       child: Column(
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              RessourceValueText(RessourceDataModel.energy.valueToString),
-              RessourceValueText(RessourceDataModel.energy.title),
-              RessourceValueText(RessourceDataModel.energy.productionToString),
+              RessourceValueText(data.valueToString),
+              RessourceValueText(data.title),
+              RessourceValueText(data.productionToString),
             ],
           ),
-          RessourceButtonLayout(RessourceDataModel.energy),
+          RessourceButtonLayout(data),
         ],
       ),
     );

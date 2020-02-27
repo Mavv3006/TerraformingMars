@@ -11,8 +11,8 @@ class RessourceValueText extends StatelessWidget {
     return Text(
       title,
       style: Theme.of(context).textTheme.body2.copyWith(
-        color: AppColors.accentColor,
-      ),
+            color: AppColors.accentColor,
+          ),
     );
   }
 }

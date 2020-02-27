@@ -1,32 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
-import 'package:terraforming_mars/models/terraformingValueData.dart';
-import 'package:terraforming_mars/theme/colors.dart';
+import 'package:terraforming_mars/components/custom_list.dart';
+import 'package:terraforming_mars/components/custom_list_element.dart';
+import 'package:terraforming_mars/components/custom_scaffold.dart';
+import 'package:terraforming_mars/components/ressourceValueText.dart';
 
-class SettingsLayout extends StatelessWidget {
-  final Color _textColor = AppColors.secondaryLight;
-  final SettingsModel settingsModel;
-  final Heat heat;
+class SettingsLayout extends StatefulWidget {
+  @override
+  _SettingsLayoutState createState() => _SettingsLayoutState();
+}
 
-  const SettingsLayout({
-    Key key,
-    /*@required*/ this.settingsModel, this.heat,
-  }) : super(key: key);
+class _SettingsLayoutState extends State<SettingsLayout> {
+  final textController = TextEditingController(text: "test");
+
+  @override
+  void initState() {
+    super.initState();
+    textController.addListener(_printLatestValue);
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Einstellungen",
-          style: Theme.of(context).textTheme.title.copyWith(color: _textColor),
-        ),
-      ),
-      backgroundColor: AppColors.backgroundColor,
-      body: Center(
-        child: Text(Provider.of<Heat>(context).title),
+    return CustomScaffold(
+      appBarTitle: "Einstellungen",
+      child: CustomList(
+        children: [
+          CustomListElement(
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    RessourceValueText("Stahl zu MegaCredits"),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Enter a search term",
+                        ),
+                        controller: textController,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    RessourceValueText("Titan zu MegaCretits"),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "2nd Text Field",
+                        ),
+                        onChanged: (String value) => print("2nd Value: $value"),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  _printLatestValue() {
+    print("1st Value: ${textController.text}");
   }
 }

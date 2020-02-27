@@ -1,0 +1,1 @@
+enum HistoryMessageType { PRODUCTION, VALUE, SETTING }

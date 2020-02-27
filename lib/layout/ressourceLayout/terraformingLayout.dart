@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/components/customButton.dart';
+import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
-import 'package:terraforming_mars/layout/list_element.dart';
-import 'package:terraforming_mars/models/ressourceDataModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 class Terraforminglayout extends StatelessWidget {
-  final RessourceDataModel dataModel;
+  final Terraforming data;
 
-  Terraforminglayout(this.dataModel);
+  Terraforminglayout(this.data);
 
   @override
   Widget build(BuildContext context) {
-    return ListElement(
+    return CustomListElement(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -19,18 +19,17 @@ class Terraforminglayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               RessourceValueText(
-                RessourceDataModel.terraFormingValue.title,
+                data.title,
               ),
               AddButton(
-                onPressed: dataModel.incrementTerraformingValue,
+                onPressed: data.incrementValue,
               ),
               RessourceValueText(
-                RessourceDataModel.terraFormingValue.valueToString,
+                data.valueToString,
               ),
               SubButton(
-                onPressed: dataModel.isTerraformingValueGreaterThenZero
-                    ? dataModel.decrementTerraformingValue
-                    : null,
+                onPressed:
+                    data.isValueGreaterThenZero ? data.decrementValue : null,
               ),
             ],
           ),

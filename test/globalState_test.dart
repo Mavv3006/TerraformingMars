@@ -1,39 +1,37 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:terraforming_mars/models/ressourceDataModel.dart';
-import 'package:terraforming_mars/models/terraformingValueData.dart';
+import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {
   test('incrementing TerraformingValue', () {
-    RessourceDataModel.terraFormingValue.resetValue();
-    final startValue = RessourceDataModel.terraFormingValue.value;
-    VoidCallback increment = () {
-      expect(
-          RessourceDataModel.terraFormingValue.value, greaterThan(startValue));
+    var terraformingValue = Terraforming();
+    final startValue = terraformingValue.value;
+    VoidCallback decrement = () {
+      expect(terraformingValue.value, greaterThan(startValue));
     };
-    RessourceDataModel.terraFormingValue.addListener(increment);
-    RessourceDataModel.terraFormingValue.incrementValue();
-    RessourceDataModel.terraFormingValue.removeListener(increment);
+    terraformingValue.addListener(decrement);
+    terraformingValue.incrementValue();
+    terraformingValue.removeListener(decrement);
   });
 
   test('decrementing TerraformingValue', () {
-    RessourceDataModel.terraFormingValue.resetValue();
-    final startValue = RessourceDataModel.terraFormingValue.value;
+    var terraformingValue = Terraforming();
+    final startValue = terraformingValue.value;
     VoidCallback decrement = () {
-      expect(RessourceDataModel.terraFormingValue.value, lessThan(startValue));
+      expect(terraformingValue.value, lessThan(startValue));
     };
-    RessourceDataModel.terraFormingValue.addListener(decrement);
-    RessourceDataModel.terraFormingValue.decrementValue();
-    RessourceDataModel.terraFormingValue.removeListener(decrement);
+    terraformingValue.addListener(decrement);
+    terraformingValue.decrementValue();
+    terraformingValue.removeListener(decrement);
   });
 
   test('nextRound greaterThem', () {
     var terraforming = Terraforming();
     var energy = Energy();
-    var megacredits = MegaCredits(terraforming);
+    var megacredits = MegaCredits().updateTerraformingValue(terraforming);
     var megaStartValue = megacredits.value;
-    var energyStartValue = RessourceDataModel.energy.value;
-    var terraStartValue = RessourceDataModel.terraFormingValue.value;
+    var energyStartValue = energy.value;
+    var terraStartValue = terraforming.value;
 
     VoidCallback megaNextRound = () {
       expect(megacredits.value, greaterThan(megaStartValue));
@@ -61,7 +59,7 @@ void main() {
   test('nextRound greaterThem', () {
     var terraforming = Terraforming();
     var energy = Energy();
-    var megacredits = MegaCredits(terraforming);
+    var megacredits = MegaCredits().updateTerraformingValue(terraforming);
 
     VoidCallback megaNextRound = () {
       expect(41, equals(megacredits.value));

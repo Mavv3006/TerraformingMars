@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
-class ListElement extends StatelessWidget {
+class CustomListElement extends StatelessWidget {
   final Widget child;
 
-  const ListElement({Key key, this.child}) : super(key: key);
+  const CustomListElement({Key key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
