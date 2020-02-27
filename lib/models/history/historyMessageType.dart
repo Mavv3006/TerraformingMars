@@ -1,1 +1,1 @@
-enum HistoryMessageType { PRODUCTION, VALUE, SETTING }
+enum HistoryMessageType { PRODUCTION, VALUE, SETTING ,NEXT_ROUND}

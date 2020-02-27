@@ -18,32 +18,40 @@ class MyProviderApp extends StatelessWidget {
         ChangeNotifierProvider<History>(
           create: (_) => History(),
         ),
-        ChangeNotifierProvider<SettingsModel>(
+        ChangeNotifierProxyProvider<History, SettingsModel>(
           create: (_) => SettingsModel(),
+          update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProvider<Terraforming>(
+        ChangeNotifierProxyProvider<History, Terraforming>(
           create: (_) => Terraforming(),
+          update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProvider<Energy>(
+        ChangeNotifierProxyProvider<History, Energy>(
           create: (_) => Energy(),
+          update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProvider<Steel>(
+        ChangeNotifierProxyProvider<History, Steel>(
           create: (_) => Steel(),
+          update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProvider<Titan>(
+        ChangeNotifierProxyProvider<History, Titan>(
           create: (_) => Titan(),
+          update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProvider<Crop>(
+        ChangeNotifierProxyProvider<History, Crop>(
           create: (_) => Crop(),
+          update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProxyProvider<Energy, Heat>(
+        ChangeNotifierProxyProvider2<Energy, History, Heat>(
           create: (_) => Heat(),
-          update: (context, energy, previous) => previous.updateEnergy(energy),
+          update: (context, energy, history, previous) =>
+              previous.updateEnergy(energy).updateHistory(history),
         ),
-        ChangeNotifierProxyProvider<Terraforming, MegaCredits>(
+        ChangeNotifierProxyProvider2<Terraforming, History, MegaCredits>(
           create: (_) => MegaCredits(),
-          update: (context, terraformingValue, previous) =>
-              previous.updateTerraformingValue(terraformingValue),
+          update: (context, terraformingValue, history, previous) => previous
+              .updateTerraformingValue(terraformingValue)
+              .updateHistory(history),
         ),
       ],
       child: MyApp(),

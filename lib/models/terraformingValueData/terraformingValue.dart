@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/exceptions/unequalValueException.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 
@@ -7,6 +8,8 @@ import '../defaultValue.dart';
 
 abstract class TerraformingValue extends ChangeNotifier {
   TerraformingValue(this._title);
+
+  History history;
 
   final String _title;
   int value = DefaultValue.defaultTerraformingStartValue;
@@ -43,5 +46,10 @@ abstract class TerraformingValue extends ChangeNotifier {
     } else {
       throw UnequalValueException("HistoryMessage.newValue != this.value");
     }
+  }
+
+  TerraformingValue updateHistory(History history){
+    this.history = history;
+    return this;
   }
 }
