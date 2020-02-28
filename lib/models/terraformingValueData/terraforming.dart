@@ -7,29 +7,29 @@ class Terraforming extends TerraformingValue {
 
   @override
   void decrementValue() {
-    super.decrementValue();
     history.log(
       HistoryMessage(
         message: "Terraforming - decrement Value",
-        oldValue: value + 1,
-        newValue: value,
+        oldValue: value,
+        newValue: isValueGreaterThenZero ? --value : value,
         type: Terraforming,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.decrementValue();
   }
 
   @override
   void incrementValue() {
-    super.incrementValue();
     history.log(
       HistoryMessage(
         message: "Terraforming - increment Value",
-        oldValue: value - 1,
-        newValue: value,
+        oldValue: value,
+        newValue: ++value,
         type: Terraforming,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.incrementValue();
   }
 }

@@ -14,79 +14,78 @@ class MegaCredits extends RessourceValue {
           startBy: DefaultValue.defaultMegaCreditsStartValue,
         );
 
-  @override
-  void nextRound() {
-    value += (terraformingValue.value + production);
-    notifyListeners();
-    history.log(
-      HistoryMessage(
-        message: "MegaCredits - next Round",
-        oldValue: value - (terraformingValue.value + production),
-        newValue: value,
-        type: MegaCredits,
-        historyMessageType: HistoryMessageType.NEXT_ROUND,
-      ),
-    );
-  }
-
   MegaCredits updateTerraformingValue(Terraforming value) {
     this.terraformingValue = value;
     return this;
   }
 
   @override
+  void nextRound() {
+    history.log(
+      HistoryMessage(
+        message: "MegaCredits - next Round",
+        oldValue: value,
+        newValue: value += (terraformingValue.value + production),
+        type: MegaCredits,
+        historyMessageType: HistoryMessageType.NEXT_ROUND,
+      ),
+    );
+    super.nextRound();
+  }
+
+  @override
   void decrementValue() {
-    super.decrementValue();
     history.log(
       HistoryMessage(
         message: "MegaCredits - decrement Value",
-        oldValue: value + 1,
         newValue: value,
+        oldValue: isValueGreaterThenZero ? --value : value,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.decrementValue();
   }
 
   @override
   void incrementValue() {
-    super.incrementValue();
     history.log(
       HistoryMessage(
         message: "MegaCredits - increment Value",
-        oldValue: value - 1,
-        newValue: value,
+        oldValue: value,
+        newValue: ++value,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.incrementValue();
   }
 
   @override
   void decrementProduction() {
-    super.decrementProduction();
     history.log(
       HistoryMessage(
         message: "MegaCredits - decrement Production",
-        oldValue: production + 1,
-        newValue: production,
+        oldValue: production,
+        newValue: isProductionGreaterThenZero ? --production : production,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.decrementProduction();
   }
 
   @override
   void incrementProduction() {
-    super.incrementProduction();
     history.log(
       HistoryMessage(
         message: "MegaCredits - increment Production",
-        oldValue: production - 1,
-        newValue: production,
+        oldValue: production,
+        newValue: ++production,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.incrementProduction();
   }
 }

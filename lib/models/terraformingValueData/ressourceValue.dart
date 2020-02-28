@@ -45,18 +45,15 @@ class RessourceValue extends TerraformingValue {
   }
 
   void incrementProduction() {
-    production++;
     notifyListeners();
   }
 
   void decrementProduction() {
-    if (isProductionGreaterThenZero) production--;
     notifyListeners();
   }
 
   @override
   void nextRound() {
-    value += production;
     notifyListeners();
   }
 }

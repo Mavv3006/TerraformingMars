@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
@@ -9,20 +10,7 @@ class Heat extends RessourceValue {
 
   Heat() : super("Wärme");
 
-  @override
-  void nextRound() {
-    value += (energy.oldValue + production);
-    notifyListeners();
-    history.log(
-      HistoryMessage(
-        message: "Heat - next Round",
-        oldValue: value - (energy.oldValue + production),
-        newValue: value,
-        type: Heat,
-        historyMessageType: HistoryMessageType.NEXT_ROUND,
-      ),
-    );
-  }
+  Heat.withEnergy({@required this.energy}) : super("Wärme");
 
   Heat updateEnergy(Energy energy) {
     this.energy = energy;
@@ -30,58 +18,73 @@ class Heat extends RessourceValue {
   }
 
   @override
+  void nextRound() {
+    history.log(
+      HistoryMessage(
+        message: "Heat - next Round",
+        oldValue: value,
+        newValue: value += (energy.oldValue + production),
+        type: Heat,
+        historyMessageType: HistoryMessageType.NEXT_ROUND,
+      ),
+    );
+    super.nextRound();
+  }
+
+
+  @override
   void decrementValue() {
-    super.decrementValue();
     history.log(
       HistoryMessage(
         message: "Heat - decrement Value",
-        oldValue: value + 1,
         newValue: value,
+        oldValue: isValueGreaterThenZero ? --value : value,
         type: Heat,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.decrementValue();
   }
 
   @override
   void incrementValue() {
-    super.incrementValue();
     history.log(
       HistoryMessage(
         message: "Heat - increment Value",
-        oldValue: value - 1,
-        newValue: value,
+        oldValue: value,
+        newValue: ++value,
         type: Heat,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.incrementValue();
   }
 
   @override
   void decrementProduction() {
-    super.decrementProduction();
     history.log(
       HistoryMessage(
         message: "Heat - decrement Production",
-        oldValue: production + 1,
-        newValue: production,
+        oldValue: production,
+        newValue: isProductionGreaterThenZero ? --production : production,
         type: Heat,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.decrementProduction();
   }
 
   @override
   void incrementProduction() {
-    super.incrementProduction();
     history.log(
       HistoryMessage(
         message: "Heat - increment Production",
-        oldValue: production - 1,
-        newValue: production,
+        oldValue: production,
+        newValue: ++production,
         type: Heat,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.incrementProduction();
   }
 }

@@ -5,13 +5,14 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 class Energy extends RessourceValue {
   int _oldValue = 0;
 
+  int get oldValue => _oldValue;
+
   Energy() : super("Energie");
 
   @override
   void nextRound() {
     _oldValue = value;
     value = production;
-    notifyListeners();
     history.log(
       HistoryMessage(
         message: "Energy - next Round",
@@ -21,63 +22,62 @@ class Energy extends RessourceValue {
         historyMessageType: HistoryMessageType.NEXT_ROUND,
       ),
     );
+    super.nextRound();
   }
-
-  int get oldValue => _oldValue;
 
   @override
   void decrementValue() {
-    super.decrementValue();
     history.log(
       HistoryMessage(
         message: "Energy - decrement Value",
-        oldValue: value + 1,
         newValue: value,
+        oldValue: isValueGreaterThenZero ? --value : value,
         type: Energy,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.decrementValue();
   }
 
   @override
   void incrementValue() {
-    super.incrementValue();
     history.log(
       HistoryMessage(
         message: "Energy - increment Value",
-        oldValue: value - 1,
-        newValue: value,
+        oldValue: value,
+        newValue: ++value,
         type: Energy,
         historyMessageType: HistoryMessageType.VALUE,
       ),
     );
+    super.incrementValue();
   }
 
   @override
   void decrementProduction() {
-    super.decrementProduction();
     history.log(
       HistoryMessage(
         message: "Energy - decrement Production",
-        oldValue: production + 1,
-        newValue: production,
+        oldValue: production,
+        newValue: isProductionGreaterThenZero ? --production : production,
         type: Energy,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.decrementProduction();
   }
 
   @override
   void incrementProduction() {
-    super.incrementProduction();
     history.log(
       HistoryMessage(
         message: "Energy - increment Production",
-        oldValue: production - 1,
-        newValue: production,
+        oldValue: production,
+        newValue: ++production,
         type: Energy,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.incrementProduction();
   }
 }

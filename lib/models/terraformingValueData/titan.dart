@@ -6,72 +6,72 @@ class Titan extends RessourceValue {
   Titan() : super("Titan");
 
   @override
-  void decrementValue() {
-    super.decrementValue();
-    history.log(
-      HistoryMessage(
-        message: "Titan - decrement Value",
-        oldValue: value + 1,
-        newValue: value,
-        type: Titan,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-  }
-
-  @override
-  void incrementValue() {
-    super.incrementValue();
-    history.log(
-      HistoryMessage(
-        message: "Titan - increment Value",
-        oldValue: value - 1,
-        newValue: value,
-        type: Titan,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-  }
-
-  @override
   void nextRound() {
-    super.nextRound();
     history.log(
       HistoryMessage(
         message: "Titan - next Round",
-        oldValue: value - production,
-        newValue: value,
+        oldValue: value,
+        newValue: value += production,
         type: Titan,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
       ),
     );
+    super.nextRound();
+  }
+
+  @override
+  void decrementValue() {
+    history.log(
+      HistoryMessage(
+        message: "Titan - decrement Value",
+        newValue: value,
+        oldValue: isValueGreaterThenZero ? --value : value,
+        type: Titan,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
+    super.decrementValue();
+  }
+
+  @override
+  void incrementValue() {
+    history.log(
+      HistoryMessage(
+        message: "Titan - increment Value",
+        oldValue: value,
+        newValue: ++value,
+        type: Titan,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
+    super.incrementValue();
   }
 
   @override
   void decrementProduction() {
-    super.decrementProduction();
     history.log(
       HistoryMessage(
         message: "Titan - decrement Production",
-        oldValue: production + 1,
-        newValue: production,
+        oldValue: production,
+        newValue: isProductionGreaterThenZero ? --production : production,
         type: Titan,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.decrementProduction();
   }
 
   @override
   void incrementProduction() {
-    super.incrementProduction();
     history.log(
       HistoryMessage(
         message: "Titan - increment Production",
-        oldValue: production - 1,
-        newValue: production,
+        oldValue: production,
+        newValue: ++production,
         type: Titan,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
     );
+    super.incrementProduction();
   }
 }

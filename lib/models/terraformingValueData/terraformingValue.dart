@@ -21,12 +21,10 @@ abstract class TerraformingValue extends ChangeNotifier {
   String get valueToString => "${value}";
 
   void incrementValue() {
-    value++;
     notifyListeners();
   }
 
   void decrementValue() {
-    if (isValueGreaterThenZero) value--;
     notifyListeners();
   }
 
@@ -48,7 +46,7 @@ abstract class TerraformingValue extends ChangeNotifier {
     }
   }
 
-  TerraformingValue updateHistory(History history){
+  TerraformingValue updateHistory(History history) {
     this.history = history;
     return this;
   }
