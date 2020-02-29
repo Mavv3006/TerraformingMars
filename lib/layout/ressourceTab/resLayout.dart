@@ -23,7 +23,7 @@ class ResLayout extends StatelessWidget {
               RessourceValueText(ressourceValue.productionToString),
             ],
           ),
-          RessourceButtonLayout(this.ressourceValue),
+          RessourceButtonLayout(ressourceValue),
         ],
       ),
     );

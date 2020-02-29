@@ -3,8 +3,10 @@ import 'package:terraforming_mars/theme/colors.dart';
 
 class CustomListElement extends StatelessWidget {
   final Widget child;
+  final EdgeInsetsGeometry padding;
 
-  const CustomListElement({Key key, this.child}) : super(key: key);
+  const CustomListElement({Key key, this.child, this.padding})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CustomListElement extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      padding: EdgeInsets.only(top: 6.0),
+      padding: this.padding ?? EdgeInsets.only(top: 6.0),
       child: this.child,
     );
   }

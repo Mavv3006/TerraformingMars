@@ -15,10 +15,11 @@ class Energy extends RessourceValue {
     value = production;
     history.log(
       HistoryMessage(
-        message: "Energy - next Round",
+        message: getHistoryMessgeNextRoundText(),
         oldValue: _oldValue,
         newValue: value,
         type: Energy,
+        production: value - _oldValue,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
       ),
     );

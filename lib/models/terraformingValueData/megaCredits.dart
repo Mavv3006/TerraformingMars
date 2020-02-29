@@ -23,10 +23,11 @@ class MegaCredits extends RessourceValue {
   void nextRound() {
     history.log(
       HistoryMessage(
-        message: "MegaCredits - next Round",
+        message: getHistoryMessgeNextRoundText(),
         oldValue: value,
         newValue: value += (terraformingValue.value + production),
         type: MegaCredits,
+        production: terraformingValue.value + production,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
       ),
     );

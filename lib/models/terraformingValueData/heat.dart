@@ -21,10 +21,11 @@ class Heat extends RessourceValue {
   void nextRound() {
     history.log(
       HistoryMessage(
-        message: "Heat - next Round",
+        message: getHistoryMessgeNextRoundText(),
         oldValue: value,
         newValue: value += (energy.oldValue + production),
         type: Heat,
+        production: energy.oldValue + production,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
       ),
     );

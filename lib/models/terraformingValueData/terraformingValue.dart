@@ -74,7 +74,17 @@ abstract class TerraformingValue extends ChangeNotifier {
 
   @protected
   void nextRoundWithType(Type type) {
-    incrementValueWithType(type);
+    history.log(
+      HistoryMessage(
+        message: getHistoryMessgeValueText(),
+        oldValue: value,
+        newValue: ++value,
+        type: type,
+        production: 1,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
+    notifyListeners();
   }
 
   void undo(HistoryMessage historyMessage) {

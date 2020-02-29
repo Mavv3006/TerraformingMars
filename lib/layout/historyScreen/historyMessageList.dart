@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:terraforming_mars/components/custom_list.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 
-class HistoryMessageList extends StatefulWidget {
-  @override
-  _HistoryMessageListState createState() => _HistoryMessageListState();
-}
+class HistoryMessageList extends StatelessWidget {
+  final History history;
 
-class _HistoryMessageListState extends State<HistoryMessageList> {
+  HistoryMessageList(this.history);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return CustomList(
+      children: history.getWidgetList(),
+    );
   }
 }

@@ -51,7 +51,9 @@ class HistoryLayout extends StatelessWidget {
           },
         ),
       ],
-      child: HistoryMessageList(),
+      child: Consumer<History>(
+        builder: (context, data, child) => HistoryMessageList(data),
+      ),
     );
   }
 }

@@ -35,4 +35,12 @@ class History extends ChangeNotifier {
   int length() {
     return _historyList.length;
   }
+
+  List<Widget> getWidgetList() {
+    return _historyList
+        .map((HistoryMessage message) => message.convertToWidget())
+        .toList()
+        .reversed
+        .toList();
+  }
 }

@@ -83,6 +83,7 @@ class RessourceValue extends TerraformingValue {
         message: getHistoryMessgeNextRoundText(),
         oldValue: value,
         newValue: value += production,
+        production: production,
         type: type,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
       ),
