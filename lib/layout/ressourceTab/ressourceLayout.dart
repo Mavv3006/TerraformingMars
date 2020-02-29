@@ -13,19 +13,19 @@ class RessourceLayout extends StatelessWidget {
         Consumer<MegaCredits>(builder: (context, data, child) {
           return ResLayout(data);
         }),
+        Consumer<Titan>(builder: (context, data, child) {
+          return ResLayout(data);
+        }),
         Consumer<Steel>(builder: (context, data, child) {
           return ResLayout(data);
         }),
-        Consumer<Heat>(builder: (context, data, child) {
+        Consumer<Crop>(builder: (context, data, child) {
           return ResLayout(data);
         }),
         Consumer<Energy>(builder: (context, data, child) {
           return ResLayout(data);
         }),
-        Consumer<Titan>(builder: (context, data, child) {
-          return ResLayout(data);
-        }),
-        Consumer<Crop>(builder: (context, data, child) {
+        Consumer<Heat>(builder: (context, data, child) {
           return ResLayout(data);
         }),
         Consumer<Terraforming>(builder: (context, data, child) {

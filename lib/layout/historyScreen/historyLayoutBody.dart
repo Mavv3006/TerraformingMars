@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/layout/historyScreen/historyMessageList.dart';
 
-import 'history.dart';
+import '../../models/history/history.dart';
 
 class HistoryLayoutBody extends StatelessWidget {
   @override

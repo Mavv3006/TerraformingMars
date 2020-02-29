@@ -26,6 +26,7 @@ class RessourceValue extends TerraformingValue {
   void undo(HistoryMessage historyMessage) {
     switch (historyMessage.historyMessageType) {
       case HistoryMessageType.VALUE:
+      case HistoryMessageType.NEXT_ROUND:
         undoValue(historyMessage);
         return;
       case HistoryMessageType.PRODUCTION:
@@ -42,7 +43,6 @@ class RessourceValue extends TerraformingValue {
     } else {
       throw UnequalValueException("HistoryMessage.newValue != this.value");
     }
-    notifyListeners();
   }
 
   void incrementProduction() {}

@@ -20,6 +20,7 @@ class NextRoundButton extends StatelessWidget {
             content: Text("Die nächste Runde wurde eingeläutet"),
           ),
         );
+        Provider.of<Terraforming>(context,listen: false).nextRound();
       },
       icon: Icon(
         CustomIcons.nextRound,

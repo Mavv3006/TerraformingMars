@@ -38,6 +38,8 @@ class History extends ChangeNotifier {
     return _historyList.length;
   }
 
+  bool get isEmpty => _historyList.isEmpty;
+
   List<Widget> getWidgetList() {
     if (_historyList.isEmpty) {
       return [
