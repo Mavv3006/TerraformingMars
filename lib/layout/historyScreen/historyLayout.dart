@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/components/custom_scaffold.dart';
+import 'package:terraforming_mars/layout/historyScreen/historyMessageList.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
@@ -13,7 +15,7 @@ class HistoryLayout extends StatelessWidget {
       appBarActions: <Widget>[
         IconButton(
           icon: Icon(
-            Icons.undo,
+            CustomIcons.undo,
           ),
           onPressed: () {
             var lastEvent = Provider.of<History>(context).getLastEntry();
@@ -49,9 +51,7 @@ class HistoryLayout extends StatelessWidget {
           },
         ),
       ],
-      child: Center(
-        child: Text("Hallo Welt!"),
-      ),
+      child: HistoryMessageList(),
     );
   }
 }

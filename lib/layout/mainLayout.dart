@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/components/next_round_notification.dart';
-import 'package:terraforming_mars/layout/actionsLayout.dart';
-import 'package:terraforming_mars/layout/historyLayout.dart';
-import 'package:terraforming_mars/layout/ressourceLayout.dart';
-import 'package:terraforming_mars/layout/settingsLayout.dart';
+import 'package:terraforming_mars/layout/actionsTab/actionsLayout.dart';
+import 'package:terraforming_mars/layout/historyScreen/historyLayout.dart';
+import 'package:terraforming_mars/layout/ressourceTab/ressourceLayout.dart';
 import 'package:terraforming_mars/theme/colors.dart';
+
+import 'settingsScreen/settingsLayout.dart';
 
 class MainLayout extends StatelessWidget {
   final Color _appBarColor = AppColors.secondaryLight;

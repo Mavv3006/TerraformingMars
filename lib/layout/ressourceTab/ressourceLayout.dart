@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/components/custom_list.dart';
-import 'package:terraforming_mars/layout/ressourceLayout/energyLayout.dart';
-import 'package:terraforming_mars/layout/ressourceLayout/resLayout.dart';
-import 'package:terraforming_mars/layout/ressourceLayout/terraformingLayout.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
+
+import 'ressourcesView.dart';
 
 class RessourceLayout extends StatelessWidget {
   @override
@@ -21,7 +20,7 @@ class RessourceLayout extends StatelessWidget {
           return ResLayout(data);
         }),
         Consumer<Energy>(builder: (context, data, child) {
-          return EnergyLayout(data);
+          return ResLayout(data);
         }),
         Consumer<Titan>(builder: (context, data, child) {
           return ResLayout(data);

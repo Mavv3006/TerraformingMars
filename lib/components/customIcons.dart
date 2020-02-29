@@ -8,4 +8,5 @@ class CustomIcons {
   static IconData nextRound = Entypo.controller_next;
   static IconData settings = Icons.settings;
   static IconData history = Icons.history;
+  static IconData undo = Icons.undo;
 }
