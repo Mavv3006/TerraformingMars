@@ -12,12 +12,14 @@ class History extends ChangeNotifier {
 
   void log(HistoryMessage message) {
     _historyList.add(message);
+    print(message);
   }
 
   HistoryMessage getLastEntry() {
     if (_historyList.isEmpty) {
       throw EmptyHistoryException("The history is empty");
     }
+    notifyListeners();
     return _historyList.removeLast();
   }
 
@@ -37,10 +39,18 @@ class History extends ChangeNotifier {
   }
 
   List<Widget> getWidgetList() {
-    return _historyList
-        .map((HistoryMessage message) => message.convertToWidget())
-        .toList()
-        .reversed
-        .toList();
+    if (_historyList.isEmpty) {
+      return [
+        Center(
+          child: Text("Du hast noch nichts gemacht"),
+        )
+      ];
+    } else {
+      return _historyList
+          .map((HistoryMessage message) => message.convertToWidget())
+          .toList()
+          .reversed
+          .toList();
+    }
   }
 }

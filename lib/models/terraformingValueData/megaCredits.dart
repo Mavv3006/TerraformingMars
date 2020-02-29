@@ -53,4 +53,9 @@ class MegaCredits extends RessourceValue {
   void incrementProduction() {
     super.incrementProductionWithType(MegaCredits);
   }
+
+  @override
+  String toString() {
+    return super.toString();
+  }
 }

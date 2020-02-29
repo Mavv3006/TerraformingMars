@@ -105,4 +105,9 @@ class HistoryMessage {
       );
     }
   }
+
+  @override
+  String toString() {
+    return 'HistoryMessage{message: $message, oldValue: $oldValue, newValue: $newValue, production: $production, type: $type, historyMessageType: $historyMessageType}';
+  }
 }

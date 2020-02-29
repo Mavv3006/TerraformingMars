@@ -59,8 +59,8 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeValueText(),
-        newValue: value,
-        oldValue: isValueGreaterThenZero ? --value : value,
+        oldValue: value,
+        newValue: isValueGreaterThenZero ? --value : value,
         type: type,
         historyMessageType: HistoryMessageType.VALUE,
       ),

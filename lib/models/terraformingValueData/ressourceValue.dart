@@ -42,6 +42,7 @@ class RessourceValue extends TerraformingValue {
     } else {
       throw UnequalValueException("HistoryMessage.newValue != this.value");
     }
+    notifyListeners();
   }
 
   void incrementProduction() {}
@@ -96,4 +97,9 @@ class RessourceValue extends TerraformingValue {
 
   @override
   void incrementValue() {}
+
+  @override
+  String toString() {
+    return '$title{production: $production}, value: ${value}';
+  }
 }

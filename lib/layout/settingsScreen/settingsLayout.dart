@@ -28,7 +28,7 @@ class _SettingsLayoutState extends State<SettingsLayout> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       appBarTitle: "Einstellungen",
-      child: CustomList(
+      body: CustomList(
         children: [
           CustomListElement(
             child: Column(

@@ -4,11 +4,11 @@ import 'package:terraforming_mars/theme/colors.dart';
 class CustomScaffold extends StatelessWidget {
   final Color _textColor = AppColors.secondaryLight;
 
-  final Widget child;
+  final Widget body;
   final List<Widget> appBarActions;
   final String appBarTitle;
 
-  CustomScaffold({Key key, this.child, this.appBarActions, this.appBarTitle}) : super(key: key);
+  CustomScaffold({Key key, this.body, this.appBarActions, this.appBarTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomScaffold extends StatelessWidget {
           iconTheme: IconThemeData(color: _textColor),
     ),
     backgroundColor: AppColors.backgroundColor,
-    body: this.child,
+    body: this.body,
     );
   }
 }

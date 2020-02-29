@@ -116,4 +116,24 @@ void main() {
 
     expect(DefaultValue.defaultProductionValue + 1, crop.production);
   });
+
+  test('decrement Value', () {
+    var steel = Steel();
+    steel.history = History();
+
+    steel.decrementValue();
+
+    expect(DefaultValue.defaultValueValue - 1, steel.value);
+    expect(steel.value, steel.history.getLastEntry().newValue);
+  });
+
+  test('increment Value', () {
+    var steel = Steel();
+    steel.history = History();
+
+    steel.incrementValue();
+
+    expect(DefaultValue.defaultValueValue + 1, steel.value);
+    expect(steel.value, steel.history.getLastEntry().newValue);
+  });
 }
