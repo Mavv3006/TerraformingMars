@@ -27,57 +27,21 @@ class Energy extends RessourceValue {
 
   @override
   void decrementValue() {
-    history.log(
-      HistoryMessage(
-        message: "Energy - decrement Value",
-        newValue: value,
-        oldValue: isValueGreaterThenZero ? --value : value,
-        type: Energy,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-    super.decrementValue();
+    super.decrementValueWithType(Energy);
   }
 
   @override
   void incrementValue() {
-    history.log(
-      HistoryMessage(
-        message: "Energy - increment Value",
-        oldValue: value,
-        newValue: ++value,
-        type: Energy,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-    super.incrementValue();
+    super.incrementValueWithType(Energy);
   }
 
   @override
   void decrementProduction() {
-    history.log(
-      HistoryMessage(
-        message: "Energy - decrement Production",
-        oldValue: production,
-        newValue: isProductionGreaterThenZero ? --production : production,
-        type: Energy,
-        historyMessageType: HistoryMessageType.PRODUCTION,
-      ),
-    );
-    super.decrementProduction();
+    super.decrementProductionWithType(Energy);
   }
 
   @override
   void incrementProduction() {
-    history.log(
-      HistoryMessage(
-        message: "Energy - increment Production",
-        oldValue: production,
-        newValue: ++production,
-        type: Energy,
-        historyMessageType: HistoryMessageType.PRODUCTION,
-      ),
-    );
-    super.incrementProduction();
+    super.incrementProductionWithType(Energy);
   }
 }

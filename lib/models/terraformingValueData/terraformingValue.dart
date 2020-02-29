@@ -9,6 +9,22 @@ import '../defaultValue.dart';
 abstract class TerraformingValue extends ChangeNotifier {
   TerraformingValue(this._title);
 
+  String _getHistoryMessageText() {
+    return "${this.title} - ";
+  }
+
+  String getHistoryMessgeProductionText() {
+    return _getHistoryMessageText() + HistoryMessageTypeString.PRODUCTION;
+  }
+
+  String getHistoryMessgeValueText() {
+    return _getHistoryMessageText() + HistoryMessageTypeString.VALUE;
+  }
+
+  String getHistoryMessgeNextRoundText() {
+    return _getHistoryMessageText() + HistoryMessageTypeString.NEXT_ROUND;
+  }
+
   History history;
 
   final String _title;
@@ -20,16 +36,42 @@ abstract class TerraformingValue extends ChangeNotifier {
 
   String get valueToString => "${value}";
 
-  void incrementValue() {
+  void incrementValue();
+
+  void incrementValueWithType(Type type) {
+    history.log(
+      HistoryMessage(
+        message: getHistoryMessgeValueText(),
+        oldValue: value,
+        newValue: ++value,
+        type: type,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
     notifyListeners();
   }
 
-  void decrementValue() {
+  void decrementValue();
+
+  void decrementValueWithType(Type type) {
+    history.log(
+      HistoryMessage(
+        message: getHistoryMessgeValueText(),
+        newValue: value,
+        oldValue: isValueGreaterThenZero ? --value : value,
+        type: type,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
     notifyListeners();
   }
 
   void nextRound() {
-    incrementValue();
+    notifyListeners();
+  }
+
+  void nextRoundWithType(Type type) {
+    incrementValueWithType(type);
   }
 
   void undo(HistoryMessage historyMessage) {

@@ -44,16 +44,53 @@ class RessourceValue extends TerraformingValue {
     }
   }
 
-  void incrementProduction() {
+  void incrementProduction() {}
+
+  void incrementProductionWithType(Type type) {
+    history.log(
+      HistoryMessage(
+        message: getHistoryMessgeProductionText(),
+        oldValue: production,
+        newValue: ++production,
+        type: type,
+        historyMessageType: HistoryMessageType.PRODUCTION,
+      ),
+    );
     notifyListeners();
   }
 
-  void decrementProduction() {
+  void decrementProduction() {}
+
+  void decrementProductionWithType(Type type) {
+    history.log(
+      HistoryMessage(
+        message: getHistoryMessgeProductionText(),
+        oldValue: production,
+        newValue: isProductionGreaterThenZero ? --production : production,
+        type: type,
+        historyMessageType: HistoryMessageType.PRODUCTION,
+      ),
+    );
     notifyListeners();
   }
 
   @override
-  void nextRound() {
+  void nextRoundWithType(Type type) {
+    history.log(
+      HistoryMessage(
+        message: getHistoryMessgeNextRoundText(),
+        oldValue: value,
+        newValue: value += production,
+        type: type,
+        historyMessageType: HistoryMessageType.NEXT_ROUND,
+      ),
+    );
     notifyListeners();
   }
+
+  @override
+  void decrementValue() {}
+
+  @override
+  void incrementValue() {}
 }

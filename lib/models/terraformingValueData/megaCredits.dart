@@ -35,57 +35,21 @@ class MegaCredits extends RessourceValue {
 
   @override
   void decrementValue() {
-    history.log(
-      HistoryMessage(
-        message: "MegaCredits - decrement Value",
-        newValue: value,
-        oldValue: isValueGreaterThenZero ? --value : value,
-        type: MegaCredits,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-    super.decrementValue();
+    super.decrementValueWithType(MegaCredits);
   }
 
   @override
   void incrementValue() {
-    history.log(
-      HistoryMessage(
-        message: "MegaCredits - increment Value",
-        oldValue: value,
-        newValue: ++value,
-        type: MegaCredits,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-    super.incrementValue();
+    super.incrementValueWithType(MegaCredits);
   }
 
   @override
   void decrementProduction() {
-    history.log(
-      HistoryMessage(
-        message: "MegaCredits - decrement Production",
-        oldValue: production,
-        newValue: isProductionGreaterThenZero ? --production : production,
-        type: MegaCredits,
-        historyMessageType: HistoryMessageType.PRODUCTION,
-      ),
-    );
-    super.decrementProduction();
+    super.decrementProductionWithType(MegaCredits);
   }
 
   @override
   void incrementProduction() {
-    history.log(
-      HistoryMessage(
-        message: "MegaCredits - increment Production",
-        oldValue: production,
-        newValue: ++production,
-        type: MegaCredits,
-        historyMessageType: HistoryMessageType.PRODUCTION,
-      ),
-    );
-    super.incrementProduction();
+    super.incrementProductionWithType(MegaCredits);
   }
 }

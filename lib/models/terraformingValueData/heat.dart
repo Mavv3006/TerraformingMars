@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
@@ -31,60 +31,23 @@ class Heat extends RessourceValue {
     super.nextRound();
   }
 
-
   @override
   void decrementValue() {
-    history.log(
-      HistoryMessage(
-        message: "Heat - decrement Value",
-        newValue: value,
-        oldValue: isValueGreaterThenZero ? --value : value,
-        type: Heat,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-    super.decrementValue();
+    super.decrementValueWithType(Heat);
   }
 
   @override
   void incrementValue() {
-    history.log(
-      HistoryMessage(
-        message: "Heat - increment Value",
-        oldValue: value,
-        newValue: ++value,
-        type: Heat,
-        historyMessageType: HistoryMessageType.VALUE,
-      ),
-    );
-    super.incrementValue();
+    super.incrementValueWithType(Heat);
   }
 
   @override
   void decrementProduction() {
-    history.log(
-      HistoryMessage(
-        message: "Heat - decrement Production",
-        oldValue: production,
-        newValue: isProductionGreaterThenZero ? --production : production,
-        type: Heat,
-        historyMessageType: HistoryMessageType.PRODUCTION,
-      ),
-    );
-    super.decrementProduction();
+    super.decrementProductionWithType(Heat);
   }
 
   @override
   void incrementProduction() {
-    history.log(
-      HistoryMessage(
-        message: "Heat - increment Production",
-        oldValue: production,
-        newValue: ++production,
-        type: Heat,
-        historyMessageType: HistoryMessageType.PRODUCTION,
-      ),
-    );
-    super.incrementProduction();
+    super.incrementProductionWithType(Heat);
   }
 }
