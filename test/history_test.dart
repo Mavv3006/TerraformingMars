@@ -83,4 +83,37 @@ void main() {
     expect(DefaultValue.defaultValueValue + DefaultValue.defaultProductionValue,
         crop.value);
   });
+
+  test('Crop increment Value', () {
+    var crop = Crop();
+    crop.history = History();
+
+    crop.incrementValue();
+
+    expect(DefaultValue.defaultValueValue + 1, crop.value);
+  });
+  test('Crop decrement Value', () {
+    var crop = Crop();
+    crop.history = History();
+
+    crop.decrementValue();
+
+    expect(DefaultValue.defaultValueValue - 1, crop.value);
+  });
+  test('Crop decrement Production', () {
+    var crop = Crop();
+    crop.history = History();
+
+    crop.decrementProduction();
+
+    expect(DefaultValue.defaultProductionValue - 1, crop.production);
+  });
+  test('Crop increment Production', () {
+    var crop = Crop();
+    crop.history = History();
+
+    crop.incrementProduction();
+
+    expect(DefaultValue.defaultProductionValue + 1, crop.production);
+  });
 }
