@@ -46,6 +46,7 @@ class RessourceValue extends TerraformingValue {
 
   void incrementProduction() {}
 
+  @protected
   void incrementProductionWithType(Type type) {
     history.log(
       HistoryMessage(
@@ -61,6 +62,7 @@ class RessourceValue extends TerraformingValue {
 
   void decrementProduction() {}
 
+  @protected
   void decrementProductionWithType(Type type) {
     history.log(
       HistoryMessage(

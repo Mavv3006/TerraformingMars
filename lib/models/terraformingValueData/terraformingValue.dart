@@ -38,6 +38,7 @@ abstract class TerraformingValue extends ChangeNotifier {
 
   void incrementValue();
 
+  @protected
   void incrementValueWithType(Type type) {
     history.log(
       HistoryMessage(
@@ -53,6 +54,7 @@ abstract class TerraformingValue extends ChangeNotifier {
 
   void decrementValue();
 
+  @protected
   void decrementValueWithType(Type type) {
     history.log(
       HistoryMessage(
@@ -70,6 +72,7 @@ abstract class TerraformingValue extends ChangeNotifier {
     notifyListeners();
   }
 
+  @protected
   void nextRoundWithType(Type type) {
     incrementValueWithType(type);
   }
