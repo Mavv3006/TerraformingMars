@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:terraforming_mars/models/defaultValue.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
@@ -36,6 +37,7 @@ void main() {
 
   test('nextRound Energy', () {
     final energy = Energy();
+    energy.history = History();
     final startValue = energy.value;
     VoidCallback listener = () {
       expect(energy.value, equals(startValue));
@@ -47,6 +49,7 @@ void main() {
 
   test('nextRound Titan', () {
     final titan = Titan();
+    titan.history = History();
     final startValue = titan.value;
     VoidCallback listener = () {
       expect(titan.value, greaterThan(startValue));
@@ -58,6 +61,7 @@ void main() {
 
   test('undo Value', () {
     var energy = Energy();
+    energy.history = History();
     int startValue = energy.value;
     energy.incrementValue();
     int newValue = energy.value;

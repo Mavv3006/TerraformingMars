@@ -1,34 +1,43 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {
   test('incrementing TerraformingValue', () {
     var terraformingValue = Terraforming();
+    terraformingValue.history = History();
     final startValue = terraformingValue.value;
-    VoidCallback decrement = () {
+    VoidCallback incrementCallback = () {
       expect(terraformingValue.value, greaterThan(startValue));
     };
-    terraformingValue.addListener(decrement);
+    terraformingValue.addListener(incrementCallback);
     terraformingValue.incrementValue();
-    terraformingValue.removeListener(decrement);
+    terraformingValue.removeListener(incrementCallback);
   });
 
   test('decrementing TerraformingValue', () {
     var terraformingValue = Terraforming();
+    terraformingValue.history = History();
     final startValue = terraformingValue.value;
-    VoidCallback decrement = () {
+    VoidCallback decrementCallback = () {
       expect(terraformingValue.value, lessThan(startValue));
     };
-    terraformingValue.addListener(decrement);
+    terraformingValue.addListener(decrementCallback);
     terraformingValue.decrementValue();
-    terraformingValue.removeListener(decrement);
+    terraformingValue.removeListener(decrementCallback);
   });
 
   test('nextRound greaterThem', () {
+    var history = History();
     var terraforming = Terraforming();
     var energy = Energy();
     var megacredits = MegaCredits().updateTerraformingValue(terraforming);
+
+    terraforming.history = history;
+    energy.history = history;
+    megacredits.history = history;
+
     var megaStartValue = megacredits.value;
     var energyStartValue = energy.value;
     var terraStartValue = terraforming.value;
@@ -57,9 +66,14 @@ void main() {
   });
 
   test('nextRound greaterThem', () {
+    var history = History();
     var terraforming = Terraforming();
     var energy = Energy();
     var megacredits = MegaCredits().updateTerraformingValue(terraforming);
+
+    terraforming.history = history;
+    energy.history = history;
+    megacredits.history = history;
 
     VoidCallback megaNextRound = () {
       expect(41, equals(megacredits.value));
