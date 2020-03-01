@@ -12,6 +12,7 @@ class RessourceValueText extends StatelessWidget {
       title,
       style: Theme.of(context).textTheme.body2.copyWith(
             color: AppColors.accentColor,
+            fontSize: 16,
           ),
     );
   }

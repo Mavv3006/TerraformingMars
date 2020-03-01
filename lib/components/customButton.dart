@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
@@ -52,6 +51,26 @@ class TextButton extends RaisedButton {
           onPressed: onPressed,
           child: Text(
             text,
+          ),
+          padding: EdgeInsets.all(8),
+        );
+}
+
+class ActionButton extends RaisedButton {
+  ActionButton({
+    Key key,
+    @required String text,
+    @required VoidCallback onPressed,
+    double buttonWidth,
+  }) : super(
+          splashColor: AppColors.accentColor,
+          key: key,
+          onPressed: onPressed,
+          child: SizedBox(
+            width: buttonWidth,
+            child: Center(
+              child: Text(text),
+            ),
           ),
           padding: EdgeInsets.all(8),
         );

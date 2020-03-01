@@ -5,4 +5,5 @@ class HistoryMessageTypeString {
   static String NEXT_ROUND = "Nächste Runde";
 }
 
-enum HistoryMessageType { PRODUCTION, VALUE, SETTING, NEXT_ROUND }
+enum HistoryMessageType { PRODUCTION, VALUE, SETTING, NEXT_ROUND, ACTION }
+

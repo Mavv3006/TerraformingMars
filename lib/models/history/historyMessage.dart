@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
+import 'package:terraforming_mars/models/action/action_type.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 import 'historyMessageType.dart';
@@ -13,6 +14,7 @@ class HistoryMessage {
   final int production;
   final Type type;
   final HistoryMessageType historyMessageType;
+  final ActionType actionType;
 
   final iconPadding = EdgeInsets.only(left: 8, right: 8);
 
@@ -22,6 +24,7 @@ class HistoryMessage {
     @required this.newValue,
     @required this.type,
     @required this.historyMessageType,
+    this.actionType,
     this.production,
   });
 
