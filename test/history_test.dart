@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:terraforming_mars/models/action/action_type.dart';
 import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
@@ -43,7 +44,7 @@ void main() {
       HistoryMessage(
         message: "Titan - decrement Value",
         oldValue: 5,
-        newValue: DefaultValue.defaultValueValue,
+        newValue: DefaultRessourceValue.defaultValueValue,
         type: Titan,
         historyMessageType: HistoryMessageType.VALUE,
       ),
@@ -80,7 +81,9 @@ void main() {
 
     crop.nextRound();
 
-    expect(DefaultValue.defaultValueValue + DefaultValue.defaultProductionValue,
+    expect(
+        DefaultRessourceValue.defaultValueValue +
+            DefaultRessourceValue.defaultProductionValue,
         crop.value);
   });
 
@@ -90,7 +93,7 @@ void main() {
 
     crop.incrementValue();
 
-    expect(DefaultValue.defaultValueValue + 1, crop.value);
+    expect(DefaultRessourceValue.defaultValueValue + 1, crop.value);
   });
   test('Crop decrement Value', () {
     var crop = Crop();
@@ -98,7 +101,7 @@ void main() {
 
     crop.decrementValue();
 
-    expect(DefaultValue.defaultValueValue - 1, crop.value);
+    expect(DefaultRessourceValue.defaultValueValue - 1, crop.value);
   });
   test('Crop decrement Production', () {
     var crop = Crop();
@@ -106,7 +109,7 @@ void main() {
 
     crop.decrementProduction();
 
-    expect(DefaultValue.defaultProductionValue - 1, crop.production);
+    expect(DefaultRessourceValue.defaultProductionValue - 1, crop.production);
   });
   test('Crop increment Production', () {
     var crop = Crop();
@@ -114,7 +117,7 @@ void main() {
 
     crop.incrementProduction();
 
-    expect(DefaultValue.defaultProductionValue + 1, crop.production);
+    expect(DefaultRessourceValue.defaultProductionValue + 1, crop.production);
   });
 
   test('decrement Value', () {
@@ -123,7 +126,7 @@ void main() {
 
     steel.decrementValue();
 
-    expect(DefaultValue.defaultValueValue - 1, steel.value);
+    expect(DefaultRessourceValue.defaultValueValue - 1, steel.value);
     expect(steel.value, steel.history.getLastEntry().newValue);
   });
 
@@ -133,7 +136,30 @@ void main() {
 
     steel.incrementValue();
 
-    expect(DefaultValue.defaultValueValue + 1, steel.value);
+    expect(DefaultRessourceValue.defaultValueValue + 1, steel.value);
     expect(steel.value, steel.history.getLastEntry().newValue);
+  });
+
+  test('HistoryMessageType without actionType', () {
+    expect(
+        () => HistoryMessage(
+            message: null,
+            oldValue: null,
+            newValue: null,
+            type: null,
+            historyMessageType: HistoryMessageType.ACTION),
+        throwsA(isA<AssertionError>()));
+  });
+
+  test('HistoryMessageType without actionType', () {
+    expect(
+        () => HistoryMessage(
+            message: null,
+            oldValue: null,
+            newValue: null,
+            type: null,
+            historyMessageType: HistoryMessageType.ACTION,
+            actionType: ActionType.BUILD_CITY),
+        returnsNormally);
   });
 }

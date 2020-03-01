@@ -13,10 +13,10 @@ class RessourceValue extends TerraformingValue {
   }
 
   RessourceValue(String title) : super(title) {
-    value = DefaultValue.defaultValueValue;
+    value = DefaultRessourceValue.defaultValueValue;
   }
 
-  int production = DefaultValue.defaultProductionValue;
+  int production = DefaultRessourceValue.defaultProductionValue;
 
   bool get isProductionGreaterThenZero => production > 0;
 

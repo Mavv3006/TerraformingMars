@@ -21,8 +21,8 @@ class PlayCards extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+              RessourceValueText("Karte ausspielen für:"),
               CustomTextInput(),
-              RessourceValueText("Karten ausspielen"),
             ],
           ),
           Row(

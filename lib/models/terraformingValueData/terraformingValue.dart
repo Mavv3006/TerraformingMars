@@ -28,7 +28,7 @@ abstract class TerraformingValue extends ChangeNotifier {
   History history;
 
   final String _title;
-  int value = DefaultValue.defaultTerraformingStartValue;
+  int value = DefaultRessourceValue.defaultTerraformingStartValue;
 
   bool get isValueGreaterThenZero => value > 0;
 

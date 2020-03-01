@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:terraforming_mars/models/action/action_type.dart';
+import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
@@ -15,6 +17,24 @@ class Heat extends RessourceValue {
   Heat updateEnergy(Energy energy) {
     this.energy = energy;
     return this;
+  }
+
+  bool get isValueEnoughForTemperaturIncrease =>
+      value >= DefaultActionValue.defaultTerraformingActionTemperaturValue;
+
+  void increaseTemperatur() {
+    history.log(
+      HistoryMessage(
+        message: null /*TODO: write message*/,
+        oldValue: value,
+        newValue: value -=
+            DefaultActionValue.defaultTerraformingActionTemperaturValue,
+        type: Heat,
+        historyMessageType: HistoryMessageType.ACTION,
+        actionType: ActionType.INCREASE_TEMPERATUR,
+      ),
+    );
+    notifyListeners();
   }
 
   @override

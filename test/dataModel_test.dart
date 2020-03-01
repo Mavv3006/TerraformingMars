@@ -74,8 +74,8 @@ void main() {
       type: Energy,
     );
 
-    expect(DefaultValue.defaultValueValue + 1, equals(energy.value));
+    expect(DefaultRessourceValue.defaultValueValue + 1, equals(energy.value));
     energy.undo(historyMessage);
-    expect(DefaultValue.defaultValueValue, equals(energy.value));
+    expect(DefaultRessourceValue.defaultValueValue, equals(energy.value));
   });
 }

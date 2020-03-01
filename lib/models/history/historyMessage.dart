@@ -26,7 +26,9 @@ class HistoryMessage {
     @required this.historyMessageType,
     this.actionType,
     this.production,
-  });
+  }) : assert(historyMessageType == HistoryMessageType.ACTION
+            ? actionType != null
+            : actionType == null);
 
   Widget convertToWidget() {
     if (this.historyMessageType == HistoryMessageType.VALUE ||
@@ -111,6 +113,6 @@ class HistoryMessage {
 
   @override
   String toString() {
-    return 'HistoryMessage{message: $message, oldValue: $oldValue, newValue: $newValue, production: $production, type: $type, historyMessageType: $historyMessageType}';
+    return 'HistoryMessage{message: $message, oldValue: $oldValue, newValue: $newValue, production: $production, type: $type, historyMessageType: $historyMessageType, actionType: $actionType}';
   }
 }
