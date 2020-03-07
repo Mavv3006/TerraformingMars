@@ -36,17 +36,11 @@ class MegaCredits extends RessourceValue {
     return this;
   }
 
-  bool _isEnoughToByCards(int amount) {
-    return this.value >= amount;
-  }
-
-  void buyCards(int amount) {
-    if (amount == 0) return;
-
-    if (_isEnoughToByCards(amount)) {
+  void playCards(int amount) {
+    if (_isEnoughToPlayCards(amount)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $amount MC gekauft",
+          message: "Karte für $amount MC ausgespielt",
           oldValue: value,
           newValue: value -= amount,
           type: MegaCredits,
@@ -58,6 +52,33 @@ class MegaCredits extends RessourceValue {
     } else {
       throw ValueTooLowException("Du hast nicht genug MegaCredits");
     }
+  }
+
+  bool _isEnoughToPlayCards(int amount) {
+    return this.value >= amount;
+  }
+
+  void buyCards(int amount) {
+    if (_isEnoughToBuyCards(amount)) {
+      history.log(
+        HistoryMessage(
+          message: "$amount Karten gekauft",
+          oldValue: value,
+          newValue: value -=
+              (amount * DefaultActionValue.defaultCardBuyingValue),
+          type: MegaCredits,
+          historyMessageType: HistoryMessageType.ACTION,
+          actionType: ActionType.BUY_CARDS,
+        ),
+      );
+      notifyListeners();
+    } else {
+      throw ValueTooLowException("Du hast nicht genug MegaCredits");
+    }
+  }
+
+  bool _isEnoughToBuyCards(int amount) {
+    return this.value >= (amount * DefaultActionValue.defaultCardBuyingValue);
   }
 
   void sellCards(int amount) {

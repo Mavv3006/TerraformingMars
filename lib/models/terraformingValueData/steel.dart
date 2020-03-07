@@ -11,7 +11,7 @@ class Steel extends RessourceValue {
     return this.value >= amount;
   }
 
-  void buyCards(int amount) {
+  void playCards(int amount) {
     if (amount == 0) return;
 
     if (_isEnoughToByCards(amount)) {

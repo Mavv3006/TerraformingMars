@@ -53,12 +53,13 @@ class _PlayCardsState extends State<PlayCards> {
                 text: "Credits",
                 onPressed: () {
                   try {
-                    print("'${textEditingController.text}' wurde eingegeben");
                     int amount = int.parse(textEditingController.text);
-                    mc.buyCards(amount);
+                    if (amount <= 0) return;
+                    mc.playCards(amount);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("Du hast eine Karte für $amount MC gekauft"),
+                        content: Text(
+                            "Du hast eine Karte für $amount MC ausgespielt"),
                       ),
                     );
                   } on FormatException catch (_) {
@@ -83,12 +84,13 @@ class _PlayCardsState extends State<PlayCards> {
                 text: "Stahl",
                 onPressed: () {
                   try {
-                    print("'${textEditingController.text}' wurde eingegeben");
                     int amount = int.parse(textEditingController.text);
-                    steel.buyCards(amount);
+                    if (amount <= 0) return;
+                    steel.playCards(amount);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("Du hast eine Karte für $amount Stahl gekauft"),
+                        content: Text(
+                            "Du hast eine Karte für $amount Stahl ausgespielt"),
                       ),
                     );
                   } on FormatException catch (_) {
@@ -111,12 +113,13 @@ class _PlayCardsState extends State<PlayCards> {
                 text: "Titan",
                 onPressed: () {
                   try {
-                    print("'${textEditingController.text}' wurde eingegeben");
                     int amount = int.parse(textEditingController.text);
-                    titan.buyCards(amount);
+                    if (amount <= 0) return;
+                    titan.playCards(amount);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("Du hast eine Karte für $amount Titan gekauft"),
+                        content: Text(
+                            "Du hast eine Karte für $amount Titan ausgespielt"),
                       ),
                     );
                   } on FormatException catch (_) {
