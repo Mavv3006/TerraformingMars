@@ -1,3 +1,4 @@
+import 'package:terraforming_mars/exceptions/valueTooLowException.dart';
 import 'package:terraforming_mars/models/action/action_type.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
@@ -35,10 +36,34 @@ class MegaCredits extends RessourceValue {
     return this;
   }
 
+  bool _isEnoughToByCards(int amount) {
+    return this.value >= amount;
+  }
+
+  void buyCards(int amount) {
+    if (amount == 0) return;
+
+    if (_isEnoughToByCards(amount)) {
+      history.log(
+        HistoryMessage(
+          message: "Karte für $amount MC gekauft",
+          oldValue: value,
+          newValue: value -= amount,
+          type: MegaCredits,
+          historyMessageType: HistoryMessageType.ACTION,
+          actionType: ActionType.PLAY_CARDS_WITH_MC,
+        ),
+      );
+      notifyListeners();
+    } else {
+      throw ValueTooLowException("Du hast nicht genug MegaCredits");
+    }
+  }
+
   void sellCards(int amount) {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "$amount Karten verkauft",
         oldValue: value,
         newValue: value +=
             (amount * DefaultActionValue.defaultCardSellingValue),
@@ -76,7 +101,7 @@ class MegaCredits extends RessourceValue {
   void _logActionTypeAsteroid() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Asteroid abgeschleppt",
         oldValue: value,
         newValue: value -=
             DefaultActionValue.defaultStandardProjectAsteroidValue,
@@ -90,10 +115,9 @@ class MegaCredits extends RessourceValue {
   void _logActionTypeOcean() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Ozean bewässert",
         oldValue: value,
-        newValue: value -=
-            DefaultActionValue.defaultStandardProjectOceanValue,
+        newValue: value -= DefaultActionValue.defaultStandardProjectOceanValue,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_OCEAN,
@@ -104,10 +128,9 @@ class MegaCredits extends RessourceValue {
   void _logActionTypeForest() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Wald gepflanzt",
         oldValue: value,
-        newValue: value -=
-            DefaultActionValue.defaultStandardProjectForestValue,
+        newValue: value -= DefaultActionValue.defaultStandardProjectForestValue,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_FOREST_WITH_MC,
@@ -118,10 +141,9 @@ class MegaCredits extends RessourceValue {
   void _logActionTypeCity() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Stadt gebaut",
         oldValue: value,
-        newValue: value -=
-            DefaultActionValue.defaultStandardProjectCityValue,
+        newValue: value -= DefaultActionValue.defaultStandardProjectCityValue,
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_CITY,
@@ -132,7 +154,7 @@ class MegaCredits extends RessourceValue {
   void _logActionTypeFactory() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Kraftwerk errichtet",
         oldValue: value,
         newValue: value -=
             DefaultActionValue.defaultStandardProjectFactoryValue,

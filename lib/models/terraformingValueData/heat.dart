@@ -25,7 +25,7 @@ class Heat extends RessourceValue {
   void increaseTemperatur() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Temperatur erhöht",
         oldValue: value,
         newValue: value -=
             DefaultActionValue.defaultTerraformingActionTemperaturValue,

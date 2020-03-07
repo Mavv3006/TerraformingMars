@@ -4,6 +4,7 @@ import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/custom_text_input.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
+import 'package:terraforming_mars/layout/actionsTab/sell_cards.dart';
 import 'package:terraforming_mars/models/action/action_type.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
@@ -21,19 +22,7 @@ class StandardProjects extends StatelessWidget {
       child: Column(
         children: <Widget>[
           RessourceValueText("Standard Projekte"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              CustomTextInput(),
-              ActionButton(
-                text: "Karten verkaufen",
-                onPressed: () {
-                  var amount = 20; // TODO: Get amount from TextField
-                  mc.sellCards(amount);
-                },
-              ),
-            ],
-          ),
+          SellCards(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

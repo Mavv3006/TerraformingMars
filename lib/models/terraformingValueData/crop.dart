@@ -13,7 +13,7 @@ class Crop extends RessourceValue {
   void buildForest() {
     history.log(
       HistoryMessage(
-        message: null /*TODO: write message*/,
+        message: "Wald gepflanzt",
         oldValue: value,
         newValue: value -=
             DefaultActionValue.defaultTerraformingActionForestValue,

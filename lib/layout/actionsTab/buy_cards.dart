@@ -16,7 +16,7 @@ class BuyCards extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          CustomTextInput(),
+          CustomTextInput(TextEditingController() /*TODO: Add TextEditingController*/),
           ActionButton(
             onPressed: () {
               /*TODO: Action*/
