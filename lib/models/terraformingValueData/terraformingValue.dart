@@ -17,7 +17,7 @@ abstract class TerraformingValue extends ChangeNotifier {
     return _getHistoryMessageText() + HistoryMessageTypeString.PRODUCTION;
   }
 
-  String getHistoryMessgeValueText() {
+  String getHistoryMessageValueText() {
     return _getHistoryMessageText() + HistoryMessageTypeString.VALUE;
   }
 
@@ -42,7 +42,7 @@ abstract class TerraformingValue extends ChangeNotifier {
   void incrementValueWithType(Type type) {
     history.log(
       HistoryMessage(
-        message: getHistoryMessgeValueText(),
+        message: getHistoryMessageValueText(),
         oldValue: value,
         newValue: ++value,
         type: type,
@@ -58,7 +58,7 @@ abstract class TerraformingValue extends ChangeNotifier {
   void decrementValueWithType(Type type) {
     history.log(
       HistoryMessage(
-        message: getHistoryMessgeValueText(),
+        message: getHistoryMessageValueText(),
         oldValue: value,
         newValue: isValueGreaterThenZero ? --value : value,
         type: type,
@@ -76,7 +76,7 @@ abstract class TerraformingValue extends ChangeNotifier {
   void nextRoundWithType(Type type) {
     history.log(
       HistoryMessage(
-        message: getHistoryMessgeValueText(),
+        message: getHistoryMessageValueText(),
         oldValue: value,
         newValue: ++value,
         type: type,

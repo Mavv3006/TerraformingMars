@@ -1,3 +1,5 @@
+import 'package:terraforming_mars/models/history/historyMessage.dart';
+import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/terraformingValueData/terraformingValue.dart';
 
 class Terraforming extends TerraformingValue {
@@ -5,16 +7,44 @@ class Terraforming extends TerraformingValue {
 
   @override
   void nextRound() {
-    nextRoundWithType(Terraforming);
+    history.log(
+      HistoryMessage(
+        message: "${this.title}",
+        oldValue: value,
+        newValue: ++value,
+        type: Terraforming,
+        production: 1,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
+    notifyListeners();
   }
 
   @override
   void decrementValue() {
-    super.decrementValueWithType(Terraforming);
+    history.log(
+      HistoryMessage(
+        message: "${this.title}",
+        oldValue: value,
+        newValue: isValueGreaterThenZero ? --value : value,
+        type: Terraforming,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
+    notifyListeners();
   }
 
   @override
   void incrementValue() {
-    super.incrementValueWithType(Terraforming);
+    history.log(
+      HistoryMessage(
+        message: "${this.title}",
+        oldValue: value,
+        newValue: ++value,
+        type: Terraforming,
+        historyMessageType: HistoryMessageType.VALUE,
+      ),
+    );
+    notifyListeners();
   }
 }

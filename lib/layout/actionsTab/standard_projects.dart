@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/components/custom_list_element.dart';
-import 'package:terraforming_mars/components/custom_text_input.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
 import 'package:terraforming_mars/layout/actionsTab/sell_cards.dart';
 import 'package:terraforming_mars/models/action/action_type.dart';
+import 'package:terraforming_mars/models/action/terraforming_switch_state.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 class StandardProjects extends StatelessWidget {
@@ -15,6 +15,7 @@ class StandardProjects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mc = Provider.of<MegaCredits>(context);
+    var switchState = Provider.of<TerraformingSwitchState>(context);
 
     return CustomListElement(
       padding:
@@ -40,12 +41,25 @@ class StandardProjects extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              RessourceValueText("Asteroid abstürzen: +2°C, +1 TFW"),
+              Consumer<TerraformingSwitchState>(
+                builder: (BuildContext context, TerraformingSwitchState value,
+                    Widget child) {
+                  var text = "Asteroid abstürzen: +2°C";
+                  if (value.currentState) {
+                    text += ", +1 TFW";
+                  }
+                  return RessourceValueText(text);
+                },
+              ),
               ActionButton(
                 text: "14 MC",
                 onPressed: mc.isValueEnoughForAsteroid
                     ? () {
                         mc.standardProject(ActionType.ASTEROID);
+                        if (switchState.currentState) {
+                          Provider.of<Terraforming>(context, listen: false)
+                              .incrementValue();
+                        }
                       }
                     : null,
               ),
@@ -54,12 +68,25 @@ class StandardProjects extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              RessourceValueText("Ozean bewässern: +1 TFW"),
+              Consumer<TerraformingSwitchState>(
+                builder: (BuildContext context, TerraformingSwitchState value,
+                    Widget child) {
+                  var text = "Ozean bewässern";
+                  if (value.currentState) {
+                    text += ": +1 TFW";
+                  }
+                  return RessourceValueText(text);
+                },
+              ),
               ActionButton(
                 text: "18 MC",
                 onPressed: mc.isValueEnoughForOcean
                     ? () {
                         mc.standardProject(ActionType.BUILD_OCEAN);
+                        if (switchState.currentState) {
+                          Provider.of<Terraforming>(context, listen: false)
+                              .incrementValue();
+                        }
                       }
                     : null,
               ),
@@ -68,12 +95,25 @@ class StandardProjects extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              RessourceValueText("Wald pflanzen: +1 TFW"),
+              Consumer<TerraformingSwitchState>(
+                builder: (BuildContext context, TerraformingSwitchState value,
+                    Widget child) {
+                  var text = "Wald pflanzen";
+                  if (value.currentState) {
+                    text += ": +1 TFW";
+                  }
+                  return RessourceValueText(text);
+                },
+              ),
               ActionButton(
                 text: "23 MC",
                 onPressed: mc.isValueEnoughForForest
                     ? () {
                         mc.standardProject(ActionType.BUILD_FOREST_WITH_MC);
+                        if (switchState.currentState) {
+                          Provider.of<Terraforming>(context, listen: false)
+                              .incrementValue();
+                        }
                       }
                     : null,
               ),

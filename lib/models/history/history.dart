@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/exceptions/emptyHistoryException.dart';
+import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_message_widget.dart';
 
 import 'historyMessage.dart';
 
@@ -49,7 +50,8 @@ class History extends ChangeNotifier {
       ];
     } else {
       return _historyList
-          .map((HistoryMessage message) => message.convertToWidget())
+          .map((HistoryMessage message) =>
+              HistoryMessageWidget(historyMessage: message))
           .toList()
           .reversed
           .toList();
