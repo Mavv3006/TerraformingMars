@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class CustomTextInput extends StatefulWidget {
-  TextEditingController textEditingController;
+  final TextEditingController textEditingController;
+  final ValueChanged<String> onSubmitted;
 
-  CustomTextInput(this.textEditingController);
+  CustomTextInput(this.textEditingController, {this.onSubmitted});
 
   @override
   _CustomTextInputState createState() => _CustomTextInputState();
 }
 
 class _CustomTextInputState extends State<CustomTextInput> {
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 75,
       height: 30,
       child: TextField(
+        onSubmitted: widget.onSubmitted,
         controller: widget.textEditingController,
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.done,

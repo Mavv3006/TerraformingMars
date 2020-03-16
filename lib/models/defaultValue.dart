@@ -24,3 +24,10 @@ class DefaultConversionFactor {
   static final defaultSteelValue = 2;
   static final defaultTitanValue = 3;
 }
+
+class DefaultSettingsValue {
+  static final defaultSteelBuyValue = 2;
+  static final defaultTitanBuyValue = 3;
+  static final defaultCropTradeValue = 8;
+  static final defaultHeatTradeValue = 8;
+}
