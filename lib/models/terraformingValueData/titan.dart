@@ -9,19 +9,20 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 class Titan extends RessourceValue {
   Titan() : super("Titan");
 
-  bool _isEnoughToByCards(int amount) {
-    return this.value >= amount;
+  bool _isEnoughToByCards(int cardValueInSteel) {
+    return this.value >= cardValueInSteel;
   }
 
-  void playCards(int amount) {
-    if (amount == 0) return;
+  void playCards(int cardValue) {
+    var cardValueInSteel = cardValue * setting.titanBuyValue;
+    if (cardValue == 0) return;
 
-    if (_isEnoughToByCards(amount)) {
+    if (_isEnoughToByCards(cardValueInSteel)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $amount Titan gekauft",
+          message: "Karte für $cardValueInSteel Titan gekauft",
           oldValue: value,
-          newValue: value -= amount,
+          newValue: value -= cardValueInSteel,
           type: Titan,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.PLAY_CARDS_WITH_TITAN,

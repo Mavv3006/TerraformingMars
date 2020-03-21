@@ -51,7 +51,7 @@ void main() {
   test('buy cards w/ titan', () {
     var history = History();
     var setting = SettingsModel().updateHistory(history);
-    var titan = Steel().updateHistory(history).updateSetting(setting);
+    var titan = Titan().updateHistory(history).updateSetting(setting);
 
     var titanValue = 2;
     var cardValue = 3;
@@ -62,5 +62,16 @@ void main() {
 
     assert(setting.titanBuyValue == titanValue);
     assert(titan.value == DefaultRessourceValue.defaultValueValue);
+  });
+
+  test('titan value test', () {
+    var history = History();
+    var setting = SettingsModel().updateHistory(history);
+    var titan = Titan().updateSetting(setting).updateHistory(history);
+
+    setting.titanBuyValue = 1;
+    titan.playCards(1);
+
+    assert(titan.value == 0);
   });
 }
