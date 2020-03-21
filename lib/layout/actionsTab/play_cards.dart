@@ -84,13 +84,13 @@ class _PlayCardsState extends State<PlayCards> {
                 text: "Stahl",
                 onPressed: () {
                   try {
-                    int amount = int.parse(textEditingController.text);
-                    if (amount <= 0) return;
-                    steel.playCards(amount);
+                    int cardValue = int.parse(textEditingController.text);
+                    if (cardValue <= 0) return;
+                    steel.playCards(cardValue);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                            "Du hast eine Karte für $amount Stahl ausgespielt"),
+                            "Du hast eine Karte für $cardValue Stahl ausgespielt"),
                       ),
                     );
                   } on FormatException catch (_) {

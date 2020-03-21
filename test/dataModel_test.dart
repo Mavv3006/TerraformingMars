@@ -8,18 +8,18 @@ import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {
   test('RessourceValue default value', () {
-    final ressoureModel = RessourceValue("test");
+    final ressoureModel = Titan();
     expect(1, equals(ressoureModel.value));
   });
 
   test('RessourceValue startBy value', () {
-    final ressourceModel = RessourceValue.startBy(startBy: 20, title: "test");
+    final ressourceModel = MegaCredits();
     final startValue = ressourceModel.value;
     expect(20, equals(startValue));
   });
 
   test('incrementing StartValue of RessourceValue', () {
-    final ressourceModel = RessourceValue.startBy(startBy: 20, title: "test");
+    final ressourceModel = MegaCredits();
     ressourceModel.addListener(() {
       expect(21, equals(ressourceModel.value));
     });
@@ -27,7 +27,7 @@ void main() {
   });
 
   test('incrementing StartValue of RessourceValue', () {
-    final ressourceModel = RessourceValue.startBy(startBy: 20, title: "test");
+    final ressourceModel = MegaCredits();
     final startProduction = ressourceModel.production;
     ressourceModel.addListener(() {
       expect(ressourceModel.production, greaterThan(startProduction));

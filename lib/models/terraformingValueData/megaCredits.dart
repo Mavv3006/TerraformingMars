@@ -1,7 +1,9 @@
 import 'package:terraforming_mars/exceptions/valueTooLowException.dart';
 import 'package:terraforming_mars/models/action/action_type.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
+import 'package:terraforming_mars/models/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 import '../defaultValue.dart';
@@ -224,5 +226,17 @@ class MegaCredits extends RessourceValue {
   @override
   String toString() {
     return super.toString();
+  }
+
+  @override
+  MegaCredits updateHistory(History history) {
+    this.history = history;
+    return this;
+  }
+
+  @override
+  MegaCredits updateSetting(SettingsModel setting) {
+    this.setting = setting;
+    return this;
   }
 }

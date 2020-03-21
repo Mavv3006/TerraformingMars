@@ -3,6 +3,7 @@ import 'package:terraforming_mars/exceptions/unequalValueException.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
+import 'package:terraforming_mars/models/settingsModel.dart';
 
 import '../defaultValue.dart';
 
@@ -26,6 +27,8 @@ abstract class TerraformingValue extends ChangeNotifier {
   }
 
   History history;
+
+  SettingsModel setting;
 
   final String _title;
   int value = DefaultRessourceValue.defaultTerraformingStartValue;
@@ -101,8 +104,7 @@ abstract class TerraformingValue extends ChangeNotifier {
     }
   }
 
-  TerraformingValue updateHistory(History history) {
-    this.history = history;
-    return this;
-  }
+  TerraformingValue updateHistory(History history);
+
+  TerraformingValue updateSetting(SettingsModel setting);
 }

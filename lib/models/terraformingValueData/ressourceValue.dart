@@ -6,7 +6,7 @@ import 'package:terraforming_mars/models/terraformingValueData/terraformingValue
 
 import '../defaultValue.dart';
 
-class RessourceValue extends TerraformingValue {
+abstract class RessourceValue extends TerraformingValue {
   RessourceValue.startBy({@required int startBy, @required String title})
       : super(title) {
     value = value;
