@@ -12,6 +12,11 @@ class SettingsModel extends ChangeNotifier {
   int _cropTradeValue = DefaultSettingsValue.defaultCropTradeValue;
   int _heatTradeValue = DefaultSettingsValue.defaultHeatTradeValue;
 
+  static const steelHistoryString = "Stahl zu MegaCredits";
+  static const titanHistoryString = "Titan zu MegaCredits";
+  static const cropHistoryString = "Pflanze zu Wald";
+  static const heatlHistoryString = "Wärme zu Temperatur";
+
   History history;
 
   SettingsModel updateHistory(History history) {
@@ -21,16 +26,16 @@ class SettingsModel extends ChangeNotifier {
 
   void undo(HistoryMessage historyMessage) {
     switch (historyMessage.message) {
-      case "SteelBuyValue":
+      case steelHistoryString:
         _undoSteel(historyMessage);
         break;
-      case "TitanBuyValue":
+      case titanHistoryString:
         _undoTitan(historyMessage);
         break;
-      case "CropTradeValue":
+      case cropHistoryString:
         _undoCrop(historyMessage);
         break;
-      case "HeatTradeValue":
+      case heatlHistoryString:
         _undoHeat(historyMessage);
         break;
       default:
@@ -42,7 +47,7 @@ class SettingsModel extends ChangeNotifier {
   set steelBuyValue(int value) {
     history.log(
       HistoryMessage(
-        message: "SteelBuyValue",
+        message: steelHistoryString,
         oldValue: _steelBuyValue,
         newValue: _steelBuyValue = value,
         type: SettingsModel,
@@ -54,7 +59,7 @@ class SettingsModel extends ChangeNotifier {
   set titanBuyValue(int value) {
     history.log(
       HistoryMessage(
-        message: "TitanBuyValue",
+        message: titanHistoryString,
         oldValue: _titanBuyValue,
         newValue: _titanBuyValue = value,
         type: SettingsModel,
@@ -66,7 +71,7 @@ class SettingsModel extends ChangeNotifier {
   set cropTradeValue(int value) {
     history.log(
       HistoryMessage(
-        message: "CropTradeValue",
+        message: cropHistoryString,
         oldValue: _cropTradeValue,
         newValue: _cropTradeValue = value,
         type: SettingsModel,
@@ -78,7 +83,7 @@ class SettingsModel extends ChangeNotifier {
   set heatTradeValue(int value) {
     history.log(
       HistoryMessage(
-        message: "HeatTradeValue",
+        message: heatlHistoryString,
         oldValue: _heatTradeValue,
         newValue: _heatTradeValue = value,
         type: SettingsModel,

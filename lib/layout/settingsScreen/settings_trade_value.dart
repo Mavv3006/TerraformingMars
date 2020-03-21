@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/components/settings_list_element.dart';
-import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/settingsModel.dart';
 
 class SettingsTradeValue extends StatefulWidget {
@@ -10,18 +9,10 @@ class SettingsTradeValue extends StatefulWidget {
 }
 
 class _SettingsTradeValueState extends State<SettingsTradeValue> {
-  final heatTradeValueController = TextEditingController.fromValue(
-    TextEditingValue(
-      text: DefaultSettingsValue.defaultHeatTradeValue.toString(),
-    ),
-  );
-  final cropTradeValueController = TextEditingController.fromValue(
-    TextEditingValue(
-      text: DefaultSettingsValue.defaultCropTradeValue.toString(),
-    ),
-  );
+  final heatTradeValueController = TextEditingController();
+  final cropTradeValueController = TextEditingController();
 
-  SettingsModel settingsModel;
+  SettingsModel setting;
 
   @override
   void initState() {
@@ -37,7 +28,12 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
 
   @override
   Widget build(BuildContext context) {
-    this.settingsModel = Provider.of<SettingsModel>(context, listen: false);
+    this.setting = Provider.of<SettingsModel>(context, listen: false);
+
+    heatTradeValueController.value =
+        TextEditingValue(text: this.setting.heatTradeValue.toString());
+    cropTradeValueController.value =
+        TextEditingValue(text: this.setting.cropTradeValue.toString());
 
     return SettingsListElement(
       topText: "Pflanzen für einen Wald:",
@@ -47,7 +43,7 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
       topSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
-          settingsModel.cropTradeValue = newValue;
+          setting.cropTradeValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
@@ -59,7 +55,7 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
       bottomSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
-          settingsModel.heatTradeValue = newValue;
+          setting.heatTradeValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
