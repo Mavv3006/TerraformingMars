@@ -22,36 +22,46 @@ class MyProviderApp extends StatelessWidget {
           create: (_) => SettingsModel(),
           update: (_, history, previous) => previous.updateHistory(history),
         ),
-        ChangeNotifierProxyProvider<History, Terraforming>(
+        ChangeNotifierProxyProvider2<History, SettingsModel, Terraforming>(
           create: (_) => Terraforming(),
-          update: (_, history, previous) => previous.updateHistory(history),
+          update: (_, history, setting, previous) =>
+              previous.updateHistory(history).updateSetting(setting),
         ),
-        ChangeNotifierProxyProvider<History, Energy>(
+        ChangeNotifierProxyProvider2<History, SettingsModel, Energy>(
           create: (_) => Energy(),
-          update: (_, history, previous) => previous.updateHistory(history),
+          update: (_, history, setting, previous) =>
+              previous.updateHistory(history).updateSetting(setting),
         ),
-        ChangeNotifierProxyProvider<History, Steel>(
+        ChangeNotifierProxyProvider2<History, SettingsModel, Steel>(
           create: (_) => Steel(),
-          update: (_, history, previous) => previous.updateHistory(history),
+          update: (_, history, setting, previous) =>
+              previous.updateHistory(history).updateSetting(setting),
         ),
-        ChangeNotifierProxyProvider<History, Titan>(
+        ChangeNotifierProxyProvider2<History, SettingsModel, Titan>(
           create: (_) => Titan(),
-          update: (_, history, previous) => previous.updateHistory(history),
+          update: (_, history, setting, previous) =>
+              previous.updateHistory(history).updateSetting(setting),
         ),
-        ChangeNotifierProxyProvider<History, Crop>(
+        ChangeNotifierProxyProvider2<History, SettingsModel, Crop>(
           create: (_) => Crop(),
-          update: (_, history, previous) => previous.updateHistory(history),
+          update: (_, history, setting, previous) =>
+              previous.updateHistory(history).updateSetting(setting),
         ),
-        ChangeNotifierProxyProvider2<Energy, History, Heat>(
+        ChangeNotifierProxyProvider3<Energy, History, SettingsModel, Heat>(
           create: (_) => Heat(),
-          update: (context, energy, history, previous) =>
-              previous.updateEnergy(energy).updateHistory(history),
+          update: (context, energy, history, setting, previous) => previous
+              .updateEnergy(energy)
+              .updateHistory(history)
+              .updateSetting(setting),
         ),
-        ChangeNotifierProxyProvider2<Terraforming, History, MegaCredits>(
+        ChangeNotifierProxyProvider3<Terraforming, History, SettingsModel,
+            MegaCredits>(
           create: (_) => MegaCredits(),
-          update: (context, terraformingValue, history, previous) => previous
-              .updateTerraformingValue(terraformingValue)
-              .updateHistory(history),
+          update: (context, terraformingValue, history, setting, previous) =>
+              previous
+                  .updateTerraformingValue(terraformingValue)
+                  .updateHistory(history)
+                  .updateSetting(setting),
         ),
       ],
       child: MyApp(),

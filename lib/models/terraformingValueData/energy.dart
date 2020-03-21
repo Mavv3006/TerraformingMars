@@ -1,5 +1,7 @@
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
+import 'package:terraforming_mars/models/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 class Energy extends RessourceValue {
@@ -44,5 +46,17 @@ class Energy extends RessourceValue {
   @override
   void incrementProduction() {
     super.incrementProductionWithType(Energy);
+  }
+
+  @override
+  Energy updateHistory(History history) {
+    this.history = history;
+    return this;
+  }
+
+  @override
+  Energy updateSetting(SettingsModel setting) {
+    this.setting = setting;
+    return this;
   }
 }

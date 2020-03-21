@@ -1,25 +1,29 @@
 import 'package:terraforming_mars/exceptions/valueTooLowException.dart';
 import 'package:terraforming_mars/models/action/action_type.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
+import 'package:terraforming_mars/models/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 class Steel extends RessourceValue {
   Steel() : super("Stahl");
 
-  bool _isEnoughToByCards(int amount) {
-    return this.value >= amount;
+  bool _isEnoughToByCards(int cardValueInSteel) {
+    return this.value >= cardValueInSteel;
   }
 
-  void playCards(int amount) {
-    if (amount == 0) return;
+  void playCards(int cardValue) {
+    var cardValueInSteel = cardValue * setting.steelBuyValue;
 
-    if (_isEnoughToByCards(amount)) {
+    if (cardValue == 0) return;
+
+    if (_isEnoughToByCards(cardValueInSteel)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $amount Stahl gekauft",
+          message: "Karte für $cardValueInSteel Stahl gekauft",
           oldValue: value,
-          newValue: value -= amount,
+          newValue: value -= cardValueInSteel,
           type: Steel,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,
@@ -54,5 +58,17 @@ class Steel extends RessourceValue {
   @override
   void incrementProduction() {
     super.incrementProductionWithType(Steel);
+  }
+
+  @override
+  Steel updateHistory(History history) {
+    this.history = history;
+    return this;
+  }
+
+  @override
+  Steel updateSetting(SettingsModel setting) {
+    this.setting = setting;
+    return this;
   }
 }
