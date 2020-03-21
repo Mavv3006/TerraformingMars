@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/components/settings_list_element.dart';
-import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/settingsModel.dart';
 
 class SettingsRessourceValue extends StatefulWidget {
@@ -10,18 +9,10 @@ class SettingsRessourceValue extends StatefulWidget {
 }
 
 class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
-  final titanValueController = TextEditingController.fromValue(
-    TextEditingValue(
-      text: DefaultSettingsValue.defaultTitanBuyValue.toString(),
-    ),
-  );
-  final steelValueController = TextEditingController.fromValue(
-    TextEditingValue(
-      text: DefaultSettingsValue.defaultSteelBuyValue.toString(),
-    ),
-  );
+  final titanValueController = TextEditingController();
+  final steelValueController = TextEditingController();
 
-  SettingsModel settingsModel;
+  SettingsModel setting;
 
   @override
   void initState() {
@@ -37,7 +28,12 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
 
   @override
   Widget build(BuildContext context) {
-    this.settingsModel = Provider.of<SettingsModel>(context, listen: false);
+    this.setting = Provider.of<SettingsModel>(context, listen: false);
+
+    steelValueController.value =
+        TextEditingValue(text: this.setting.steelBuyValue.toString());
+    titanValueController.value =
+        TextEditingValue(text: this.setting.titanBuyValue.toString());
 
     return SettingsListElement(
       topText: "Stahl zu MegaCredits:",
@@ -47,7 +43,7 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
       topSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
-          settingsModel.steelBuyValue = newValue;
+          setting.steelBuyValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
@@ -59,7 +55,7 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
       bottomSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
-          settingsModel.titanBuyValue = newValue;
+          setting.titanBuyValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
