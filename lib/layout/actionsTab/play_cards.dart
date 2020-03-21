@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/components/customButton.dart';
@@ -31,114 +32,138 @@ class _PlayCardsState extends State<PlayCards> {
     var steel = Provider.of<Steel>(context);
 
     return CustomListElement(
-      padding: EdgeInsets.only(
-        left: widget.outsidePadding,
-        right: widget.outsidePadding,
-        top: 6,
-      ),
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              RessourceValueText("Karte ausspielen für:"),
-              CustomTextInput(textEditingController),
-            ],
+          Padding(
+            padding: EdgeInsets.only(
+              left: widget.outsidePadding,
+              right: widget.outsidePadding,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RessourceValueText("Karte ausspielen für:"),
+                CustomTextInput(textEditingController),
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              ActionButton(
-                buttonWidth: widget.buttonWidth,
-                text: "Credits",
-                onPressed: () {
-                  try {
-                    int amount = int.parse(textEditingController.text);
-                    if (amount <= 0) return;
-                    mc.playCards(amount);
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            "Du hast eine Karte für $amount MC ausgespielt"),
-                      ),
-                    );
-                  } on FormatException catch (_) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Gebe eine Zahl ein."),
-                      ),
-                    );
-                  } on ValueTooLowException catch (e) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          e.errorMessage(),
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                ActionButton(
+                  buttonWidth: widget.buttonWidth,
+                  text: "Credits",
+                  onPressed: () {
+                    try {
+                      int amount = int.parse(textEditingController.text);
+                      if (amount <= 0) return;
+                      mc.playCards(amount);
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              "Du hast eine Karte für $amount MC ausgespielt"),
                         ),
-                      ),
-                    );
-                  }
-                },
-              ),
-              ActionButton(
-                buttonWidth: widget.buttonWidth,
-                text: "Stahl",
-                onPressed: () {
-                  try {
-                    int cardValue = int.parse(textEditingController.text);
-                    if (cardValue <= 0) return;
-                    steel.playCards(cardValue);
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            "Du hast eine Karte für $cardValue Stahl ausgespielt"),
-                      ),
-                    );
-                  } on FormatException catch (_) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Gebe eine Zahl ein."),
-                      ),
-                    );
-                  } on ValueTooLowException catch (e) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(e.errorMessage()),
-                      ),
-                    );
-                  }
-                },
-              ),
-              ActionButton(
-                buttonWidth: widget.buttonWidth,
-                text: "Titan",
-                onPressed: () {
-                  try {
-                    int cardValue = int.parse(textEditingController.text);
-                    if (cardValue <= 0) return;
-                    titan.playCards(cardValue);
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            "Du hast eine Karte für $cardValue Titan ausgespielt"),
-                      ),
-                    );
-                  } on FormatException catch (_) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Gebe eine Zahl ein."),
-                      ),
-                    );
-                  } on ValueTooLowException catch (e) {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(e.errorMessage()),
-                      ),
-                    );
-                  }
-                },
-              ),
-              // TODO: Implement Button for playing Cards with MC + Titan or Steel
-            ],
+                      );
+                    } on FormatException catch (_) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Gebe eine Zahl ein."),
+                        ),
+                      );
+                    } on ValueTooLowException catch (e) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            e.errorMessage(),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                ActionButton(
+                  buttonWidth: widget.buttonWidth,
+                  text: "Stahl",
+                  onPressed: () {
+                    try {
+                      int cardValue = int.parse(textEditingController.text);
+                      if (cardValue <= 0) return;
+                      steel.playCards(cardValue);
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              "Du hast eine Karte für $cardValue Stahl ausgespielt"),
+                        ),
+                      );
+                    } on FormatException catch (_) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Gebe eine Zahl ein."),
+                        ),
+                      );
+                    } on ValueTooLowException catch (e) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(e.errorMessage()),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                ActionButton(
+                  buttonWidth: widget.buttonWidth,
+                  text: "Titan",
+                  onPressed: () {
+                    try {
+                      int cardValue = int.parse(textEditingController.text);
+                      if (cardValue <= 0) return;
+                      titan.playCards(cardValue);
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              "Du hast eine Karte für $cardValue Titan ausgespielt"),
+                        ),
+                      );
+                    } on FormatException catch (_) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Gebe eine Zahl ein."),
+                        ),
+                      );
+                    } on ValueTooLowException catch (e) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(e.errorMessage()),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                // TODO: Implement Button for playing Cards with MC + Titan or Steel
+                ActionButton(
+                    text: "Kombination",
+                    onPressed: () {
+                      showCupertinoDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Alert Dialog"),
+                              content: Text(
+                                  "press close to close this Alert Dialog"),
+                              actions: <Widget>[
+                                FlatButton(
+                                    child: Text("close"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    })
+                              ],
+                            );
+                          });
+                    }),
+              ],
+            ),
           ),
         ],
       ),
