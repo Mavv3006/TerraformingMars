@@ -4,6 +4,8 @@ import 'package:terraforming_mars/components/custom_scaffold.dart';
 import 'package:terraforming_mars/layout/settingsScreen/settings_ressource_value.dart';
 import 'package:terraforming_mars/layout/settingsScreen/settings_trade_value.dart';
 
+import 'settings_heat_as_mc.dart';
+
 class SettingsLayout extends StatefulWidget {
   @override
   _SettingsLayoutState createState() => _SettingsLayoutState();
@@ -18,6 +20,7 @@ class _SettingsLayoutState extends State<SettingsLayout> {
         children: [
           SettingsRessourceValue(),
           SettingsTradeValue(),
+          SettingsHeatAsMC(),
         ],
       ),
     );

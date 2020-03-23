@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/history/history.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {

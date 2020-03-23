@@ -4,7 +4,7 @@ import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {
@@ -29,7 +29,8 @@ void main() {
   });
 
   test('incrementing StartValue of RessourceValue', () {
-    final ressourceModel = MegaCredits().updateHistory(History()).updateSetting(SettingsModel());
+    final ressourceModel =
+        MegaCredits().updateHistory(History()).updateSetting(SettingsModel());
     final startProduction = ressourceModel.production;
     ressourceModel.addListener(() {
       expect(ressourceModel.production, greaterThan(startProduction));

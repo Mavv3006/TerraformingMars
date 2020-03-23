@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:terraforming_mars/components/settings_list_element.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/components/custom_list_element.dart';
+import 'package:terraforming_mars/components/settings_text_input_row.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
+import 'package:terraforming_mars/theme/padding.dart';
 
 class SettingsTradeValue extends StatefulWidget {
   @override
@@ -35,12 +37,10 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
     cropTradeValueController.value =
         TextEditingValue(text: this.setting.cropTradeValue.toString());
 
-    return SettingsListElement(
-      topText: "Pflanzen für einen Wald:",
-      bottomText: "Wärme für +2°C:",
-      topController: cropTradeValueController,
-      bottomController: heatTradeValueController,
-      topSubmitted: (String value) {
+    var topListElement = SettingsTextInputRow(
+      text: "Pflanzen für einen Wald:",
+      controller: cropTradeValueController,
+      onSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
           setting.cropTradeValue = newValue;
@@ -52,7 +52,12 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
           );
         }
       },
-      bottomSubmitted: (String value) {
+    );
+
+    var bottomListElement = SettingsTextInputRow(
+      text: "Wärme für +2°C:",
+      controller: heatTradeValueController,
+      onSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
           setting.heatTradeValue = newValue;
@@ -64,6 +69,19 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
           );
         }
       },
+    );
+
+    return CustomListElement(
+      padding: CustomPadding.settingsListTopBottomPadding,
+      child: Column(
+        children: <Widget>[
+          topListElement,
+          Padding(
+            padding: EdgeInsets.only(top: 6.0),
+            child: bottomListElement,
+          ),
+        ],
+      ),
     );
   }
 }

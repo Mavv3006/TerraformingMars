@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/models/defaultValue.dart';
+import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 
-import 'history/history.dart';
 
 class SettingsModel extends ChangeNotifier {
   int _steelBuyValue = DefaultSettingsValue.defaultSteelBuyValue;

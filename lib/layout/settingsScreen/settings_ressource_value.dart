@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:terraforming_mars/components/settings_list_element.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/components/custom_list_element.dart';
+import 'package:terraforming_mars/components/settings_text_input_row.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
+import 'package:terraforming_mars/theme/padding.dart';
 
 class SettingsRessourceValue extends StatefulWidget {
   @override
@@ -35,12 +37,10 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
     titanValueController.value =
         TextEditingValue(text: this.setting.titanBuyValue.toString());
 
-    return SettingsListElement(
-      topText: "Stahl zu MegaCredits:",
-      bottomText: "Titan zu MegaCredits:",
-      topController: steelValueController,
-      bottomController: titanValueController,
-      topSubmitted: (String value) {
+    var topListElement = SettingsTextInputRow(
+      controller: steelValueController,
+      text: "Stahl zu MegaCredits:",
+      onSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
           setting.steelBuyValue = newValue;
@@ -52,10 +52,15 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
           );
         }
       },
-      bottomSubmitted: (String value) {
+    );
+
+    var bottomListElement = SettingsTextInputRow(
+      controller: titanValueController,
+      text: "Titan zu MegaCredits:",
+      onSubmitted: (String value) {
         try {
           int newValue = int.parse(value);
-          setting.titanBuyValue = newValue;
+          setting.steelBuyValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
@@ -64,6 +69,19 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
           );
         }
       },
+    );
+
+    return CustomListElement(
+      padding: CustomPadding.settingsListTopBottomPadding,
+      child: Column(
+        children: <Widget>[
+          topListElement,
+          Padding(
+            padding: EdgeInsets.only(top: 6.0),
+            child: bottomListElement,
+          ),
+        ],
+      ),
     );
   }
 }

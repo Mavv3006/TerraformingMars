@@ -4,7 +4,7 @@ import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/components/custom_scaffold.dart';
 import 'package:terraforming_mars/layout/historyScreen/historyLayoutBody.dart';
 import 'package:terraforming_mars/models/history/history.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 class HistoryLayout extends StatelessWidget {

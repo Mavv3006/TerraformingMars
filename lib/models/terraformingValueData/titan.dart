@@ -3,7 +3,8 @@ import 'package:terraforming_mars/models/action/action_type.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
+
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 class Titan extends RessourceValue {

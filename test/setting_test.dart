@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:terraforming_mars/models/defaultValue.dart';
 import 'package:terraforming_mars/models/history/history.dart';
-import 'package:terraforming_mars/models/settingsModel.dart';
+import 'package:terraforming_mars/models/settings/settingsModel.dart';
 
 void main() {
   test('log history Message: SteelBuyValue', () {
@@ -39,8 +39,7 @@ void main() {
     setting.undo(history.getLastEntry());
 
     assert(history.length() == 0);
-    assert(
-    setting.steelBuyValue == DefaultSettingsValue.defaultSteelBuyValue);
+    assert(setting.steelBuyValue == DefaultSettingsValue.defaultSteelBuyValue);
   });
 
   test('undo setting: HeatTradeValue', () {
@@ -52,7 +51,7 @@ void main() {
 
     assert(history.length() == 0);
     assert(
-    setting.heatTradeValue == DefaultSettingsValue.defaultHeatTradeValue);
+        setting.heatTradeValue == DefaultSettingsValue.defaultHeatTradeValue);
   });
 
   test('undo setting: CropValue', () {
@@ -64,7 +63,7 @@ void main() {
 
     assert(history.length() == 0);
     assert(
-    setting.cropTradeValue == DefaultSettingsValue.defaultCropTradeValue);
+        setting.cropTradeValue == DefaultSettingsValue.defaultCropTradeValue);
   });
 
   test('undo setting: TitanValue', () {
@@ -75,7 +74,6 @@ void main() {
     setting.undo(history.getLastEntry());
 
     assert(history.length() == 0);
-    assert(
-    setting.titanBuyValue == DefaultSettingsValue.defaultTitanBuyValue);
+    assert(setting.titanBuyValue == DefaultSettingsValue.defaultTitanBuyValue);
   });
 }
