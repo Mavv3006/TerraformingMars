@@ -145,7 +145,7 @@ class _PlayCardsState extends State<PlayCards> {
                 ActionButton(
                     text: "Kombination",
                     onPressed: () {
-                      showCupertinoDialog(
+                      showDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(

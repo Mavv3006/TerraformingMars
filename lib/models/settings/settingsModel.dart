@@ -4,14 +4,7 @@ import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 
-
 class SettingsModel extends ChangeNotifier {
-  int _steelBuyValue = DefaultSettingsValue.defaultSteelBuyValue;
-  int _titanBuyValue = DefaultSettingsValue.defaultTitanBuyValue;
-
-  int _cropTradeValue = DefaultSettingsValue.defaultCropTradeValue;
-  int _heatTradeValue = DefaultSettingsValue.defaultHeatTradeValue;
-
   static const steelHistoryString = "Stahl zu MegaCredits";
   static const titanHistoryString = "Titan zu MegaCredits";
   static const cropHistoryString = "Pflanze zu Wald";
@@ -19,29 +12,27 @@ class SettingsModel extends ChangeNotifier {
 
   History history;
 
-  SettingsModel updateHistory(History history) {
-    this.history = history;
-    return this;
-  }
+  int _steelBuyValue = DefaultSettingsValue.defaultSteelBuyValue;
+  int _titanBuyValue = DefaultSettingsValue.defaultTitanBuyValue;
 
-  void undo(HistoryMessage historyMessage) {
-    switch (historyMessage.message) {
-      case steelHistoryString:
-        _undoSteel(historyMessage);
-        break;
-      case titanHistoryString:
-        _undoTitan(historyMessage);
-        break;
-      case cropHistoryString:
-        _undoCrop(historyMessage);
-        break;
-      case heatlHistoryString:
-        _undoHeat(historyMessage);
-        break;
-      default:
-        print("Setting.undo() - wrong HistoryMessage.message");
-        break;
-    }
+  int _cropTradeValue = DefaultSettingsValue.defaultCropTradeValue;
+  int _heatTradeValue = DefaultSettingsValue.defaultHeatTradeValue;
+
+  bool _heatAsMCSwitchState = false;
+
+  bool get heatAsMCSwitchState => _heatAsMCSwitchState;
+
+  int get steelBuyValue => _steelBuyValue;
+
+  int get titanBuyValue => _titanBuyValue;
+
+  int get cropTradeValue => _cropTradeValue;
+
+  int get heatTradeValue => _heatTradeValue;
+
+  set heatAsMCSwitchState(bool value) {
+    _heatAsMCSwitchState = value;
+    notifyListeners();
   }
 
   set steelBuyValue(int value) {
@@ -92,13 +83,30 @@ class SettingsModel extends ChangeNotifier {
     );
   }
 
-  int get steelBuyValue => _steelBuyValue;
+  SettingsModel updateHistory(History history) {
+    this.history = history;
+    return this;
+  }
 
-  int get titanBuyValue => _titanBuyValue;
-
-  int get cropTradeValue => _cropTradeValue;
-
-  int get heatTradeValue => _heatTradeValue;
+  void undo(HistoryMessage historyMessage) {
+    switch (historyMessage.message) {
+      case steelHistoryString:
+        _undoSteel(historyMessage);
+        break;
+      case titanHistoryString:
+        _undoTitan(historyMessage);
+        break;
+      case cropHistoryString:
+        _undoCrop(historyMessage);
+        break;
+      case heatlHistoryString:
+        _undoHeat(historyMessage);
+        break;
+      default:
+        print("Setting.undo() - wrong HistoryMessage.message");
+        break;
+    }
+  }
 
   void _undoSteel(HistoryMessage historyMessage) {
     if (validateNewValue(historyMessage.newValue, this._steelBuyValue)) {
@@ -109,17 +117,20 @@ class SettingsModel extends ChangeNotifier {
   void _undoTitan(HistoryMessage historyMessage) {
     if (validateNewValue(historyMessage.newValue, this._titanBuyValue)) {
       this._titanBuyValue = historyMessage.oldValue;
-    }}
+    }
+  }
 
   void _undoCrop(HistoryMessage historyMessage) {
     if (validateNewValue(historyMessage.newValue, this._cropTradeValue)) {
       this._cropTradeValue = historyMessage.oldValue;
-    }}
+    }
+  }
 
   void _undoHeat(HistoryMessage historyMessage) {
     if (validateNewValue(historyMessage.newValue, this._heatTradeValue)) {
       this._heatTradeValue = historyMessage.oldValue;
-    }}
+    }
+  }
 
   bool validateNewValue(int historyMessageNewValue, int currentValue) {
     return historyMessageNewValue == currentValue;
