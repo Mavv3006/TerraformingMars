@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terraforming_mars/exceptions/valueTooLowException.dart';
 import 'package:terraforming_mars/models/action/action_type.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
@@ -27,8 +28,8 @@ class Heat extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Temperatur erhöht",
-        oldValue: value,
-        newValue: value -= setting.heatTradeValue,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:value -= setting.heatTradeValue),
         type: Heat,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.INCREASE_TEMPERATUR,
@@ -42,8 +43,8 @@ class Heat extends RessourceValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: value,
-        newValue: value += (energy.oldValue + production),
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:value += (energy.oldValue + production)),
         type: Heat,
         production: energy.oldValue + production,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
@@ -82,5 +83,27 @@ class Heat extends RessourceValue {
   Heat updateSetting(SettingsModel setting) {
     this.setting = setting;
     return this;
+  }
+
+  void playCards(int amount) {
+    if (_isEnoughToPlayCards(amount)) {
+      history.log(
+        HistoryMessage(
+          message: "Karte für $amount Wärme ausgespielt",
+          oldValue: HistoryMessageValue(intValue:value),
+          newValue: HistoryMessageValue(intValue:value -= amount),
+          type: Heat,
+          historyMessageType: HistoryMessageType.ACTION,
+          actionType: ActionType.PLAY_CARDS_WITH_HEAT,
+        ),
+      );
+      notifyListeners();
+    } else {
+      throw ValueTooLowException("Du hast nicht genug Wärme");
+    }
+  }
+
+  bool _isEnoughToPlayCards(int amount) {
+    return this.value >= amount;
   }
 }

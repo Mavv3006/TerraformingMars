@@ -43,8 +43,10 @@ void main() {
     history.log(
       HistoryMessage(
         message: "Titan - decrement Value",
-        oldValue: 5,
-        newValue: DefaultRessourceValue.defaultValueValue,
+        oldValue: HistoryMessageValue(intValue: 5),
+        newValue: HistoryMessageValue(
+          intValue: DefaultRessourceValue.defaultValueValue,
+        ),
         type: Titan,
         historyMessageType: HistoryMessageType.VALUE,
       ),

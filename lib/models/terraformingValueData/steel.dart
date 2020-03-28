@@ -23,8 +23,8 @@ class Steel extends RessourceValue {
       history.log(
         HistoryMessage(
           message: "Karte für $cardValueInSteel Stahl gekauft",
-          oldValue: value,
-          newValue: value -= cardValueInSteel,
+          oldValue: HistoryMessageValue(intValue:value),
+          newValue: HistoryMessageValue(intValue:value -= cardValueInSteel),
           type: Steel,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,

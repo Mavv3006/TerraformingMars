@@ -25,9 +25,9 @@ class HistoryPlayCardsWithTitan extends HistoryWidget {
               RessourceValueText("Titan - Anzahl"),
             ],
           ),
-          HistoryNewValue(
-            oldValue: historyMessage.oldValue,
-            newValue: historyMessage.newValue,
+          HistoryNewIntValue(
+            oldValue: historyMessage.oldValue.intValue,
+            newValue: historyMessage.newValue.intValue,
           ),
         ],
       ),

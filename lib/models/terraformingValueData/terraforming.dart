@@ -13,8 +13,8 @@ class Terraforming extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: "${this.title}",
-        oldValue: value,
-        newValue: ++value,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue:HistoryMessageValue(intValue: ++value),
         type: Terraforming,
         production: 1,
         historyMessageType: HistoryMessageType.VALUE,
@@ -28,8 +28,8 @@ class Terraforming extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: "${this.title}",
-        oldValue: value,
-        newValue: isValueGreaterThenZero ? --value : value,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:isValueGreaterThenZero ? --value : value),
         type: Terraforming,
         historyMessageType: HistoryMessageType.VALUE,
       ),
@@ -42,8 +42,8 @@ class Terraforming extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: "${this.title}",
-        oldValue: value,
-        newValue: ++value,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:++value),
         type: Terraforming,
         historyMessageType: HistoryMessageType.VALUE,
       ),

@@ -14,8 +14,8 @@ class Crop extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Wald gepflanzt",
-        oldValue: value,
-        newValue: value -= setting.cropTradeValue,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:value -= setting.cropTradeValue),
         type: Crop,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_FOREST_WITH_CROP,

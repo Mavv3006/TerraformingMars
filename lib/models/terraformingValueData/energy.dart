@@ -19,8 +19,8 @@ class Energy extends RessourceValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: _oldValue,
-        newValue: value,
+        oldValue: HistoryMessageValue(intValue:_oldValue),
+        newValue: HistoryMessageValue(intValue:value),
         type: Energy,
         production: value - _oldValue,
         historyMessageType: HistoryMessageType.NEXT_ROUND,

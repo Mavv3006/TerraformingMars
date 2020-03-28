@@ -30,10 +30,7 @@ class SettingsHeatAsMC extends StatelessWidget {
                   value: value.heatAsMCSwitchState,
                   onChanged: (newValue) {
                     if (newValue) {
-                      showDialog(
-                        context: context,
-                        builder: buildAlertDialog,
-                      );
+                      showDialog(context: context, builder: buildAlertDialog);
                     } else {
                       value.heatAsMCSwitchState = false;
                     }

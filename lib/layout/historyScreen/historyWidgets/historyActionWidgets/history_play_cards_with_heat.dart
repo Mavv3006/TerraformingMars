@@ -5,8 +5,8 @@ import 'package:terraforming_mars/components/ressourceValueText.dart';
 import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_widget.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 
-class HistoryPlayCardsWithSteel extends HistoryWidget {
-  HistoryPlayCardsWithSteel({
+class HistoryPlayCardsWithHeat extends HistoryWidget {
+  HistoryPlayCardsWithHeat({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
@@ -22,12 +22,14 @@ class HistoryPlayCardsWithSteel extends HistoryWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RessourceValueText(historyMessage.message),
-              RessourceValueText("Stahl - Anzahl"),
+              RessourceValueText(
+                "Wärme - Anzahl",
+              )
             ],
           ),
-          HistoryNewIntValue(
-            oldValue: historyMessage.oldValue.intValue,
-            newValue: historyMessage.newValue.intValue,
+          HistoryNewBoolValue(
+            newValue: historyMessage.newValue.boolValue,
+            oldValue: historyMessage.oldValue.boolValue,
           ),
         ],
       ),

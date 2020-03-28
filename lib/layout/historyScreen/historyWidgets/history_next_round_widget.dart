@@ -27,7 +27,7 @@ class HistoryNextRoundWidget extends HistoryWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              RessourceValueText(historyMessage.oldValue.toString()),
+              RessourceValueText(historyMessage.oldValue.intValue.toString()),
               Padding(
                 padding: iconPadding,
                 child: Icon(
@@ -49,7 +49,7 @@ class HistoryNextRoundWidget extends HistoryWidget {
                   size: 12,
                 ),
               ),
-              RessourceValueText(historyMessage.newValue.toString()),
+              RessourceValueText(historyMessage.newValue.intValue.toString()),
             ],
           ),
         ],

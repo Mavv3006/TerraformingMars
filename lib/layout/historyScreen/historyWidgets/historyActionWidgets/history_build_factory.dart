@@ -25,9 +25,9 @@ class HistoryBuildFactory extends HistoryWidget {
               RessourceValueText("MegaCredits - Anzahl"),
             ],
           ),
-          HistoryNewValue(
-            oldValue: historyMessage.oldValue,
-            newValue: historyMessage.newValue,
+          HistoryNewIntValue(
+            oldValue: historyMessage.oldValue.intValue,
+            newValue: historyMessage.newValue.intValue,
           ),
         ],
       ),

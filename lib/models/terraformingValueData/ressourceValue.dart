@@ -39,7 +39,7 @@ abstract class RessourceValue extends TerraformingValue {
 
   void undoProduction(HistoryMessage historyMessage) {
     if (historyMessage.newValue == this.production) {
-      this.production = historyMessage.oldValue;
+      this.production = historyMessage.oldValue.intValue;
     } else {
       throw UnequalValueException("HistoryMessage.newValue != this.value");
     }
@@ -52,8 +52,8 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeProductionText(),
-        oldValue: production,
-        newValue: ++production,
+        oldValue: HistoryMessageValue(intValue:production),
+        newValue: HistoryMessageValue(intValue:++production),
         type: type,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
@@ -68,8 +68,8 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeProductionText(),
-        oldValue: production,
-        newValue: isProductionGreaterThenZero ? --production : production,
+        oldValue: HistoryMessageValue(intValue:production),
+        newValue: HistoryMessageValue(intValue:isProductionGreaterThenZero ? --production : production),
         type: type,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
@@ -82,8 +82,8 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: value,
-        newValue: value += production,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:value += production),
         production: production,
         type: type,
         historyMessageType: HistoryMessageType.NEXT_ROUND,

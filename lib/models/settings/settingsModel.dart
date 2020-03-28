@@ -8,7 +8,8 @@ class SettingsModel extends ChangeNotifier {
   static const steelHistoryString = "Stahl zu MegaCredits";
   static const titanHistoryString = "Titan zu MegaCredits";
   static const cropHistoryString = "Pflanze zu Wald";
-  static const heatlHistoryString = "Wärme zu Temperatur";
+  static const heatHistoryString = "Wärme zu Temperatur";
+  static const heatSwitchHistoryString = "Wärme als MegaCredits";
 
   History history;
 
@@ -31,7 +32,15 @@ class SettingsModel extends ChangeNotifier {
   int get heatTradeValue => _heatTradeValue;
 
   set heatAsMCSwitchState(bool value) {
-    _heatAsMCSwitchState = value;
+    history.log(
+      HistoryMessage(
+          message: heatSwitchHistoryString,
+          oldValue: HistoryMessageValue(boolValue: _heatAsMCSwitchState),
+          newValue:
+              HistoryMessageValue(boolValue: _heatAsMCSwitchState = value),
+          type: SettingsModel,
+          historyMessageType: HistoryMessageType.SETTING),
+    );
     notifyListeners();
   }
 
@@ -39,8 +48,8 @@ class SettingsModel extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: steelHistoryString,
-        oldValue: _steelBuyValue,
-        newValue: _steelBuyValue = value,
+        oldValue: HistoryMessageValue(intValue: _steelBuyValue),
+        newValue: HistoryMessageValue(intValue: _steelBuyValue = value),
         type: SettingsModel,
         historyMessageType: HistoryMessageType.SETTING,
       ),
@@ -51,8 +60,8 @@ class SettingsModel extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: titanHistoryString,
-        oldValue: _titanBuyValue,
-        newValue: _titanBuyValue = value,
+        oldValue: HistoryMessageValue(intValue: _titanBuyValue),
+        newValue: HistoryMessageValue(intValue: _titanBuyValue = value),
         type: SettingsModel,
         historyMessageType: HistoryMessageType.SETTING,
       ),
@@ -63,8 +72,8 @@ class SettingsModel extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: cropHistoryString,
-        oldValue: _cropTradeValue,
-        newValue: _cropTradeValue = value,
+        oldValue: HistoryMessageValue(intValue: _cropTradeValue),
+        newValue: HistoryMessageValue(intValue: _cropTradeValue = value),
         type: SettingsModel,
         historyMessageType: HistoryMessageType.SETTING,
       ),
@@ -74,9 +83,9 @@ class SettingsModel extends ChangeNotifier {
   set heatTradeValue(int value) {
     history.log(
       HistoryMessage(
-        message: heatlHistoryString,
-        oldValue: _heatTradeValue,
-        newValue: _heatTradeValue = value,
+        message: heatHistoryString,
+        oldValue: HistoryMessageValue(intValue: _heatTradeValue),
+        newValue: HistoryMessageValue(intValue: _heatTradeValue = value),
         type: SettingsModel,
         historyMessageType: HistoryMessageType.SETTING,
       ),
@@ -99,8 +108,11 @@ class SettingsModel extends ChangeNotifier {
       case cropHistoryString:
         _undoCrop(historyMessage);
         break;
-      case heatlHistoryString:
+      case heatHistoryString:
         _undoHeat(historyMessage);
+        break;
+      case heatSwitchHistoryString:
+        _undoHeatSwitch(historyMessage);
         break;
       default:
         print("Setting.undo() - wrong HistoryMessage.message");
@@ -109,30 +121,45 @@ class SettingsModel extends ChangeNotifier {
   }
 
   void _undoSteel(HistoryMessage historyMessage) {
-    if (validateNewValue(historyMessage.newValue, this._steelBuyValue)) {
-      this._steelBuyValue = historyMessage.oldValue;
+    if (validateNewIntValue(
+        historyMessage.newValue.intValue, this._steelBuyValue)) {
+      this._steelBuyValue = historyMessage.oldValue.intValue;
     }
   }
 
   void _undoTitan(HistoryMessage historyMessage) {
-    if (validateNewValue(historyMessage.newValue, this._titanBuyValue)) {
-      this._titanBuyValue = historyMessage.oldValue;
+    if (validateNewIntValue(
+        historyMessage.newValue.intValue, this._titanBuyValue)) {
+      this._titanBuyValue = historyMessage.oldValue.intValue;
     }
   }
 
   void _undoCrop(HistoryMessage historyMessage) {
-    if (validateNewValue(historyMessage.newValue, this._cropTradeValue)) {
-      this._cropTradeValue = historyMessage.oldValue;
+    if (validateNewIntValue(
+        historyMessage.newValue.intValue, this._cropTradeValue)) {
+      this._cropTradeValue = historyMessage.oldValue.intValue;
     }
   }
 
   void _undoHeat(HistoryMessage historyMessage) {
-    if (validateNewValue(historyMessage.newValue, this._heatTradeValue)) {
-      this._heatTradeValue = historyMessage.oldValue;
+    if (validateNewIntValue(
+        historyMessage.newValue.intValue, this._heatTradeValue)) {
+      this._heatTradeValue = historyMessage.oldValue.intValue;
     }
   }
 
-  bool validateNewValue(int historyMessageNewValue, int currentValue) {
+  void _undoHeatSwitch(HistoryMessage historyMessage) {
+    if (validateNewBoolValue(
+        historyMessage.newValue.boolValue, this._heatAsMCSwitchState)) {
+      this._heatAsMCSwitchState = historyMessage.oldValue.boolValue;
+    }
+  }
+
+  bool validateNewIntValue(int historyMessageNewValue, int currentValue) {
+    return historyMessageNewValue == currentValue;
+  }
+
+  bool validateNewBoolValue(bool historyMessageNewValue, bool currentValue) {
     return historyMessageNewValue == currentValue;
   }
 }

@@ -19,9 +19,9 @@ class HistoryValueProductionWidget extends HistoryWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           RessourceValueText(historyMessage.message),
-          HistoryNewValue(
-            oldValue: historyMessage.oldValue,
-            newValue: historyMessage.newValue,
+          HistoryNewIntValue(
+            oldValue: historyMessage.oldValue.intValue,
+            newValue: historyMessage.newValue.intValue,
           ),
         ],
       ),

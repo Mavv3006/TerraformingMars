@@ -11,8 +11,23 @@ class HistorySettingWidget extends HistoryWidget {
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
 
+  Widget historyNewValue;
+
   @override
   Widget build(BuildContext context) {
+
+    if (historyMessage.oldValue.intValue!=null) {
+      historyNewValue =  HistoryNewIntValue(
+        oldValue: historyMessage.oldValue.intValue,
+        newValue: historyMessage.newValue.intValue,
+      );
+    } else {
+      historyNewValue = HistoryNewBoolValue(
+        oldValue: historyMessage.oldValue.boolValue,
+        newValue: historyMessage.newValue.boolValue,
+      );
+    }
+
     return CustomListElement(
       padding: widgetPadding,
       child: Row(
@@ -25,10 +40,7 @@ class HistorySettingWidget extends HistoryWidget {
               RessourceValueText(historyMessage.message),
             ],
           ),
-          HistoryNewValue(
-            oldValue: historyMessage.oldValue,
-            newValue: historyMessage.newValue,
-          ),
+          historyNewValue,
         ],
       ),
     );

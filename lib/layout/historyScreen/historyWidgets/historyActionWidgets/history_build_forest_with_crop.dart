@@ -25,9 +25,9 @@ class HistoryBuildForestWithCrop extends HistoryWidget {
               RessourceValueText("Pflanze - Anzahl"),
             ],
           ),
-          HistoryNewValue(
-            oldValue: historyMessage.oldValue,
-            newValue: historyMessage.newValue,
+          HistoryNewIntValue(
+            oldValue: historyMessage.oldValue.intValue,
+            newValue: historyMessage.newValue.intValue,
           ),
         ],
       ),

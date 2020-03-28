@@ -65,9 +65,10 @@ void main() {
   test('undo Value', () {
     var energy = Energy();
     energy.history = History();
-    int startValue = energy.value;
+    HistoryMessageValue startValue =
+        HistoryMessageValue(intValue: energy.value);
     energy.incrementValue();
-    int newValue = energy.value;
+    HistoryMessageValue newValue = HistoryMessageValue(intValue: energy.value);
 
     var historyMessage = HistoryMessage(
       oldValue: startValue,

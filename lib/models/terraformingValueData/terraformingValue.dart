@@ -47,8 +47,8 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessageValueText(),
-        oldValue: value,
-        newValue: ++value,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:++value),
         type: type,
         historyMessageType: HistoryMessageType.VALUE,
       ),
@@ -63,8 +63,8 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessageValueText(),
-        oldValue: value,
-        newValue: isValueGreaterThenZero ? --value : value,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:isValueGreaterThenZero ? --value : value),
         type: type,
         historyMessageType: HistoryMessageType.VALUE,
       ),
@@ -81,8 +81,8 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessageValueText(),
-        oldValue: value,
-        newValue: ++value,
+        oldValue: HistoryMessageValue(intValue:value),
+        newValue: HistoryMessageValue(intValue:++value),
         type: type,
         production: 1,
         historyMessageType: HistoryMessageType.VALUE,
@@ -98,8 +98,8 @@ abstract class TerraformingValue extends ChangeNotifier {
   }
 
   void undoValue(HistoryMessage historyMessage) {
-    if (historyMessage.newValue == this.value) {
-      this.value = historyMessage.oldValue;
+    if (historyMessage.newValue.intValue == this.value) {
+      this.value = historyMessage.oldValue.intValue;
     } else {
       throw UnequalValueException("HistoryMessage.newValue != this.value");
     }

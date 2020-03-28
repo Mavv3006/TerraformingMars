@@ -43,8 +43,8 @@ class MegaCredits extends RessourceValue {
       history.log(
         HistoryMessage(
           message: "Karte für $amount MC ausgespielt",
-          oldValue: value,
-          newValue: value -= amount,
+          oldValue: HistoryMessageValue(intValue: value),
+          newValue: HistoryMessageValue(intValue: value -= amount),
           type: MegaCredits,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.PLAY_CARDS_WITH_MC,
@@ -65,9 +65,11 @@ class MegaCredits extends RessourceValue {
       history.log(
         HistoryMessage(
           message: "$amount Karten gekauft",
-          oldValue: value,
-          newValue: value -=
-              (amount * DefaultActionValue.defaultCardBuyingValue),
+          oldValue: HistoryMessageValue(intValue: value),
+          newValue: HistoryMessageValue(
+            intValue: value -=
+                (amount * DefaultActionValue.defaultCardBuyingValue),
+          ),
           type: MegaCredits,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.BUY_CARDS,
@@ -87,9 +89,10 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "$amount Karten verkauft",
-        oldValue: value,
-        newValue: value +=
-            (amount * DefaultActionValue.defaultCardSellingValue),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+            intValue: value +=
+                (amount * DefaultActionValue.defaultCardSellingValue)),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.SELL_CARDS,
@@ -125,9 +128,10 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Asteroid abgeschleppt",
-        oldValue: value,
-        newValue: value -=
-            DefaultActionValue.defaultStandardProjectAsteroidValue,
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+            intValue: value -=
+                DefaultActionValue.defaultStandardProjectAsteroidValue),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.ASTEROID,
@@ -139,8 +143,10 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Ozean bewässert",
-        oldValue: value,
-        newValue: value -= DefaultActionValue.defaultStandardProjectOceanValue,
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+            intValue: value -=
+                DefaultActionValue.defaultStandardProjectOceanValue),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_OCEAN,
@@ -152,8 +158,11 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Wald gepflanzt",
-        oldValue: value,
-        newValue: value -= DefaultActionValue.defaultStandardProjectForestValue,
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+          intValue: value -=
+              DefaultActionValue.defaultStandardProjectForestValue,
+        ),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_FOREST_WITH_MC,
@@ -165,8 +174,10 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Stadt gebaut",
-        oldValue: value,
-        newValue: value -= DefaultActionValue.defaultStandardProjectCityValue,
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+          intValue: value -= DefaultActionValue.defaultStandardProjectCityValue,
+        ),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_CITY,
@@ -178,9 +189,11 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: "Kraftwerk errichtet",
-        oldValue: value,
-        newValue: value -=
-            DefaultActionValue.defaultStandardProjectFactoryValue,
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+          intValue: value -=
+              DefaultActionValue.defaultStandardProjectFactoryValue,
+        ),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.BUILD_FACTORY,
@@ -193,8 +206,10 @@ class MegaCredits extends RessourceValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: value,
-        newValue: value += (terraformingValue.value + production),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+          intValue: value += (terraformingValue.value + production),
+        ),
         type: MegaCredits,
         production: terraformingValue.value + production,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
