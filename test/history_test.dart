@@ -129,7 +129,7 @@ void main() {
     steel.decrementValue();
 
     expect(DefaultRessourceValue.defaultValueValue - 1, steel.value);
-    expect(steel.value, steel.history.getLastEntry().newValue);
+    expect(steel.value, steel.history.getLastEntry().newValue.intValue);
   });
 
   test('increment Value', () {
@@ -139,7 +139,7 @@ void main() {
     steel.incrementValue();
 
     expect(DefaultRessourceValue.defaultValueValue + 1, steel.value);
-    expect(steel.value, steel.history.getLastEntry().newValue);
+    expect(steel.value, steel.history.getLastEntry().newValue.intValue);
   });
 
   test('HistoryMessageType without actionType', () {
@@ -156,9 +156,9 @@ void main() {
   test('HistoryMessageType without actionType', () {
     expect(
         () => HistoryMessage(
-            message: null,
-            oldValue: null,
-            newValue: null,
+            message: "null",
+            oldValue: HistoryMessageValue(intValue: 1),
+            newValue: HistoryMessageValue(intValue: 1),
             type: null,
             historyMessageType: HistoryMessageType.ACTION,
             actionType: ActionType.BUILD_CITY),

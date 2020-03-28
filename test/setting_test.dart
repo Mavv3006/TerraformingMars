@@ -10,7 +10,7 @@ void main() {
     setting.steelBuyValue = 1;
 
     assert(setting.steelBuyValue == 1);
-    assert(history.getLastEntry().newValue == setting.steelBuyValue);
+    assert(history.getLastEntry().newValue.intValue == setting.steelBuyValue);
   });
 
   test('log history Message: TitanBuyValue', () {
@@ -19,7 +19,7 @@ void main() {
     setting.titanBuyValue = 1;
 
     assert(setting.titanBuyValue == 1);
-    assert(history.getLastEntry().newValue == setting.titanBuyValue);
+    assert(history.getLastEntry().newValue.intValue == setting.titanBuyValue);
   });
 
   test('log history Message: HeatTradeValue', () {
@@ -28,7 +28,7 @@ void main() {
     setting.heatTradeValue = 1;
 
     assert(setting.heatTradeValue == 1);
-    assert(history.getLastEntry().newValue == setting.heatTradeValue);
+    assert(history.getLastEntry().newValue.intValue == setting.heatTradeValue);
   });
 
   test('undo setting: SteelBuyValue', () {
