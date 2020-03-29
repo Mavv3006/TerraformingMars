@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/custom_text_input.dart';
+import 'package:terraforming_mars/components/play_cards_alert_dialog.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
 import 'package:terraforming_mars/exceptions/valueTooLowException.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
@@ -194,18 +195,7 @@ class _PlayCardsState extends State<PlayCards> {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-              title: Text("Alert Dialog"),
-              content: Text("press close to close this Alert Dialog"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("close"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
+            return PlayCardsAlertDialog();
           },
         );
       },

@@ -45,6 +45,7 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
           int newValue = int.parse(value);
           setting.steelBuyValue = newValue;
         } on FormatException catch (_) {
+          // TODO: Refactor into seperate Widget
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content: Text("Gebe eine Zahl ein"),

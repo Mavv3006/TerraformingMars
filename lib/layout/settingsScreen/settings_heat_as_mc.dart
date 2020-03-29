@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:terraforming_mars/components/alert_dialog_button.dart';
 import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/custom_switch.dart';
 import 'package:terraforming_mars/components/ressourceValueText.dart';
+import 'package:terraforming_mars/components/terraforming_alert_dialog.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
-import 'package:terraforming_mars/theme/alert_dialog_shape.dart';
-import 'package:terraforming_mars/theme/colors.dart';
 import 'package:terraforming_mars/theme/padding.dart';
 
 class SettingsHeatAsMC extends StatelessWidget {
@@ -30,7 +28,27 @@ class SettingsHeatAsMC extends StatelessWidget {
                   value: value.heatAsMCSwitchState,
                   onChanged: (newValue) {
                     if (newValue) {
-                      showDialog(context: context, builder: buildAlertDialog);
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return TerraformingAlertDialog(
+                            title:
+                                "Möchtest du Wärme als Zahlungsmittel hinzufügen?",
+                            acceptButtonTitle: "Ja",
+                            acceptButtonOnPressed: () {
+                              Navigator.of(context).pop();
+                              Provider.of<SettingsModel>(
+                                context,
+                                listen: false,
+                              ).heatAsMCSwitchState = true;
+                            },
+                            declineButtonTitle: "Nein",
+                            declineButtonOnPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        },
+                      );
                     } else {
                       value.heatAsMCSwitchState = false;
                     }
@@ -41,36 +59,6 @@ class SettingsHeatAsMC extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildAlertDialog(BuildContext context) {
-    return AlertDialog(
-      shape: globalAlertDialogShape,
-      titleTextStyle: Theme.of(context)
-          .textTheme
-          .title
-          .copyWith(color: AppColors.accentColor),
-      backgroundColor: AppColors.secondaryLight,
-      title: Text("Möchtest du Wärme als Zahlungsmittel hinzufügen?"),
-      actions: <Widget>[
-        AlertDialogButton(
-          text: "Ja",
-          onPressed: () {
-            Navigator.of(context).pop();
-            Provider.of<SettingsModel>(
-              context,
-              listen: false,
-            ).heatAsMCSwitchState = true;
-          },
-        ),
-        AlertDialogButton(
-          text: "Nein",
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
     );
   }
 }
