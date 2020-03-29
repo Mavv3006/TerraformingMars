@@ -4,16 +4,18 @@ import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
 
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
-class Titan extends RessourceValue {
+class Titan extends RessourceValue with PlayCardMixin{
   Titan() : super("Titan");
 
   bool _isEnoughToByCards(int cardValueInSteel) {
     return this.value >= cardValueInSteel;
   }
 
+  @override
   void playCards(int cardValue) {
     var cardValueInSteel = cardValue * setting.titanBuyValue;
     if (cardValue == 0) return;

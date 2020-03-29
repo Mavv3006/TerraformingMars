@@ -5,11 +5,12 @@ import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
+import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 import 'energy.dart';
 
-class Heat extends RessourceValue {
+class Heat extends RessourceValue with PlayCardMixin{
   Energy energy;
 
   Heat() : super("Wärme");
@@ -85,6 +86,7 @@ class Heat extends RessourceValue {
     return this;
   }
 
+  @override
   void playCards(int amount) {
     if (_isEnoughToPlayCards(amount)) {
       history.log(

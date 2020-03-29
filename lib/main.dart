@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terraforming_mars/layout/mainLayout.dart';
 import 'package:terraforming_mars/models/history/history.dart';
-import 'package:terraforming_mars/models/settings/settingsSwitchState.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 import 'package:terraforming_mars/theme/button.dart';
 import 'package:terraforming_mars/theme/colors.dart';
@@ -17,9 +16,6 @@ class MyProviderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SettingsSwitchState>(
-          create: (_) => SettingsSwitchState(),
-        ),
         ChangeNotifierProvider<History>(
           create: (_) => History(),
         ),

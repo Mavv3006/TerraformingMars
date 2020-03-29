@@ -5,7 +5,6 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 
-
 import '../defaultValue.dart';
 
 abstract class TerraformingValue extends ChangeNotifier {
@@ -47,8 +46,8 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessageValueText(),
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:++value),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(intValue: ++value),
         type: type,
         historyMessageType: HistoryMessageType.VALUE,
       ),
@@ -63,8 +62,9 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessageValueText(),
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:isValueGreaterThenZero ? --value : value),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+            intValue: isValueGreaterThenZero ? --value : value),
         type: type,
         historyMessageType: HistoryMessageType.VALUE,
       ),
@@ -81,8 +81,8 @@ abstract class TerraformingValue extends ChangeNotifier {
     history.log(
       HistoryMessage(
         message: getHistoryMessageValueText(),
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:++value),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(intValue: ++value),
         type: type,
         production: 1,
         historyMessageType: HistoryMessageType.VALUE,

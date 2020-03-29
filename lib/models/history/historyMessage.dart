@@ -76,6 +76,4 @@ class HistoryMessageValue {
   String toString() {
     return 'HistoryMessageValue{intValue: $intValue, boolValue: $boolValue}';
   }
-
-
 }
