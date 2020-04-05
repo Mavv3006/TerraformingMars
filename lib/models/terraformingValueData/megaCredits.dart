@@ -58,8 +58,8 @@ class MegaCredits extends RessourceValue with PlayCardMixin{
     }
   }
 
-  bool _isEnoughToPlayCards(int amount) {
-    return this.value >= amount;
+  bool _isEnoughToPlayCards(int cardValue) {
+    return this.value >= cardValue;
   }
 
   void buyCards(int amount) {
@@ -255,5 +255,10 @@ class MegaCredits extends RessourceValue with PlayCardMixin{
   MegaCredits updateSetting(SettingsModel setting) {
     this.setting = setting;
     return this;
+  }
+
+  @override
+  bool canPlayCards(int cardValue) {
+    return _isEnoughToPlayCards(cardValue);
   }
 }

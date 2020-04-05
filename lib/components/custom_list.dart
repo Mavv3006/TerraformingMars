@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CustomList extends StatelessWidget {
   final List<Widget> children;
 
+  static Widget mydivider = Divider(color: Colors.transparent);
+
   const CustomList({Key key, this.children}) : super(key: key);
 
   @override
@@ -13,7 +15,7 @@ class CustomList extends StatelessWidget {
         return children[index];
       },
       separatorBuilder: (BuildContext context, int index) {
-        return Divider(color: Colors.transparent);
+        return mydivider;
       },
       itemCount: children.length,
     );

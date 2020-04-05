@@ -15,6 +15,11 @@ class Titan extends RessourceValue with PlayCardMixin{
     return this.value >= cardValueInSteel;
   }
 
+  bool canPlayCards(int cardValue){
+    var cardValueInSteel = cardValue * setting.titanBuyValue;
+    return _isEnoughToByCards(cardValueInSteel);
+  }
+
   @override
   void playCards(int cardValue) {
     var cardValueInSteel = cardValue * setting.titanBuyValue;

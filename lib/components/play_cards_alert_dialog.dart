@@ -33,26 +33,9 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var _orangeTheme = Theme.of(context)
-        .textTheme
-        .body1
-        .copyWith(color: AppColors.orangeColor);
+    var _wrongInput = AlertText(text: "Falsche Eingabe");
 
-    var _wrongInput = Padding(
-      padding: EdgeInsets.only(top: 12),
-      child: Text(
-        "Falsche Eingabe",
-        style: _orangeTheme,
-      ),
-    );
-
-    var _notEnoughtMoney = Padding(
-      padding: EdgeInsets.only(top: 12),
-      child: Text(
-        "Nicht genug Ressourcen",
-        style: _orangeTheme,
-      ),
-    );
+    var _notEnoughtMoney = AlertText(text: "Nicht genug Ressourcen");
 
     var mcLayout = SettingsTextInputRow(
       text: "MegaCredits:",
@@ -62,7 +45,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
           int newValue = int.parse(value);
           _mcValue = newValue;
         } on FormatException catch (_) {
-          showWrongInputText();
+          _showWrongInputText();
         }
       },
     );
@@ -76,7 +59,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
             int newValue = int.parse(value);
             _titanValue = newValue;
           } on FormatException catch (_) {
-            showWrongInputText();
+            _showWrongInputText();
           }
         },
       ),
@@ -92,7 +75,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
             int newValue = int.parse(value);
             _steelValue = newValue;
           } on FormatException catch (_) {
-            showWrongInputText();
+            _showWrongInputText();
           }
         },
       ),
@@ -107,7 +90,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
             int newValue = int.parse(value);
             _heatValue = newValue;
           } on FormatException catch (_) {
-            showWrongInputText();
+            _showWrongInputText();
           }
         },
       ),
@@ -151,42 +134,84 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
         children: layoutList,
       ),
       acceptButtonOnPressed: () {
-        buyCards();
+        _buyCards(context);
         if (_isEnoughToPlayCards) Navigator.of(context).pop();
       },
     );
   }
 
-  void buyCards() {
+  void _buyCards(BuildContext context) {
     print(
       "{_mcValue: $_mcValue, _titanValue: $_titanValue, _steelValue: $_steelValue, _heatValue: $_heatValue}",
     );
-    try {
-      if (_mcValue > 0) {
-        Provider.of<MegaCredits>(context, listen: false).playCards(_mcValue);
+    if (_canPlayCards(context)) {
+      try {
+        if (_mcValue > 0) {
+          Provider.of<MegaCredits>(context, listen: false).playCards(_mcValue);
+        }
+        if (_titanValue > 0) {
+          Provider.of<Titan>(context, listen: false).playCards(_titanValue);
+        }
+        if (_steelValue > 0) {
+          Provider.of<Steel>(context, listen: false).playCards(_steelValue);
+        }
+        if (_heatValue > 0) {
+          Provider.of<Heat>(context, listen: false).playCards(_heatValue);
+        }
+      } on ValueTooLowException catch (_) {
+        _showNotEnoughMoney();
       }
-      if (_titanValue > 0) {
-        Provider.of<Titan>(context, listen: false).playCards(_titanValue);
-      }
-      if (_steelValue > 0) {
-        Provider.of<Steel>(context, listen: false).playCards(_steelValue);
-      }
-      if (_heatValue > 0) {
-        Provider.of<Heat>(context, listen: false).playCards(_heatValue);
-      }
-    } on ValueTooLowException catch (_) {
-      setState(() {
-        _isEnoughToPlayCards = false;
-      });
-      Timer(Duration(seconds: 5), () {
-        setState(() {
-          _isEnoughToPlayCards = true;
-        });
-      });
+    } else {
+      _showNotEnoughMoney();
     }
   }
 
-  void showWrongInputText() {
+  void _showNotEnoughMoney() {
+    setState(() {
+      _isEnoughToPlayCards = false;
+    });
+    Timer(Duration(seconds: 5), () {
+      setState(() {
+        _isEnoughToPlayCards = true;
+      });
+    });
+  }
+
+  bool _canPlayCards(BuildContext context) {
+    List<bool> enoughToPlayCards = [false, false, false, false];
+    if ((_mcValue > 0 &&
+            Provider.of<MegaCredits>(context, listen: false)
+                .canPlayCards(_mcValue)) ||
+        _mcValue == 0) {
+      enoughToPlayCards[0] = true;
+    }
+    if ((_titanValue > 0 &&
+            Provider.of<Titan>(context, listen: false)
+                .canPlayCards(_titanValue)) ||
+        _titanValue == 0) {
+      enoughToPlayCards[1] = true;
+    }
+    if ((_steelValue > 0 &&
+            Provider.of<Steel>(context, listen: false)
+                .canPlayCards(_steelValue)) ||
+        _steelValue == 0) {
+      enoughToPlayCards[2] = true;
+    }
+    if ((_heatValue > 0 &&
+            Provider.of<Heat>(context, listen: false)
+                .canPlayCards(_heatValue)) ||
+        _heatValue == 0) {
+      enoughToPlayCards[3] = true;
+    }
+
+    print("Enough to Play Cards: $enoughToPlayCards");
+
+    return enoughToPlayCards.every((element) {
+      return element == true;
+    });
+  }
+
+  void _showWrongInputText() {
     setState(() {
       _isInputCorrect = false;
     });
@@ -195,5 +220,30 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
         _isInputCorrect = true;
       });
     });
+  }
+}
+
+class AlertText extends StatelessWidget {
+  const AlertText({
+    Key key,
+    @required this.text,
+  }) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    var _orangeTheme = Theme.of(context)
+        .textTheme
+        .body1
+        .copyWith(color: AppColors.orangeColor);
+
+    return Padding(
+      padding: EdgeInsets.only(top: 12),
+      child: Text(
+        text,
+        style: _orangeTheme,
+      ),
+    );
   }
 }
