@@ -27,13 +27,15 @@ abstract class RessourceValue extends TerraformingValue {
     switch (historyMessage.historyMessageType) {
       case HistoryMessageType.VALUE:
       case HistoryMessageType.NEXT_ROUND:
+      case HistoryMessageType.ACTION:
         undoValue(historyMessage);
         return;
       case HistoryMessageType.PRODUCTION:
         undoProduction(historyMessage);
         return;
-      default:
-        return;
+      case HistoryMessageType.SETTING:
+        print("HistoryMessageType.SETTING detectet in RessourceValue");
+        break;
     }
   }
 

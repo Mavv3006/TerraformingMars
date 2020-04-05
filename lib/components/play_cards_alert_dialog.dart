@@ -32,6 +32,64 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
   TextEditingController _heatController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _mcController.addListener(_listenToMcController);
+    _titanController.addListener(_listenToTitanController);
+    _steelController.addListener(_listenToSteelController);
+    _heatController.addListener(_listenToHeatController);
+  }
+
+  _listenToMcController() {
+    try {
+      if (_mcController.text.length == 0) return;
+      int newValue = int.parse(_mcController.text);
+      _mcValue = newValue;
+    } on FormatException catch (_) {
+      _showWrongInputText();
+    }
+  }
+
+  _listenToTitanController() {
+    try {
+      if (_titanController.text.length == 0) return;
+      int newValue = int.parse(_titanController.text);
+      _titanValue = newValue;
+    } on FormatException catch (_) {
+      _showWrongInputText();
+    }
+  }
+
+  _listenToSteelController() {
+    try {
+      if (_steelController.text.length == 0) return;
+      int newValue = int.parse(_steelController.text);
+      _steelValue = newValue;
+    } on FormatException catch (_) {
+      _showWrongInputText();
+    }
+  }
+
+  _listenToHeatController() {
+    try {
+      if (_heatController.text.length == 0) return;
+      int newValue = int.parse(_heatController.text);
+      _heatValue = newValue;
+    } on FormatException catch (_) {
+      _showWrongInputText();
+    }
+  }
+
+  @override
+  void dispose() {
+    _mcController.dispose();
+    _titanController.dispose();
+    _steelController.dispose();
+    _heatController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var _wrongInput = AlertText(text: "Falsche Eingabe");
 
@@ -64,20 +122,11 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
         },
       ),
     );
-
     var steelLayout = Padding(
       padding: EdgeInsets.only(top: 6.0),
       child: SettingsTextInputRow(
         text: "Stahl:",
         controller: _steelController,
-        onSubmitted: (String value) {
-          try {
-            int newValue = int.parse(value);
-            _steelValue = newValue;
-          } on FormatException catch (_) {
-            _showWrongInputText();
-          }
-        },
       ),
     );
     var heatLayout = Padding(
@@ -159,9 +208,11 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
           Provider.of<Heat>(context, listen: false).playCards(_heatValue);
         }
       } on ValueTooLowException catch (_) {
+        print("ValueTooLowException");
         _showNotEnoughMoney();
       }
     } else {
+      print("Cannot Play Cards");
       _showNotEnoughMoney();
     }
   }

@@ -22,7 +22,7 @@ class HistoryLayout extends StatelessWidget {
               : () {
                   var lastEvent = Provider.of<History>(context, listen: false)
                       .getLastEntry();
-                  print(lastEvent.toString());
+                  print("HistoryLayout -> Last History Event: "+lastEvent.toString());
                   switch (lastEvent.type) {
                     case MegaCredits:
                       Provider.of<MegaCredits>(context, listen: false)

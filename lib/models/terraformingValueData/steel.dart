@@ -15,6 +15,7 @@ class Steel extends RessourceValue with PlayCardMixin {
   }
 
   bool canPlayCards(int cardValue){
+    // TODO: Sort this out. I have to decide whether I input the amount of Steel or the cardValue and comput the value myself
     var cardValueInSteel = cardValue * setting.steelBuyValue;
     return _isEnoughToByCards(cardValueInSteel);
   }
