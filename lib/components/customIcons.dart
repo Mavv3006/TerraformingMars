@@ -10,5 +10,6 @@ class CustomIcons {
   static IconData history = Icons.history;
   static IconData undo = Icons.undo;
   static IconData newValue = Icons.arrow_forward;
+  static IconData newBoolValue = Icons.arrow_downward;
   static IconData equals = FontAwesomeIcons.equals;
 }

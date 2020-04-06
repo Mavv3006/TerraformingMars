@@ -39,13 +39,13 @@ class HistoryNewBoolValue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: <Widget>[
         RessourceValueText(oldValue.toString().toUpperCase()),
         Padding(
           padding: iconPadding,
           child: Icon(
-            CustomIcons.newValue,
+            CustomIcons.newBoolValue,
             color: AppColors.accentColor,
           ),
         ),
