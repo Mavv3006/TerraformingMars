@@ -25,11 +25,19 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
 
   bool _isInputCorrect = true;
   bool _isEnoughToPlayCards = true;
+  bool _hasPlayedCard = false;
 
   TextEditingController _mcController = TextEditingController();
   TextEditingController _titanController = TextEditingController();
   TextEditingController _steelController = TextEditingController();
   TextEditingController _heatController = TextEditingController();
+
+  var _wrongInput = AlertText(text: "Falsche Eingabe");
+  var _notEnoughtMoney = AlertText(text: "Nicht genug Ressourcen");
+  var _playedCard = AlertText(
+    text: "Karte ausgespielt",
+    textColor: AppColors.accentColor,
+  );
 
   @override
   void initState() {
@@ -43,8 +51,8 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
   _listenToMcController() {
     try {
       if (_mcController.text.length == 0) return;
-      int newValue = int.parse(_mcController.text);
-      _mcValue = newValue;
+      int cardValue = int.parse(_mcController.text);
+      _mcValue = cardValue;
     } on FormatException catch (_) {
       _showWrongInputText();
     }
@@ -91,35 +99,15 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var _wrongInput = AlertText(text: "Falsche Eingabe");
-
-    var _notEnoughtMoney = AlertText(text: "Nicht genug Ressourcen");
-
     var mcLayout = SettingsTextInputRow(
       text: "MegaCredits:",
       controller: _mcController,
-      onSubmitted: (String value) {
-        try {
-          int newValue = int.parse(value);
-          _mcValue = newValue;
-        } on FormatException catch (_) {
-          _showWrongInputText();
-        }
-      },
     );
     var titanLayout = Padding(
       padding: EdgeInsets.only(top: 6.0),
       child: SettingsTextInputRow(
         text: "Titan:",
         controller: _titanController,
-        onSubmitted: (String value) {
-          try {
-            int newValue = int.parse(value);
-            _titanValue = newValue;
-          } on FormatException catch (_) {
-            _showWrongInputText();
-          }
-        },
       ),
     );
     var steelLayout = Padding(
@@ -134,14 +122,6 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
       child: SettingsTextInputRow(
         text: "Wärme:",
         controller: _heatController,
-        onSubmitted: (String value) {
-          try {
-            int newValue = int.parse(value);
-            _heatValue = newValue;
-          } on FormatException catch (_) {
-            _showWrongInputText();
-          }
-        },
       ),
     );
 
@@ -171,25 +151,32 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
       layoutList.add(_notEnoughtMoney);
     }
 
+    if (_hasPlayedCard) {
+      layoutList.add(_playedCard);
+    }
+
     return TerraformingAlertDialog(
       title: "Welche Kombination?",
       declineButtonTitle: "Abbrechen",
-      declineButtonOnPressed: () {
-        Navigator.of(context).pop();
-      },
+      declineButtonOnPressed: _hasPlayedCard
+          ? null
+          : () {
+              Navigator.of(context).pop();
+            },
       acceptButtonTitle: "Bestätigen",
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: layoutList,
       ),
-      acceptButtonOnPressed: () {
-        _buyCards(context);
-        if (_isEnoughToPlayCards) Navigator.of(context).pop();
-      },
+      acceptButtonOnPressed: _hasPlayedCard
+          ? null
+          : () {
+              _buyCard(context);
+            },
     );
   }
 
-  void _buyCards(BuildContext context) {
+  void _buyCard(BuildContext context) {
     print(
       "{_mcValue: $_mcValue, _titanValue: $_titanValue, _steelValue: $_steelValue, _heatValue: $_heatValue}",
     );
@@ -207,6 +194,8 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
         if (_heatValue > 0) {
           Provider.of<Heat>(context, listen: false).playCards(_heatValue);
         }
+
+        _showHasPlayedCard(context);
       } on ValueTooLowException catch (_) {
         print("ValueTooLowException");
         _showNotEnoughMoney();
@@ -272,22 +261,33 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
       });
     });
   }
+
+  void _showHasPlayedCard(BuildContext context) {
+    setState(() {
+      _hasPlayedCard = true;
+    });
+    Timer(Duration(milliseconds: 1250), () {
+      Navigator.of(context).pop();
+    });
+  }
 }
 
 class AlertText extends StatelessWidget {
   const AlertText({
     Key key,
     @required this.text,
+    this.textColor,
   }) : super(key: key);
 
   final String text;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     var _orangeTheme = Theme.of(context)
         .textTheme
         .body1
-        .copyWith(color: AppColors.orangeColor);
+        .copyWith(color: this.textColor ?? AppColors.orangeColor);
 
     return Padding(
       padding: EdgeInsets.only(top: 12),

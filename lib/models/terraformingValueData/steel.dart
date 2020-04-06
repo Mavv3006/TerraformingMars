@@ -10,28 +10,20 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 class Steel extends RessourceValue with PlayCardMixin {
   Steel() : super("Stahl");
 
-  bool _isEnoughToByCards(int cardValueInSteel) {
-    return this.value >= cardValueInSteel;
-  }
-
-  bool canPlayCards(int cardValue){
-    // TODO: Sort this out. I have to decide whether I input the amount of Steel or the cardValue and comput the value myself
-    var cardValueInSteel = cardValue * setting.steelBuyValue;
-    return _isEnoughToByCards(cardValueInSteel);
+  bool canPlayCards(int cardValue) {
+    return this.value >= cardValue;
   }
 
   @override
   void playCards(int cardValue) {
-    var cardValueInSteel = cardValue * setting.steelBuyValue;
-
     if (cardValue == 0) return;
 
-    if (_isEnoughToByCards(cardValueInSteel)) {
+    if (canPlayCards(cardValue)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $cardValueInSteel Stahl gekauft",
+          message: "Karte für $cardValue Stahl gekauft",
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= cardValueInSteel),
+          newValue: HistoryMessageValue(intValue: value -= cardValue),
           type: Steel,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,
