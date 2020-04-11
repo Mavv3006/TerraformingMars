@@ -140,9 +140,9 @@ class _PlayCardsState extends State<PlayCards> {
           heat.playCard(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content:
-              Text('Du hast eine Karte für ${heat
-                  .lastCardValue} Wärme ausgespielt'),
+              content: Text(
+                  'Du hast eine Karte für ${heat
+                      .lastCardValue} Wärme ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
@@ -175,9 +175,9 @@ class _PlayCardsState extends State<PlayCards> {
           titan.playAmount(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content:
-              Text('Du hast eine Karte für ${titan
-                  .lastCardValue} Titan ausgespielt'),
+              content: Text(
+                  'Du hast eine Karte für ${titan
+                      .lastCardValue} Titan ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
@@ -224,9 +224,9 @@ class _PlayCardsState extends State<PlayCards> {
           steel.playCard(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content:
-              Text('Du hast eine Karte für ${steel
-                  .lastCardValue} Stahl ausgespielt'),
+              content: Text(
+                  'Du hast eine Karte für ${steel
+                      .lastCardValue} Stahl ausgespielt'),
             ),
           );
         } on FormatException catch (_) {

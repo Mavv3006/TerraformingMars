@@ -1,9 +1,9 @@
 export 'crop.dart';
 export 'energy.dart';
 export 'heat.dart';
-export 'megaCredits.dart';
-export 'ressourceValue.dart';
+export 'mega_Credits.dart';
+export 'ressource_value.dart';
 export 'steel.dart';
 export 'terraforming.dart';
-export 'terraformingValue.dart';
+export 'terraforming_value.dart';
 export 'titan.dart';

@@ -5,7 +5,7 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
-import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
+import 'package:terraforming_mars/models/terraformingValueData/ressource_value.dart';
 
 class Steel extends RessourceValue with PlayCardMixin {
   Steel() : super('Stahl');
@@ -17,7 +17,7 @@ class Steel extends RessourceValue with PlayCardMixin {
 
   @override
   bool canPlayCard(int amount) {
-    return value >= amount;
+    return dataModel.value >= amount;
   }
 
   @override
@@ -42,8 +42,9 @@ class Steel extends RessourceValue with PlayCardMixin {
       history.log(
         HistoryMessage(
           message: 'Karte für $_lastCardValue Stahl gekauft',
-          oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= _lastCardValue),
+          oldValue: HistoryMessageValue(intValue: dataModel.value),
+          newValue:
+          HistoryMessageValue(intValue: dataModel.value -= _lastCardValue),
           type: Steel,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,

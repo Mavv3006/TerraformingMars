@@ -2,7 +2,7 @@ import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
-import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
+import 'package:terraforming_mars/models/terraformingValueData/ressource_value.dart';
 
 class Energy extends RessourceValue {
   Energy() : super('Energie');
@@ -13,15 +13,15 @@ class Energy extends RessourceValue {
 
   @override
   void nextRound() {
-    _oldValue = value;
-    value = production;
+    _oldValue = dataModel.value;
+    dataModel.value = dataModel.production;
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
         oldValue: HistoryMessageValue(intValue: _oldValue),
-        newValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(intValue: dataModel.value),
         type: Energy,
-        production: value - _oldValue,
+        production: dataModel.value - _oldValue,
         historyMessageType: HistoryMessageType.nextRound,
       ),
     );

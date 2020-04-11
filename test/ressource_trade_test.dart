@@ -14,7 +14,8 @@ void main() {
     crop.buildForest();
 
     assert(setting.cropTradeValue == 4);
-    assert(crop.value == (DefaultRessourceValue.defaultValueValue - 4));
+    assert(
+    crop.dataModel.value == (DefaultRessourceValue.defaultValueValue - 4));
   });
 
   test('increase Temperatur w/ heat', () {
@@ -29,7 +30,8 @@ void main() {
     heat.increaseTemperatur();
 
     assert(setting.heatTradeValue == 4);
-    assert(heat.value == (DefaultRessourceValue.defaultValueValue - 4));
+    assert(
+    heat.dataModel.value == (DefaultRessourceValue.defaultValueValue - 4));
   });
 
   test('buy cards w/ steel', () {
@@ -41,11 +43,11 @@ void main() {
     const int cardValue = 3;
 
     setting.steelBuyValue = steelValue;
-    steel.value += (cardValue / steelValue).round();
+    steel.dataModel.value += (cardValue / steelValue).round();
     steel.playCard(cardValue);
 
     assert(setting.steelBuyValue == steelValue);
-    assert(steel.value == DefaultRessourceValue.defaultValueValue);
+    assert(steel.dataModel.value == DefaultRessourceValue.defaultValueValue);
   });
 
   test('buy cards w/ titan', () {
@@ -57,11 +59,11 @@ void main() {
     const int cardValue = 4;
 
     setting.titanBuyValue = titanValue;
-    titan.value += (cardValue / titanValue).round();
+    titan.dataModel.value += (cardValue / titanValue).round();
     titan.playAmount(cardValue);
 
     assert(setting.titanBuyValue == titanValue);
-    assert(titan.value == DefaultRessourceValue.defaultValueValue);
+    assert(titan.dataModel.value == DefaultRessourceValue.defaultValueValue);
   });
 
   test('titan value test', () {
@@ -72,6 +74,6 @@ void main() {
     setting.titanBuyValue = 1;
     titan.playAmount(1);
 
-    assert(titan.value == 0);
+    assert(titan.dataModel.value == 0);
   });
 }
