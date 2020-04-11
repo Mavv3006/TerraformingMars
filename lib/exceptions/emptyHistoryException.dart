@@ -1,7 +1,7 @@
 class EmptyHistoryException implements Exception {
-  final String message;
+  const EmptyHistoryException(this.message);
 
-  EmptyHistoryException(this.message);
+  final String message;
 
   String errorMessage() => message;
 }

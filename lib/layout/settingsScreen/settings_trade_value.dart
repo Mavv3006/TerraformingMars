@@ -11,8 +11,8 @@ class SettingsTradeValue extends StatefulWidget {
 }
 
 class _SettingsTradeValueState extends State<SettingsTradeValue> {
-  final heatTradeValueController = TextEditingController();
-  final cropTradeValueController = TextEditingController();
+  final TextEditingController heatTradeValueController = TextEditingController();
+  final TextEditingController cropTradeValueController = TextEditingController();
 
   SettingsModel setting;
 
@@ -30,41 +30,41 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
 
   @override
   Widget build(BuildContext context) {
-    this.setting = Provider.of<SettingsModel>(context, listen: false);
+    setting = Provider.of<SettingsModel>(context, listen: false);
 
     heatTradeValueController.value =
-        TextEditingValue(text: this.setting.heatTradeValue.toString());
+        TextEditingValue(text: setting.heatTradeValue.toString());
     cropTradeValueController.value =
-        TextEditingValue(text: this.setting.cropTradeValue.toString());
+        TextEditingValue(text: setting.cropTradeValue.toString());
 
-    var topListElement = SettingsTextInputRow(
-      text: "Pflanzen für einen Wald:",
+    final SettingsTextInputRow topListElement = SettingsTextInputRow(
+      text: 'Pflanzen für einen Wald:',
       controller: cropTradeValueController,
       onSubmitted: (String value) {
         try {
-          int newValue = int.parse(value);
+          final int newValue = int.parse(value);
           setting.cropTradeValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein"),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein'),
             ),
           );
         }
       },
     );
 
-    var bottomListElement = SettingsTextInputRow(
-      text: "Wärme für +2°C:",
+    final SettingsTextInputRow bottomListElement = SettingsTextInputRow(
+      text: 'Wärme für +2°C:',
       controller: heatTradeValueController,
       onSubmitted: (String value) {
         try {
-          int newValue = int.parse(value);
+          final int newValue = int.parse(value);
           setting.heatTradeValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein"),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein'),
             ),
           );
         }
@@ -77,7 +77,7 @@ class _SettingsTradeValueState extends State<SettingsTradeValue> {
         children: <Widget>[
           topListElement,
           Padding(
-            padding: EdgeInsets.only(top: 6.0),
+            padding: const EdgeInsets.only(top: 6.0),
             child: bottomListElement,
           ),
         ],

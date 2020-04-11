@@ -52,7 +52,7 @@ class TextButton extends RaisedButton {
           child: Text(
             text,
           ),
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
         );
 }
 
@@ -72,6 +72,6 @@ class ActionButton extends RaisedButton {
               child: Text(text),
             ),
           ),
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
         );
 }

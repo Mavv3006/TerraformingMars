@@ -6,7 +6,7 @@ import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_wi
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 
 class HistoryValueProductionWidget extends HistoryWidget {
-  HistoryValueProductionWidget({
+  const HistoryValueProductionWidget({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);

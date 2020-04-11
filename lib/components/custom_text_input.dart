@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class CustomTextInput extends StatefulWidget {
+  const CustomTextInput(this.textEditingController, {this.onSubmitted});
+
   final TextEditingController textEditingController;
   final ValueChanged<String> onSubmitted;
-
-  CustomTextInput(this.textEditingController, {this.onSubmitted});
 
   @override
   _CustomTextInputState createState() => _CustomTextInputState();
@@ -27,7 +27,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
         textAlign: TextAlign.center,
         style: TextStyle(color: AppColors.accentColor),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 14),
+          contentPadding: const EdgeInsets.only(top: 14),
           filled: true,
           fillColor: AppColors.backgroundColor,
           enabledBorder: OutlineInputBorder(

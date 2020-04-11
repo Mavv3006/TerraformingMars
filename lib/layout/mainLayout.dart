@@ -21,13 +21,13 @@ class MainLayout extends StatelessWidget {
         appBar: AppBar(
           bottom: TabBar(
             labelColor: _appBarColor,
-            tabs: [
-              Tab(text: "Ressourcen"),
-              Tab(text: "Aktionen"),
+            tabs: const <Tab>[
+              Tab(text: 'Ressourcen'),
+              Tab(text: 'Aktionen'),
             ],
           ),
           title: Text(
-            "Terraforming Mars",
+            'Terraforming Mars',
             style: Theme.of(context).textTheme.title.copyWith(
                   color: _appBarColor,
                 ),
@@ -36,10 +36,10 @@ class MainLayout extends StatelessWidget {
             NextRoundButton(),
             IconButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.push<dynamic>(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => HistoryLayout(),
+                  MaterialPageRoute<dynamic>(
+                    builder: (BuildContext context) => HistoryLayout(),
                   ),
                 );
               },
@@ -49,10 +49,10 @@ class MainLayout extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.push<dynamic>(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => SettingsLayout(),
+                  MaterialPageRoute<dynamic>(
+                    builder: (BuildContext context) => SettingsLayout(),
                   ),
                 );
               },

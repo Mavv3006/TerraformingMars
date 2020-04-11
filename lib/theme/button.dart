@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
-const globalButtonTheme = ButtonThemeData(
+const ButtonThemeData globalButtonTheme = ButtonThemeData(
   buttonColor: AppColors.primaryColor,
   disabledColor: AppColors.disabledButtonColor,
   textTheme: ButtonTextTheme.accent,

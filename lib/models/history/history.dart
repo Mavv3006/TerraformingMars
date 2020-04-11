@@ -5,11 +5,11 @@ import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_me
 import 'historyMessage.dart';
 
 class History extends ChangeNotifier {
-  List<HistoryMessage> _historyList;
-
   History() {
-    _historyList = List<HistoryMessage>();
+    _historyList = <HistoryMessage>[];
   }
+
+  List<HistoryMessage> _historyList;
 
   void log(HistoryMessage message) {
     _historyList.add(message);
@@ -18,7 +18,7 @@ class History extends ChangeNotifier {
 
   HistoryMessage getLastEntry() {
     if (_historyList.isEmpty) {
-      throw EmptyHistoryException("The history is empty");
+      throw const EmptyHistoryException('The history is empty');
     }
     notifyListeners();
     return _historyList.removeLast();
@@ -30,7 +30,7 @@ class History extends ChangeNotifier {
 
   HistoryMessage getAtIndex(int index) {
     if (_historyList.isEmpty) {
-      throw EmptyHistoryException("The history is empty");
+      throw const EmptyHistoryException('The history is empty');
     }
     return _historyList[index];
   }
@@ -43,9 +43,9 @@ class History extends ChangeNotifier {
 
   List<Widget> getWidgetList() {
     if (_historyList.isEmpty) {
-      return [
-        Center(
-          child: Text("Du hast noch nichts gemacht"),
+      return <Widget>[
+        const Center(
+          child: Text('Du hast noch nichts gemacht'),
         )
       ];
     } else {

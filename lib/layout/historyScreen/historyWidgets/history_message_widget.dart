@@ -8,23 +8,23 @@ import 'history_setting_widget.dart';
 import 'history_value_production_widget.dart';
 
 class HistoryMessageWidget extends StatelessWidget {
-  final HistoryMessage historyMessage;
-
-  HistoryMessageWidget({Key key, @required this.historyMessage})
+  const HistoryMessageWidget({Key key, @required this.historyMessage})
       : super(key: key);
+
+  final HistoryMessage historyMessage;
 
   @override
   // ignore: missing_return
   Widget build(BuildContext context) {
     switch (historyMessage.historyMessageType) {
-      case HistoryMessageType.PRODUCTION:
-      case HistoryMessageType.VALUE:
+      case HistoryMessageType.production:
+      case HistoryMessageType.value:
         return HistoryValueProductionWidget(historyMessage: historyMessage);
-      case HistoryMessageType.NEXT_ROUND:
+      case HistoryMessageType.nextRound:
         return HistoryNextRoundWidget(historyMessage: historyMessage);
-      case HistoryMessageType.ACTION:
+      case HistoryMessageType.action:
         return HistoryActionWidget(historyMessage: historyMessage);
-      case HistoryMessageType.SETTING:
+      case HistoryMessageType.setting:
         return HistorySettingWidget(historyMessage: historyMessage);
     }
   }

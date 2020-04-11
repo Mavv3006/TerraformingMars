@@ -6,7 +6,7 @@ import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_wi
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 
 class HistoryPlayCardsWithSteel extends HistoryWidget {
-  HistoryPlayCardsWithSteel({
+  const HistoryPlayCardsWithSteel({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
@@ -22,7 +22,7 @@ class HistoryPlayCardsWithSteel extends HistoryWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RessourceValueText(historyMessage.message),
-              RessourceValueText("Stahl - Anzahl"),
+              const RessourceValueText('Stahl - Anzahl'),
             ],
           ),
           HistoryNewIntValue(

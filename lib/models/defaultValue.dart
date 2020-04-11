@@ -1,33 +1,33 @@
 class DefaultRessourceValue {
-  static final defaultTerraformingStartValue = 20;
-  static final defaultMegaCreditsStartValue = 20;
+  static const int defaultTerraformingStartValue = 20;
+  static const int defaultMegaCreditsStartValue = 20;
 
-  static final defaultValueValue = 1;
-  static final defaultProductionValue = 1;
+  static const int defaultValueValue = 1;
+  static const int defaultProductionValue = 1;
 }
 
 class DefaultActionValue {
-  static final defaultStandardProjectFactoryValue = 11;
-  static final defaultStandardProjectAsteroidValue = 14;
-  static final defaultStandardProjectOceanValue = 18;
-  static final defaultStandardProjectForestValue = 23;
-  static final defaultStandardProjectCityValue = 25;
+  static const int defaultStandardProjectFactoryValue = 11;
+  static const int defaultStandardProjectAsteroidValue = 14;
+  static const int defaultStandardProjectOceanValue = 18;
+  static const int defaultStandardProjectForestValue = 23;
+  static const int defaultStandardProjectCityValue = 25;
 
-  static final defaultCardBuyingValue = 3;
-  static final defaultCardSellingValue = 1;
+  static const int defaultCardBuyingValue = 3;
+  static const int defaultCardSellingValue = 1;
 
-  static final defaultTerraformingActionTemperaturValue = 8;
-  static final defaultTerraformingActionForestValue = 8;
+  static const int defaultTerraformingActionTemperaturValue = 8;
+  static const int defaultTerraformingActionForestValue = 8;
 }
 
 class DefaultConversionFactor {
-  static final defaultSteelValue = 2;
-  static final defaultTitanValue = 3;
+  static const int defaultSteelValue = 2;
+  static const int defaultTitanValue = 3;
 }
 
 class DefaultSettingsValue {
-  static final defaultSteelBuyValue = 2;
-  static final defaultTitanBuyValue = 3;
-  static final defaultCropTradeValue = 8;
-  static final defaultHeatTradeValue = 8;
+  static const int defaultSteelBuyValue = 2;
+  static const int defaultTitanBuyValue = 3;
+  static const int defaultCropTradeValue = 8;
+  static const int defaultHeatTradeValue = 8;
 }

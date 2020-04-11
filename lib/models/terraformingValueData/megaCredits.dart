@@ -11,6 +11,12 @@ import '../defaultValue.dart';
 import 'terraforming.dart';
 
 class MegaCredits extends RessourceValue with PlayCardMixin {
+  MegaCredits()
+      : super.fromValue(
+          title: 'Megacredits',
+          startBy: DefaultRessourceValue.defaultMegaCreditsStartValue,
+        );
+
   Terraforming terraformingValue;
 
   bool get isValueEnoughForFactory =>
@@ -28,14 +34,8 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   bool get isValueEnoughForCity =>
       value >= DefaultActionValue.defaultStandardProjectCityValue;
 
-  MegaCredits()
-      : super.startBy(
-          title: "Megacredits",
-          startBy: DefaultRessourceValue.defaultMegaCreditsStartValue,
-        );
-
   MegaCredits updateTerraformingValue(Terraforming value) {
-    this.terraformingValue = value;
+    terraformingValue = value;
     return this;
   }
 
@@ -44,59 +44,60 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     if (_isEnoughToPlayCards(amount)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $amount MC ausgespielt",
+          message: 'Karte für $amount MC ausgespielt',
           oldValue: HistoryMessageValue(intValue: value),
           newValue: HistoryMessageValue(intValue: value -= amount),
           type: MegaCredits,
-          historyMessageType: HistoryMessageType.ACTION,
+          historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_MC,
         ),
       );
       notifyListeners();
     } else {
-      throw ValueTooLowException("Du hast nicht genug MegaCredits");
+      throw const ValueTooLowException('Du hast nicht genug MegaCredits');
     }
   }
 
   bool _isEnoughToPlayCards(int cardValue) {
-    return this.value >= cardValue;
+    return value >= cardValue;
   }
 
   void buyCards(int amount) {
     if (_isEnoughToBuyCards(amount)) {
       history.log(
         HistoryMessage(
-          message: "$amount Karten gekauft",
+          message: '$amount Karten gekauft',
           oldValue: HistoryMessageValue(intValue: value),
           newValue: HistoryMessageValue(
             intValue: value -=
-                (amount * DefaultActionValue.defaultCardBuyingValue),
+                amount * DefaultActionValue.defaultCardBuyingValue,
           ),
           type: MegaCredits,
-          historyMessageType: HistoryMessageType.ACTION,
+          historyMessageType: HistoryMessageType.action,
           actionType: ActionType.BUY_CARDS,
         ),
       );
       notifyListeners();
     } else {
-      throw ValueTooLowException("Du hast nicht genug MegaCredits");
+      throw const ValueTooLowException('Du hast nicht genug MegaCredits');
     }
   }
 
   bool _isEnoughToBuyCards(int amount) {
-    return this.value >= (amount * DefaultActionValue.defaultCardBuyingValue);
+    return value >= (amount * DefaultActionValue.defaultCardBuyingValue);
   }
 
   void sellCards(int amount) {
     history.log(
       HistoryMessage(
-        message: "$amount Karten verkauft",
+        message: '$amount Karten verkauft',
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
-            intValue: value +=
-                (amount * DefaultActionValue.defaultCardSellingValue)),
+          intValue: value +=
+              amount * DefaultActionValue.defaultCardSellingValue,
+        ),
         type: MegaCredits,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.SELL_CARDS,
       ),
     );
@@ -129,13 +130,13 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   void _logActionTypeAsteroid() {
     history.log(
       HistoryMessage(
-        message: "Asteroid abgeschleppt",
+        message: 'Asteroid abgeschleppt',
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
             intValue: value -=
                 DefaultActionValue.defaultStandardProjectAsteroidValue),
         type: MegaCredits,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.ASTEROID,
       ),
     );
@@ -144,13 +145,13 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   void _logActionTypeOcean() {
     history.log(
       HistoryMessage(
-        message: "Ozean bewässert",
+        message: 'Ozean bewässert',
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
             intValue: value -=
                 DefaultActionValue.defaultStandardProjectOceanValue),
         type: MegaCredits,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.BUILD_OCEAN,
       ),
     );
@@ -159,14 +160,14 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   void _logActionTypeForest() {
     history.log(
       HistoryMessage(
-        message: "Wald gepflanzt",
+        message: 'Wald gepflanzt',
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
           intValue: value -=
               DefaultActionValue.defaultStandardProjectForestValue,
         ),
         type: MegaCredits,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.BUILD_FOREST_WITH_MC,
       ),
     );
@@ -175,13 +176,13 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   void _logActionTypeCity() {
     history.log(
       HistoryMessage(
-        message: "Stadt gebaut",
+        message: 'Stadt gebaut',
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
           intValue: value -= DefaultActionValue.defaultStandardProjectCityValue,
         ),
         type: MegaCredits,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.BUILD_CITY,
       ),
     );
@@ -190,14 +191,14 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   void _logActionTypeFactory() {
     history.log(
       HistoryMessage(
-        message: "Kraftwerk errichtet",
+        message: 'Kraftwerk errichtet',
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
           intValue: value -=
               DefaultActionValue.defaultStandardProjectFactoryValue,
         ),
         type: MegaCredits,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.BUILD_FACTORY,
       ),
     );
@@ -210,11 +211,11 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
         message: getHistoryMessgeNextRoundText(),
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
-          intValue: value += (terraformingValue.value + production),
+          intValue: value += terraformingValue.value + production,
         ),
         type: MegaCredits,
         production: terraformingValue.value + production,
-        historyMessageType: HistoryMessageType.NEXT_ROUND,
+        historyMessageType: HistoryMessageType.nextRound,
       ),
     );
     super.nextRound();
@@ -241,19 +242,14 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   }
 
   @override
-  String toString() {
-    return super.toString();
-  }
-
-  @override
   MegaCredits updateHistory(History history) {
-    this.history = history;
+    history = history;
     return this;
   }
 
   @override
   MegaCredits updateSetting(SettingsModel setting) {
-    this.setting = setting;
+    setting = setting;
     return this;
   }
 

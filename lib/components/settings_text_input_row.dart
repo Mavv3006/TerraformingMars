@@ -5,15 +5,15 @@ import 'custom_text_input.dart';
 import 'ressourceValueText.dart';
 
 class SettingsTextInputRow extends StatefulWidget {
-  final TextEditingController controller;
-  final String text;
-  final Function(String) onSubmitted;
-
-  SettingsTextInputRow({
+  const SettingsTextInputRow({
     this.controller,
     this.text,
     this.onSubmitted,
   });
+
+  final TextEditingController controller;
+  final String text;
+  final Function(String) onSubmitted;
 
   @override
   _SettingsTextInputRowState createState() => _SettingsTextInputRowState();

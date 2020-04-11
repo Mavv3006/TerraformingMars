@@ -3,9 +3,9 @@ import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 class RessourceButtonLayout extends StatelessWidget {
-  final RessourceValue resValue;
+  const RessourceButtonLayout(this.resValue);
 
-  RessourceButtonLayout(this.resValue);
+  final RessourceValue resValue;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class RessourceButtonLayout extends StatelessWidget {
             onPressed: resValue.isValueGreaterThenZero
                 ? resValue.decrementValue
                 : null),
-        SizedBox(width: 25),
+        const SizedBox(width: 25),
         AddButton(onPressed: resValue.incrementProduction),
         SubButton(
             onPressed: resValue.isProductionGreaterThenZero

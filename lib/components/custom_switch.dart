@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class CustomSwitch extends StatefulWidget {
-  final bool value;
-  final Function(bool) onChanged;
-
-  CustomSwitch({
+  const CustomSwitch({
     this.value,
     this.onChanged,
   });
+
+  final bool value;
+  final Function(bool) onChanged;
 
   @override
   _CustomSwitchState createState() => _CustomSwitchState();

@@ -10,25 +10,32 @@ class RessourceLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomList(
       children: <Widget>[
-        Consumer<MegaCredits>(builder: (context, data, child) {
+        Consumer<MegaCredits>(
+            builder: (BuildContext context, MegaCredits data, Widget child) {
           return ResLayout(data);
         }),
-        Consumer<Titan>(builder: (context, data, child) {
+        Consumer<Titan>(
+            builder: (BuildContext context, Titan data, Widget child) {
           return ResLayout(data);
         }),
-        Consumer<Steel>(builder: (context, data, child) {
+        Consumer<Steel>(
+            builder: (BuildContext context, Steel data, Widget child) {
           return ResLayout(data);
         }),
-        Consumer<Crop>(builder: (context, data, child) {
+        Consumer<Crop>(
+            builder: (BuildContext context, Crop data, Widget child) {
           return ResLayout(data);
         }),
-        Consumer<Energy>(builder: (context, data, child) {
+        Consumer<Energy>(
+            builder: (BuildContext context, Energy data, Widget child) {
           return ResLayout(data);
         }),
-        Consumer<Heat>(builder: (context, data, child) {
+        Consumer<Heat>(
+            builder: (BuildContext context, Heat data, Widget child) {
           return ResLayout(data);
         }),
-        Consumer<Terraforming>(builder: (context, data, child) {
+        Consumer<Terraforming>(
+            builder: (BuildContext context, Terraforming data, Widget child) {
           return Terraforminglayout(data);
         }),
       ],

@@ -8,7 +8,7 @@ class HistoryLayoutBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<History>(
-      builder: (context, data, child) => HistoryMessageList(data),
+      builder: (BuildContext context, History data, Widget child) => HistoryMessageList(data),
     );
   }
 }

@@ -11,19 +11,19 @@ abstract class TerraformingValue extends ChangeNotifier {
   TerraformingValue(this._title);
 
   String _getHistoryMessageText() {
-    return "${this.title} - ";
+    return '$title - ';
   }
 
   String getHistoryMessgeProductionText() {
-    return _getHistoryMessageText() + HistoryMessageTypeString.PRODUCTION;
+    return _getHistoryMessageText() + HistoryMessageTypeString.production;
   }
 
   String getHistoryMessageValueText() {
-    return _getHistoryMessageText() + HistoryMessageTypeString.VALUE;
+    return _getHistoryMessageText() + HistoryMessageTypeString.value;
   }
 
   String getHistoryMessgeNextRoundText() {
-    return _getHistoryMessageText() + HistoryMessageTypeString.NEXT_ROUND;
+    return _getHistoryMessageText() + HistoryMessageTypeString.nextRound;
   }
 
   History history;
@@ -37,7 +37,7 @@ abstract class TerraformingValue extends ChangeNotifier {
 
   String get title => _title;
 
-  String get valueToString => "${value}";
+  String get valueToString => '$value';
 
   void incrementValue();
 
@@ -49,7 +49,7 @@ abstract class TerraformingValue extends ChangeNotifier {
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(intValue: ++value),
         type: type,
-        historyMessageType: HistoryMessageType.VALUE,
+        historyMessageType: HistoryMessageType.value,
       ),
     );
     notifyListeners();
@@ -66,7 +66,7 @@ abstract class TerraformingValue extends ChangeNotifier {
         newValue: HistoryMessageValue(
             intValue: isValueGreaterThenZero ? --value : value),
         type: type,
-        historyMessageType: HistoryMessageType.VALUE,
+        historyMessageType: HistoryMessageType.value,
       ),
     );
     notifyListeners();
@@ -85,23 +85,23 @@ abstract class TerraformingValue extends ChangeNotifier {
         newValue: HistoryMessageValue(intValue: ++value),
         type: type,
         production: 1,
-        historyMessageType: HistoryMessageType.VALUE,
+        historyMessageType: HistoryMessageType.value,
       ),
     );
     notifyListeners();
   }
 
   void undo(HistoryMessage historyMessage) {
-    if (historyMessage.historyMessageType == HistoryMessageType.VALUE) {
+    if (historyMessage.historyMessageType == HistoryMessageType.value) {
       undoValue(historyMessage);
     }
   }
 
   void undoValue(HistoryMessage historyMessage) {
-    if (historyMessage.newValue.intValue == this.value) {
-      this.value = historyMessage.oldValue.intValue;
+    if (historyMessage.newValue.intValue == value) {
+      value = historyMessage.oldValue.intValue;
     } else {
-      throw UnequalValueException("HistoryMessage.newValue != this.value");
+      throw const UnequalValueException('HistoryMessage.newValue != value');
     }
   }
 

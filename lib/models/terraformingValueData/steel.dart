@@ -8,30 +8,33 @@ import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 class Steel extends RessourceValue with PlayCardMixin {
-  Steel() : super("Stahl");
+  Steel() : super('Stahl');
 
+  @override
   bool canPlayCards(int cardValue) {
-    return this.value >= cardValue;
+    return value >= cardValue;
   }
 
   @override
-  void playCards(int cardValue) {
-    if (cardValue == 0) return;
+  void playCards(int amount) {
+    if (amount == 0) {
+      return;
+    }
 
-    if (canPlayCards(cardValue)) {
+    if (canPlayCards(amount)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $cardValue Stahl gekauft",
+          message: 'Karte für $amount Stahl gekauft',
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= cardValue),
+          newValue: HistoryMessageValue(intValue: value -= amount),
           type: Steel,
-          historyMessageType: HistoryMessageType.ACTION,
+          historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,
         ),
       );
       notifyListeners();
     } else {
-      throw ValueTooLowException("Du hast nicht genug Stahl");
+      throw const ValueTooLowException('Du hast nicht genug Stahl');
     }
   }
 
@@ -62,13 +65,13 @@ class Steel extends RessourceValue with PlayCardMixin {
 
   @override
   Steel updateHistory(History history) {
-    this.history = history;
+    history = history;
     return this;
   }
 
   @override
   Steel updateSetting(SettingsModel setting) {
-    this.setting = setting;
+    setting = setting;
     return this;
   }
 }

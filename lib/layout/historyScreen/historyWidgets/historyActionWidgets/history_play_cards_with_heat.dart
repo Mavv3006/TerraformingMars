@@ -6,7 +6,7 @@ import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_wi
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 
 class HistoryPlayCardsWithHeat extends HistoryWidget {
-  HistoryPlayCardsWithHeat({
+  const HistoryPlayCardsWithHeat({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
@@ -22,9 +22,7 @@ class HistoryPlayCardsWithHeat extends HistoryWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RessourceValueText(historyMessage.message),
-              RessourceValueText(
-                "Wärme - Anzahl",
-              )
+              const RessourceValueText('Wärme - Anzahl')
             ],
           ),
           HistoryNewBoolValue(

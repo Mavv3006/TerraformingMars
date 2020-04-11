@@ -11,11 +11,11 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 import 'energy.dart';
 
 class Heat extends RessourceValue with PlayCardMixin {
+  Heat() : super('Wärme');
+
+  Heat.withEnergy({@required this.energy}) : super('Wärme');
+
   Energy energy;
-
-  Heat() : super("Wärme");
-
-  Heat.withEnergy({@required this.energy}) : super("Wärme");
 
   Heat updateEnergy(Energy energy) {
     this.energy = energy;
@@ -28,12 +28,12 @@ class Heat extends RessourceValue with PlayCardMixin {
   void increaseTemperatur() {
     history.log(
       HistoryMessage(
-        message: "Temperatur erhöht",
+        message: 'Temperatur erhöht',
         oldValue: HistoryMessageValue(intValue: value),
         newValue:
             HistoryMessageValue(intValue: value -= setting.heatTradeValue),
         type: Heat,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.INCREASE_TEMPERATUR,
       ),
     );
@@ -47,10 +47,10 @@ class Heat extends RessourceValue with PlayCardMixin {
         message: getHistoryMessgeNextRoundText(),
         oldValue: HistoryMessageValue(intValue: value),
         newValue: HistoryMessageValue(
-            intValue: value += (energy.oldValue + production)),
+            intValue: value += energy.oldValue + production),
         type: Heat,
         production: energy.oldValue + production,
-        historyMessageType: HistoryMessageType.NEXT_ROUND,
+        historyMessageType: HistoryMessageType.nextRound,
       ),
     );
     super.nextRound();
@@ -93,22 +93,22 @@ class Heat extends RessourceValue with PlayCardMixin {
     if (_isEnoughToPlayCards(amount)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $amount Wärme ausgespielt",
+          message: 'Karte für $amount Wärme ausgespielt',
           oldValue: HistoryMessageValue(intValue: value),
           newValue: HistoryMessageValue(intValue: value -= amount),
           type: Heat,
-          historyMessageType: HistoryMessageType.ACTION,
+          historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_HEAT,
         ),
       );
       notifyListeners();
     } else {
-      throw ValueTooLowException("Du hast nicht genug Wärme");
+      throw const ValueTooLowException('Du hast nicht genug Wärme');
     }
   }
 
   bool _isEnoughToPlayCards(int cardValue) {
-    return this.value >= cardValue;
+    return value >= cardValue;
   }
 
   @override

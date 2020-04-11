@@ -5,17 +5,7 @@ import 'package:terraforming_mars/theme/colors.dart';
 import 'alert_dialog_button.dart';
 
 class TerraformingAlertDialog extends StatelessWidget {
-  final String acceptButtonTitle;
-  final String declineButtonTitle;
-
-  final String title;
-
-  final VoidCallback acceptButtonOnPressed;
-  final VoidCallback declineButtonOnPressed;
-
-  final Widget child;
-
-  TerraformingAlertDialog({
+  const TerraformingAlertDialog({
     this.acceptButtonTitle,
     this.declineButtonTitle,
     this.title,
@@ -24,6 +14,13 @@ class TerraformingAlertDialog extends StatelessWidget {
     this.child,
   });
 
+  final String acceptButtonTitle;
+  final String declineButtonTitle;
+  final String title;
+  final VoidCallback acceptButtonOnPressed;
+  final VoidCallback declineButtonOnPressed;
+  final Widget child;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -31,7 +28,7 @@ class TerraformingAlertDialog extends StatelessWidget {
           .textTheme
           .body1
           .copyWith(color: AppColors.accentColor),
-      content: child == null ? null : child,
+      content: child,
       shape: globalAlertDialogShape,
       titleTextStyle: Theme.of(context)
           .textTheme
@@ -50,6 +47,5 @@ class TerraformingAlertDialog extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

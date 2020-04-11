@@ -29,10 +29,10 @@ class _PlayCardsState extends State<PlayCards> {
 
   @override
   Widget build(BuildContext context) {
-    var mc = Provider.of<MegaCredits>(context);
-    var titan = Provider.of<Titan>(context);
-    var steel = Provider.of<Steel>(context);
-    var heat = Provider.of<Heat>(context);
+    final MegaCredits mc = Provider.of<MegaCredits>(context);
+    final Titan titan = Provider.of<Titan>(context);
+    final Steel steel = Provider.of<Steel>(context);
+    final Heat heat = Provider.of<Heat>(context);
 
     if (Provider.of<SettingsModel>(context, listen: false)
         .heatAsMCSwitchState) {
@@ -78,13 +78,13 @@ class _PlayCardsState extends State<PlayCards> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                RessourceValueText("Karte ausspielen für:"),
+                const RessourceValueText('Karte ausspielen für:'),
                 CustomTextInput(textEditingController),
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: buttonRow,
           ),
         ],
@@ -95,21 +95,23 @@ class _PlayCardsState extends State<PlayCards> {
   Widget buildCreditsButton(MegaCredits mc) {
     return ActionButton(
       buttonWidth: widget.buttonWidth,
-      text: "Credits",
+      text: 'Credits',
       onPressed: () {
         try {
-          int amount = int.parse(textEditingController.text);
-          if (amount <= 0) return;
+          final int amount = int.parse(textEditingController.text);
+          if (amount <= 0) {
+            return;
+          }
           mc.playCards(amount);
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content: Text("Du hast eine Karte für $amount MC ausgespielt"),
+              content: Text('Du hast eine Karte für $amount MC ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein."),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein.'),
             ),
           );
         } on ValueTooLowException catch (e) {
@@ -127,22 +129,24 @@ class _PlayCardsState extends State<PlayCards> {
 
   Widget buildHeatButton(Heat heat) {
     return ActionButton(
-      text: "Wärme",
+      text: 'Wärme',
       onPressed: () {
         try {
-          int cardValue = int.parse(textEditingController.text);
-          if (cardValue <= 0) return;
+          final int cardValue = int.parse(textEditingController.text);
+          if (cardValue <= 0) {
+            return;
+          }
           heat.playCards(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content:
-                  Text("Du hast eine Karte für $cardValue Wärme ausgespielt"),
+                  Text('Du hast eine Karte für $cardValue Wärme ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein"),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein'),
             ),
           );
         } on ValueTooLowException catch (e) {
@@ -159,22 +163,24 @@ class _PlayCardsState extends State<PlayCards> {
   Widget buildTitanButton(Titan titan) {
     return ActionButton(
       buttonWidth: widget.buttonWidth,
-      text: "Titan",
+      text: 'Titan',
       onPressed: () {
         try {
-          int cardValue = int.parse(textEditingController.text);
-          if (cardValue <= 0) return;
+          final int cardValue = int.parse(textEditingController.text);
+          if (cardValue <= 0) {
+            return;
+          }
           titan.playCards(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content:
-                  Text("Du hast eine Karte für $cardValue Titan ausgespielt"),
+                  Text('Du hast eine Karte für $cardValue Titan ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein."),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein.'),
             ),
           );
         } on ValueTooLowException catch (e) {
@@ -190,11 +196,11 @@ class _PlayCardsState extends State<PlayCards> {
 
   Widget buildCominationButton() {
     return ActionButton(
-      text: "Kombination",
+      text: 'Kombination',
       onPressed: () {
-        showDialog(
+        showDialog<Widget>(
           context: context,
-          builder: (context) {
+          builder: (BuildContext context) {
             return PlayCardsAlertDialog();
           },
         );
@@ -205,22 +211,24 @@ class _PlayCardsState extends State<PlayCards> {
   Widget buildSteelButton(Steel steel) {
     return ActionButton(
       buttonWidth: widget.buttonWidth,
-      text: "Stahl",
+      text: 'Stahl',
       onPressed: () {
         try {
-          int cardValue = int.parse(textEditingController.text);
-          if (cardValue <= 0) return;
+          final int cardValue = int.parse(textEditingController.text);
+          if (cardValue <= 0) {
+            return;
+          }
           steel.playCards(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content:
-                  Text("Du hast eine Karte für $cardValue Stahl ausgespielt"),
+                  Text('Du hast eine Karte für $cardValue Stahl ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein."),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein.'),
             ),
           );
         } on ValueTooLowException catch (e) {

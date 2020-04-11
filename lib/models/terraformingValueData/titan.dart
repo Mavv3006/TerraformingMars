@@ -9,30 +9,33 @@ import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 class Titan extends RessourceValue with PlayCardMixin {
-  Titan() : super("Titan");
+  Titan() : super('Titan');
 
+  @override
   bool canPlayCards(int cardValue) {
-    return this.value >= cardValue;
+    return value >= cardValue;
   }
 
   @override
-  void playCards(int cardValue) {
-    if (cardValue == 0) return;
+  void playCards(int amount) {
+    if (amount == 0) {
+      return;
+    }
 
-    if (canPlayCards(cardValue)) {
+    if (canPlayCards(amount)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $cardValue Titan gekauft",
+          message: 'Karte für $amount Titan gekauft',
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= cardValue),
+          newValue: HistoryMessageValue(intValue: value -= amount),
           type: Titan,
-          historyMessageType: HistoryMessageType.ACTION,
+          historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_TITAN,
         ),
       );
       notifyListeners();
     } else {
-      throw ValueTooLowException("Du hast nicht genug Titan");
+      throw const ValueTooLowException('Du hast nicht genug Titan');
     }
   }
 

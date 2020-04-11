@@ -5,12 +5,10 @@ import 'package:terraforming_mars/theme/colors.dart';
 import 'customIcons.dart';
 
 class HistoryNewIntValue extends StatelessWidget {
-  final iconPadding = EdgeInsets.only(left: 8, right: 8);
+  const HistoryNewIntValue({this.oldValue, this.newValue});
 
   final int oldValue;
   final int newValue;
-
-  HistoryNewIntValue({this.oldValue, this.newValue});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class HistoryNewIntValue extends StatelessWidget {
       children: <Widget>[
         RessourceValueText(oldValue.toString()),
         Padding(
-          padding: iconPadding,
+          padding: const EdgeInsets.only(left: 8, right: 8),
           child: Icon(
             CustomIcons.newValue,
             color: AppColors.accentColor,
@@ -31,12 +29,10 @@ class HistoryNewIntValue extends StatelessWidget {
 }
 
 class HistoryNewBoolValue extends StatelessWidget {
-  final iconPadding = EdgeInsets.only(left: 8, right: 8);
+  const HistoryNewBoolValue({this.oldValue, this.newValue});
 
   final bool oldValue;
   final bool newValue;
-
-  HistoryNewBoolValue({this.oldValue, this.newValue});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +40,7 @@ class HistoryNewBoolValue extends StatelessWidget {
       children: <Widget>[
         RessourceValueText(oldValue.toString().toUpperCase()),
         Padding(
-          padding: iconPadding,
+          padding: const EdgeInsets.only(left: 8, right: 8),
           child: Icon(
             CustomIcons.newBoolValue,
             color: AppColors.accentColor,

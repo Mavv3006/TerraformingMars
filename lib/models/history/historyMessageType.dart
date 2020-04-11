@@ -1,8 +1,8 @@
 class HistoryMessageTypeString {
-  static String PRODUCTION = "Produktion";
-  static String VALUE = "Anzahl";
-  static String SETTING = "Einstellung";
-  static String NEXT_ROUND = "Nächste Runde";
+  static String production = 'Produktion';
+  static String value = 'Anzahl';
+  static String setting = 'Einstellung';
+  static String nextRound = 'Nächste Runde';
 }
 
-enum HistoryMessageType { PRODUCTION, VALUE, SETTING, NEXT_ROUND, ACTION }
+enum HistoryMessageType { production, value, setting, nextRound, action }

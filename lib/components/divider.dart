@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Seperator extends StatelessWidget {
-  final double height;
-
   const Seperator({Key key, this.height}) : super(key: key);
+
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: this.height ?? 9,
+      height: height ?? 9,
     );
   }
 }

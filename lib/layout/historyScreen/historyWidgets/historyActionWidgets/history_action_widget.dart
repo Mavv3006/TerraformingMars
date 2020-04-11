@@ -20,7 +20,7 @@ import 'history_play_cards_with_titan.dart';
 import 'history_sell_cards_widget.dart';
 
 class HistoryActionWidget extends HistoryWidget {
-  HistoryActionWidget({
+  const HistoryActionWidget({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
@@ -58,7 +58,7 @@ class HistoryActionWidget extends HistoryWidget {
     }
     return CustomListElement(
       child: RessourceValueText(
-          "noch nicht implementiert: ${historyMessage.actionType}"),
+          'noch nicht implementiert: ${historyMessage.actionType}'),
     );
   }
 }

@@ -17,7 +17,7 @@ class SettingsHeatAsMC extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RessourceValueText("Wärme als MegaCredits verwenden?"),
+            const RessourceValueText('Wärme als MegaCredits verwenden?'),
             Consumer<SettingsModel>(
               builder: (
                 BuildContext context,
@@ -26,15 +26,15 @@ class SettingsHeatAsMC extends StatelessWidget {
               ) {
                 return CustomSwitch(
                   value: value.heatAsMCSwitchState,
-                  onChanged: (newValue) {
+                  onChanged: (bool newValue) {
                     if (newValue) {
-                      showDialog(
+                      showDialog<Widget>(
                         context: context,
-                        builder: (context) {
+                        builder: (BuildContext context) {
                           return TerraformingAlertDialog(
                             title:
-                                "Möchtest du Wärme als Zahlungsmittel hinzufügen?",
-                            acceptButtonTitle: "Ja",
+                                'Möchtest du Wärme als Zahlungsmittel hinzufügen?',
+                            acceptButtonTitle: 'Ja',
                             acceptButtonOnPressed: () {
                               Navigator.of(context).pop();
                               Provider.of<SettingsModel>(
@@ -42,7 +42,7 @@ class SettingsHeatAsMC extends StatelessWidget {
                                 listen: false,
                               ).heatAsMCSwitchState = true;
                             },
-                            declineButtonTitle: "Nein",
+                            declineButtonTitle: 'Nein',
                             declineButtonOnPressed: () {
                               Navigator.of(context).pop();
                             },

@@ -11,8 +11,8 @@ class SettingsRessourceValue extends StatefulWidget {
 }
 
 class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
-  final titanValueController = TextEditingController();
-  final steelValueController = TextEditingController();
+  final TextEditingController titanValueController = TextEditingController();
+  final TextEditingController steelValueController = TextEditingController();
 
   SettingsModel setting;
 
@@ -30,42 +30,42 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
 
   @override
   Widget build(BuildContext context) {
-    this.setting = Provider.of<SettingsModel>(context, listen: false);
+    setting = Provider.of<SettingsModel>(context, listen: false);
 
     steelValueController.value =
-        TextEditingValue(text: this.setting.steelBuyValue.toString());
+        TextEditingValue(text: setting.steelBuyValue.toString());
     titanValueController.value =
-        TextEditingValue(text: this.setting.titanBuyValue.toString());
+        TextEditingValue(text: setting.titanBuyValue.toString());
 
-    var topListElement = SettingsTextInputRow(
+    final SettingsTextInputRow topListElement = SettingsTextInputRow(
       controller: steelValueController,
-      text: "Stahl zu MegaCredits:",
+      text: 'Stahl zu MegaCredits:',
       onSubmitted: (String value) {
         try {
-          int newValue = int.parse(value);
+          final int newValue = int.parse(value);
           setting.steelBuyValue = newValue;
         } on FormatException catch (_) {
-          // TODO: Refactor into seperate Widget
+          // TODO(Marvin): Refactor into seperate Widget
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein"),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein'),
             ),
           );
         }
       },
     );
 
-    var bottomListElement = SettingsTextInputRow(
+    final SettingsTextInputRow bottomListElement = SettingsTextInputRow(
       controller: titanValueController,
-      text: "Titan zu MegaCredits:",
+      text: 'Titan zu MegaCredits:',
       onSubmitted: (String value) {
         try {
-          int newValue = int.parse(value);
+          final int newValue = int.parse(value);
           setting.steelBuyValue = newValue;
         } on FormatException catch (_) {
           Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Gebe eine Zahl ein"),
+            const SnackBar(
+              content: Text('Gebe eine Zahl ein'),
             ),
           );
         }
@@ -78,7 +78,7 @@ class _SettingsRessourceValueState extends State<SettingsRessourceValue> {
         children: <Widget>[
           topListElement,
           Padding(
-            padding: EdgeInsets.only(top: 6.0),
+            padding: const EdgeInsets.only(top: 6.0),
             child: bottomListElement,
           ),
         ],

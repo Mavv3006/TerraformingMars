@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class CustomListElement extends StatelessWidget {
-  final Widget child;
-  final EdgeInsetsGeometry padding;
-
   const CustomListElement({Key key, this.child, this.padding})
       : super(key: key);
+
+  final Widget child;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class CustomListElement extends StatelessWidget {
           width: 3,
           color: AppColors.accentColor,
         ),
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
       ),
-      padding: this.padding ?? EdgeInsets.only(top: 6.0),
-      child: this.child,
+      padding: padding ?? const EdgeInsets.only(top: 6.0),
+      child: child,
     );
   }
 }
