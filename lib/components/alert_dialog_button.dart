@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class AlertDialogButton extends StatelessWidget {
+  const AlertDialogButton({this.onPressed, this.text});
+
   final VoidCallback onPressed;
   final String text;
-
-  AlertDialogButton({this.onPressed, this.text});
 
   @override
   Widget build(BuildContext context) {

@@ -27,15 +27,16 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
   bool _isEnoughToPlayCards = true;
   bool _hasPlayedCard = false;
 
-  TextEditingController _mcController = TextEditingController();
-  TextEditingController _titanController = TextEditingController();
-  TextEditingController _steelController = TextEditingController();
-  TextEditingController _heatController = TextEditingController();
+  final TextEditingController _mcController = TextEditingController();
+  final TextEditingController _titanController = TextEditingController();
+  final TextEditingController _steelController = TextEditingController();
+  final TextEditingController _heatController = TextEditingController();
 
-  var _wrongInput = AlertText(text: "Falsche Eingabe");
-  var _notEnoughtMoney = AlertText(text: "Nicht genug Ressourcen");
-  var _playedCard = AlertText(
-    text: "Karte ausgespielt",
+  final AlertText _wrongInput = const AlertText(text: 'Falsche Eingabe');
+  final AlertText _notEnoughtMoney =
+      const AlertText(text: 'Nicht genug Ressourcen');
+  final AlertText _playedCard = AlertText(
+    text: 'Karte ausgespielt',
     textColor: AppColors.accentColor,
   );
 
@@ -48,40 +49,48 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     _heatController.addListener(_listenToHeatController);
   }
 
-  _listenToMcController() {
+  void _listenToMcController() {
     try {
-      if (_mcController.text.length == 0) return;
-      int cardValue = int.parse(_mcController.text);
+      if (_mcController.text.isEmpty) {
+        return;
+      }
+      final int cardValue = int.parse(_mcController.text);
       _mcValue = cardValue;
     } on FormatException catch (_) {
       _showWrongInputText();
     }
   }
 
-  _listenToTitanController() {
+  void _listenToTitanController() {
     try {
-      if (_titanController.text.length == 0) return;
-      int newValue = int.parse(_titanController.text);
+      if (_titanController.text.isEmpty) {
+        return;
+      }
+      final int newValue = int.parse(_titanController.text);
       _titanValue = newValue;
     } on FormatException catch (_) {
       _showWrongInputText();
     }
   }
 
-  _listenToSteelController() {
+  void _listenToSteelController() {
     try {
-      if (_steelController.text.length == 0) return;
-      int newValue = int.parse(_steelController.text);
+      if (_steelController.text.isEmpty) {
+        return;
+      }
+      final int newValue = int.parse(_steelController.text);
       _steelValue = newValue;
     } on FormatException catch (_) {
       _showWrongInputText();
     }
   }
 
-  _listenToHeatController() {
+  void _listenToHeatController() {
     try {
-      if (_heatController.text.length == 0) return;
-      int newValue = int.parse(_heatController.text);
+      if (_heatController.text.isEmpty) {
+        return;
+      }
+      final int newValue = int.parse(_heatController.text);
       _heatValue = newValue;
     } on FormatException catch (_) {
       _showWrongInputText();
@@ -99,28 +108,28 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var mcLayout = SettingsTextInputRow(
-      text: "MegaCredits:",
+    final SettingsTextInputRow mcLayout = SettingsTextInputRow(
+      text: 'MegaCredits:',
       controller: _mcController,
     );
-    var titanLayout = Padding(
-      padding: EdgeInsets.only(top: 6.0),
+    final Padding titanLayout = Padding(
+      padding: const EdgeInsets.only(top: 6.0),
       child: SettingsTextInputRow(
-        text: "Titan:",
+        text: 'Titan:',
         controller: _titanController,
       ),
     );
-    var steelLayout = Padding(
-      padding: EdgeInsets.only(top: 6.0),
+    final Padding steelLayout = Padding(
+      padding: const EdgeInsets.only(top: 6.0),
       child: SettingsTextInputRow(
-        text: "Stahl:",
+        text: 'Stahl:',
         controller: _steelController,
       ),
     );
-    var heatLayout = Padding(
-      padding: EdgeInsets.only(top: 6.0),
+    final Padding heatLayout = Padding(
+      padding: const EdgeInsets.only(top: 6.0),
       child: SettingsTextInputRow(
-        text: "Wärme:",
+        text: 'Wärme:',
         controller: _heatController,
       ),
     );
@@ -129,14 +138,14 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
       context,
       listen: false,
     ).heatAsMCSwitchState) {
-      layoutList = [
+      layoutList = <Widget>[
         mcLayout,
         steelLayout,
         titanLayout,
         heatLayout,
       ];
     } else {
-      layoutList = [
+      layoutList = <Widget>[
         mcLayout,
         steelLayout,
         titanLayout,
@@ -156,14 +165,14 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     }
 
     return TerraformingAlertDialog(
-      title: "Welche Kombination?",
-      declineButtonTitle: "Abbrechen",
+      title: 'Welche Kombination?',
+      declineButtonTitle: 'Abbrechen',
       declineButtonOnPressed: _hasPlayedCard
           ? null
           : () {
               Navigator.of(context).pop();
             },
-      acceptButtonTitle: "Bestätigen",
+      acceptButtonTitle: 'Bestätigen',
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: layoutList,
@@ -178,7 +187,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
 
   void _buyCard(BuildContext context) {
     print(
-      "{_mcValue: $_mcValue, _titanValue: $_titanValue, _steelValue: $_steelValue, _heatValue: $_heatValue}",
+      '{_mcValue: $_mcValue, _titanValue: $_titanValue, _steelValue: $_steelValue, _heatValue: $_heatValue}',
     );
     if (_canPlayCards(context)) {
       try {
@@ -197,11 +206,11 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
 
         _showHasPlayedCard(context);
       } on ValueTooLowException catch (_) {
-        print("ValueTooLowException");
+        print('ValueTooLowException');
         _showNotEnoughMoney();
       }
     } else {
-      print("Cannot Play Cards");
+      print('Cannot Play Cards');
       _showNotEnoughMoney();
     }
   }
@@ -210,7 +219,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     setState(() {
       _isEnoughToPlayCards = false;
     });
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       setState(() {
         _isEnoughToPlayCards = true;
       });
@@ -218,7 +227,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
   }
 
   bool _canPlayCards(BuildContext context) {
-    List<bool> enoughToPlayCards = [false, false, false, false];
+    final List<bool> enoughToPlayCards = <bool>[false, false, false, false];
     if ((_mcValue > 0 &&
             Provider.of<MegaCredits>(context, listen: false)
                 .canPlayCards(_mcValue)) ||
@@ -244,9 +253,9 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
       enoughToPlayCards[3] = true;
     }
 
-    print("Enough to Play Cards: $enoughToPlayCards");
+    print('Enough to Play Cards: $enoughToPlayCards');
 
-    return enoughToPlayCards.every((element) {
+    return enoughToPlayCards.every((bool element) {
       return element == true;
     });
   }
@@ -255,7 +264,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     setState(() {
       _isInputCorrect = false;
     });
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       setState(() {
         _isInputCorrect = true;
       });
@@ -266,7 +275,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     setState(() {
       _hasPlayedCard = true;
     });
-    Timer(Duration(milliseconds: 1250), () {
+    Timer(const Duration(milliseconds: 1250), () {
       Navigator.of(context).pop();
     });
   }
@@ -284,13 +293,13 @@ class AlertText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _orangeTheme = Theme.of(context)
+    final TextStyle _orangeTheme = Theme.of(context)
         .textTheme
         .body1
-        .copyWith(color: this.textColor ?? AppColors.orangeColor);
+        .copyWith(color: textColor ?? AppColors.orangeColor);
 
     return Padding(
-      padding: EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: 12),
       child: Text(
         text,
         style: _orangeTheme,

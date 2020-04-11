@@ -1,7 +1,7 @@
 class UnequalValueException implements Exception {
-  final String message;
+  const UnequalValueException(this.message);
 
-  UnequalValueException(this.message);
+  final String message;
 
   String errorMessage() => message;
 }

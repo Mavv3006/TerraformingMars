@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const ShapeBorder globalAlertDialogShape = RoundedRectangleBorder(
-  borderRadius: const BorderRadius.all(
+  borderRadius: BorderRadius.all(
     Radius.circular(20),
   ),
 );

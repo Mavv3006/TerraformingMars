@@ -7,8 +7,8 @@ import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {
-  test("adding Messages - history.length", () {
-    var energy = Energy();
+  test('adding Messages - history.length', () {
+    final Energy energy = Energy();
     energy.history = History();
 
     energy.incrementValue();
@@ -17,7 +17,7 @@ void main() {
   });
 
   test('undo function', () {
-    var titan = Titan();
+    final Titan titan = Titan();
     titan.history = History();
 
     titan.incrementValue();
@@ -29,11 +29,11 @@ void main() {
   });
 
   test('history message type', () {
-    var history = History();
-    var titan = Titan();
-    var energy = Energy();
-    var heat = Heat.withEnergy(energy: energy);
-    var steel = Steel();
+    final History history = History();
+    final Titan titan = Titan();
+    final Energy energy = Energy();
+    final Heat heat = Heat.withEnergy(energy: energy);
+    final Steel steel = Steel();
 
     titan.history = history;
     energy.history = history;
@@ -42,35 +42,35 @@ void main() {
 
     history.log(
       HistoryMessage(
-        message: "Titan - decrement Value",
+        message: 'Titan - decrement Value',
         oldValue: HistoryMessageValue(intValue: 5),
         newValue: HistoryMessageValue(
           intValue: DefaultRessourceValue.defaultValueValue,
         ),
         type: Titan,
-        historyMessageType: HistoryMessageType.VALUE,
+        historyMessageType: HistoryMessageType.value,
       ),
     );
 
-    var lastEntry = history.getLastEntry();
+    final HistoryMessage lastEntry = history.getLastEntry();
     switch (lastEntry.type) {
       case Steel:
-        fail("Steel: wrong Type");
+        fail('Steel: wrong Type');
         break;
       case Energy:
-        fail("Energy: wrong Type");
+        fail('Energy: wrong Type');
         break;
       case Heat:
-        fail("Heat: wrong Type");
+        fail('Heat: wrong Type');
         break;
       case MegaCredits:
-        fail("MegaCredits: wrong Type");
+        fail('MegaCredits: wrong Type');
         break;
       case Titan:
         titan.undo(lastEntry);
         break;
       default:
-        fail("Default: wrong Type");
+        fail('Default: wrong Type');
         break;
     }
 
@@ -78,7 +78,7 @@ void main() {
   });
 
   test('Crop nextRound', () {
-    var crop = Crop();
+    final Crop crop = Crop();
     crop.history = History();
 
     crop.nextRound();
@@ -90,31 +90,34 @@ void main() {
   });
 
   test('Crop increment Value', () {
-    var crop = Crop();
+    final Crop crop = Crop();
     crop.history = History();
 
     crop.incrementValue();
 
     expect(DefaultRessourceValue.defaultValueValue + 1, crop.value);
   });
+
   test('Crop decrement Value', () {
-    var crop = Crop();
+    final Crop crop = Crop();
     crop.history = History();
 
     crop.decrementValue();
 
     expect(DefaultRessourceValue.defaultValueValue - 1, crop.value);
   });
+
   test('Crop decrement Production', () {
-    var crop = Crop();
+    final Crop crop = Crop();
     crop.history = History();
 
     crop.decrementProduction();
 
     expect(DefaultRessourceValue.defaultProductionValue - 1, crop.production);
   });
+
   test('Crop increment Production', () {
-    var crop = Crop();
+    final Crop crop = Crop();
     crop.history = History();
 
     crop.incrementProduction();
@@ -123,7 +126,7 @@ void main() {
   });
 
   test('decrement Value', () {
-    var steel = Steel();
+    final Steel steel = Steel();
     steel.history = History();
 
     steel.decrementValue();
@@ -133,7 +136,7 @@ void main() {
   });
 
   test('increment Value', () {
-    var steel = Steel();
+    final Steel steel = Steel();
     steel.history = History();
 
     steel.incrementValue();
@@ -149,18 +152,18 @@ void main() {
             oldValue: null,
             newValue: null,
             type: null,
-            historyMessageType: HistoryMessageType.ACTION),
+            historyMessageType: HistoryMessageType.action),
         throwsA(isA<AssertionError>()));
   });
 
   test('HistoryMessageType without actionType', () {
     expect(
         () => HistoryMessage(
-            message: "null",
+            message: 'null',
             oldValue: HistoryMessageValue(intValue: 1),
             newValue: HistoryMessageValue(intValue: 1),
             type: null,
-            historyMessageType: HistoryMessageType.ACTION,
+            historyMessageType: HistoryMessageType.action,
             actionType: ActionType.BUILD_CITY),
         returnsNormally);
   });

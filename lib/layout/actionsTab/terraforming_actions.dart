@@ -17,10 +17,10 @@ class _TerraformingActionState extends State<TerraformingAction> {
 
   @override
   Widget build(BuildContext context) {
-    var crop = Provider.of<Crop>(context);
-    var heat = Provider.of<Heat>(context);
-    var terra = Provider.of<Terraforming>(context);
-    var switchState = Provider.of<TerraformingSwitchState>(context);
+    final Crop crop = Provider.of<Crop>(context);
+    final Heat heat = Provider.of<Heat>(context);
+    final Terraforming terra = Provider.of<Terraforming>(context);
+    final TerraformingSwitchState switchState = Provider.of<TerraformingSwitchState>(context);
 
     return CustomListElement(
       padding: EdgeInsets.only(left: outsidePadding, right: outsidePadding),
@@ -39,7 +39,7 @@ class _TerraformingActionState extends State<TerraformingAction> {
                           }
                         }
                       : null,
-                  text: "Temperatur erhöhen"),
+                  text: 'Temperatur erhöhen'),
               ActionButton(
                   buttonWidth: 130,
                   onPressed: crop.isValueEnoughForForest
@@ -50,18 +50,18 @@ class _TerraformingActionState extends State<TerraformingAction> {
                           }
                         }
                       : null,
-                  text: "Wald bauen"),
+                  text: 'Wald bauen'),
             ],
           ),
           Row(
             children: <Widget>[
-              RessourceValueText("mit TFW?"),
+              const RessourceValueText('mit TFW?'),
               Switch(
                 activeColor: AppColors.accentColor,
                 inactiveThumbColor: AppColors.primaryColor,
                 inactiveTrackColor: AppColors.disabledButtonColor,
                 value: switchState.currentState,
-                onChanged: (newValue) => setState(
+                onChanged: (bool newValue) => setState(
                   () {
                     switchState.currentState = newValue;
                   },

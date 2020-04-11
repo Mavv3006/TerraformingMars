@@ -6,18 +6,16 @@ import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_wi
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 
 class HistorySettingWidget extends HistoryWidget {
-  HistorySettingWidget({
+  const HistorySettingWidget({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
 
-  Widget historyNewValue;
-
   @override
   Widget build(BuildContext context) {
-
-    if (historyMessage.oldValue.intValue!=null) {
-      historyNewValue =  HistoryNewIntValue(
+    Widget historyNewValue;
+    if (historyMessage.oldValue.intValue != null) {
+      historyNewValue = HistoryNewIntValue(
         oldValue: historyMessage.oldValue.intValue,
         newValue: historyMessage.newValue.intValue,
       );
@@ -36,7 +34,7 @@ class HistorySettingWidget extends HistoryWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              RessourceValueText("Tauschwert:"),
+              const RessourceValueText('Tauschwert:'),
               RessourceValueText(historyMessage.message),
             ],
           ),

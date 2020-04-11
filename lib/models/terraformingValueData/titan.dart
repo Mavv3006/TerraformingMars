@@ -5,34 +5,38 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
-
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
-class Titan extends RessourceValue with PlayCardMixin{
-  Titan() : super("Titan");
+class Titan extends RessourceValue with PlayCardMixin {
+  Titan() : super('Titan');
 
-  bool canPlayCards(int cardValue){
-    return this.value >= cardValue;
+  @override
+  bool canPlayCards(int amount) {
+    return value >= amount;
   }
 
   @override
-  void playCards(int cardValue) {
-    if (cardValue == 0) return;
+  void playCards(int amount) {
+    if (amount == 0) {
+      return;
+    }
 
-    if (canPlayCards(cardValue)) {
+    final int titanAmount = (amount / setting.titanBuyValue).round();
+
+    if (canPlayCards(titanAmount)) {
       history.log(
         HistoryMessage(
-          message: "Karte für $cardValue Titan gekauft",
-          oldValue: HistoryMessageValue(intValue:value),
-          newValue: HistoryMessageValue(intValue:value -= cardValue),
+          message: 'Karte für $amount Titan gekauft',
+          oldValue: HistoryMessageValue(intValue: value),
+          newValue: HistoryMessageValue(intValue: value -= titanAmount),
           type: Titan,
-          historyMessageType: HistoryMessageType.ACTION,
+          historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_TITAN,
         ),
       );
       notifyListeners();
     } else {
-      throw ValueTooLowException("Du hast nicht genug Titan");
+      throw const ValueTooLowException('Du hast nicht genug Titan');
     }
   }
 

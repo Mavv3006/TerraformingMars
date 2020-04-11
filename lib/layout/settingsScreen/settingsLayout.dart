@@ -15,9 +15,9 @@ class _SettingsLayoutState extends State<SettingsLayout> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBarTitle: "Einstellungen",
+      appBarTitle: 'Einstellungen',
       body: CustomList(
-        children: [
+        children: <Widget>[
           SettingsRessourceValue(),
           SettingsTradeValue(),
           SettingsHeatAsMC(),

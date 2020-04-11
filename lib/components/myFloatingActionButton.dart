@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class MyFloatingActionButton extends StatelessWidget {
-  final double buttonSize = 30.0;
+  const MyFloatingActionButton(this.onPressed, this.icon);
+
   final Function() onPressed;
   final IconData icon;
 
-  MyFloatingActionButton(this.onPressed, this.icon);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: buttonSize,
-      height: buttonSize,
+      width: 30.0,
+      height: 30.0,
       child: RawMaterialButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         fillColor: Theme.of(context).primaryColor,
         elevation: 0.0,
         onPressed: () {

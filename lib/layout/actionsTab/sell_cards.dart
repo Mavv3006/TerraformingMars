@@ -20,22 +20,22 @@ class _SellCardsState extends State<SellCards> {
 
   @override
   Widget build(BuildContext context) {
-    var mc = Provider.of<MegaCredits>(context);
+    final MegaCredits mc = Provider.of<MegaCredits>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         CustomTextInput(textEditingController),
         ActionButton(
-          text: "Karten verkaufen",
+          text: 'Karten verkaufen',
           onPressed: () {
             try {
-              var amount = int.parse(textEditingController.text);
+              final int amount = int.parse(textEditingController.text);
               mc.sellCards(amount);
-            } on FormatException catch (e) {
+            } on FormatException catch (_) {
               print("'${textEditingController.text}' wurde eingegeben");
               Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Gebe eine Zahl ein."),
+                const SnackBar(
+                  content: Text('Gebe eine Zahl ein.'),
                 ),
               );
             }

@@ -5,8 +5,8 @@ import 'package:terraforming_mars/models/settings/settingsModel.dart';
 
 void main() {
   test('log history Message: SteelBuyValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
     setting.steelBuyValue = 1;
 
     assert(setting.steelBuyValue == 1);
@@ -14,8 +14,8 @@ void main() {
   });
 
   test('log history Message: TitanBuyValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
     setting.titanBuyValue = 1;
 
     assert(setting.titanBuyValue == 1);
@@ -23,8 +23,8 @@ void main() {
   });
 
   test('log history Message: HeatTradeValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
     setting.heatTradeValue = 1;
 
     assert(setting.heatTradeValue == 1);
@@ -32,8 +32,8 @@ void main() {
   });
 
   test('undo setting: SteelBuyValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
 
     setting.steelBuyValue = 1;
     setting.undo(history.getLastEntry());
@@ -43,8 +43,8 @@ void main() {
   });
 
   test('undo setting: HeatTradeValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
 
     setting.heatTradeValue = 1;
     setting.undo(history.getLastEntry());
@@ -55,8 +55,8 @@ void main() {
   });
 
   test('undo setting: CropValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
 
     setting.cropTradeValue = 1;
     setting.undo(history.getLastEntry());
@@ -67,8 +67,8 @@ void main() {
   });
 
   test('undo setting: TitanValue', () {
-    var history = History();
-    var setting = SettingsModel().updateHistory(history);
+    final History history = History();
+    final SettingsModel setting = SettingsModel().updateHistory(history);
 
     setting.titanBuyValue = 1;
     setting.undo(history.getLastEntry());

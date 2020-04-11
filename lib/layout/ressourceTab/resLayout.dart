@@ -6,9 +6,9 @@ import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 import 'ressourcesView.dart';
 
 class ResLayout extends StatelessWidget {
-  final RessourceValue ressourceValue;
+  const ResLayout(this.ressourceValue);
 
-  ResLayout(this.ressourceValue);
+  final RessourceValue ressourceValue;
 
   @override
   Widget build(BuildContext context) {

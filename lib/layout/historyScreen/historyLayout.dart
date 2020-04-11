@@ -4,6 +4,7 @@ import 'package:terraforming_mars/components/customIcons.dart';
 import 'package:terraforming_mars/components/custom_scaffold.dart';
 import 'package:terraforming_mars/layout/historyScreen/historyLayoutBody.dart';
 import 'package:terraforming_mars/models/history/history.dart';
+import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
@@ -11,7 +12,7 @@ class HistoryLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBarTitle: "Verlauf",
+      appBarTitle: 'Verlauf',
       appBarActions: <Widget>[
         IconButton(
           icon: Icon(
@@ -20,9 +21,10 @@ class HistoryLayout extends StatelessWidget {
           onPressed: Provider.of<History>(context).isEmpty
               ? null
               : () {
-                  var lastEvent = Provider.of<History>(context, listen: false)
+                  final HistoryMessage lastEvent = Provider.of<History>(context, listen: false)
                       .getLastEntry();
-                  print("HistoryLayout -> Last History Event: "+lastEvent.toString());
+                  print('HistoryLayout -> Last History Event: ' +
+                      lastEvent.toString());
                   switch (lastEvent.type) {
                     case MegaCredits:
                       Provider.of<MegaCredits>(context, listen: false)
@@ -55,7 +57,7 @@ class HistoryLayout extends StatelessWidget {
                           .undo(lastEvent);
                       break;
                     default:
-                      print("Unexpected Type: ${lastEvent.type}");
+                      print('Unexpected Type: ${lastEvent.type}');
                       return;
                   }
                 },

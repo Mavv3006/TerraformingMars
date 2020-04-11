@@ -3,9 +3,9 @@ import 'package:terraforming_mars/components/custom_list.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 
 class HistoryMessageList extends StatelessWidget {
-  final History history;
+  const HistoryMessageList(this.history);
 
-  HistoryMessageList(this.history);
+  final History history;
 
   @override
   Widget build(BuildContext context) {

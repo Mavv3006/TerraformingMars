@@ -14,22 +14,23 @@ class StandardProjects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mc = Provider.of<MegaCredits>(context);
-    var switchState = Provider.of<TerraformingSwitchState>(context);
+    final MegaCredits mc = Provider.of<MegaCredits>(context);
+    final TerraformingSwitchState switchState =
+        Provider.of<TerraformingSwitchState>(context);
 
     return CustomListElement(
       padding:
           EdgeInsets.only(left: outsidePadding, right: outsidePadding, top: 6),
       child: Column(
         children: <Widget>[
-          RessourceValueText("Standard Projekte"),
+          const RessourceValueText('Standard Projekte'),
           SellCards(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              RessourceValueText("Kraftwerk bauen: +1 Energie Prod."),
+              const RessourceValueText('Kraftwerk bauen: +1 Energie Prod.'),
               ActionButton(
-                text: "11 MC",
+                text: '11 MC',
                 onPressed: mc.isValueEnoughForFactory
                     ? () {
                         mc.standardProject(ActionType.BUILD_FACTORY);
@@ -44,15 +45,15 @@ class StandardProjects extends StatelessWidget {
               Consumer<TerraformingSwitchState>(
                 builder: (BuildContext context, TerraformingSwitchState value,
                     Widget child) {
-                  var text = "Asteroid abstürzen: +2°C";
+                  String text = 'Asteroid abstürzen: +2°C';
                   if (value.currentState) {
-                    text += ", +1 TFW";
+                    text += ', +1 TFW';
                   }
                   return RessourceValueText(text);
                 },
               ),
               ActionButton(
-                text: "14 MC",
+                text: '14 MC',
                 onPressed: mc.isValueEnoughForAsteroid
                     ? () {
                         mc.standardProject(ActionType.ASTEROID);
@@ -71,15 +72,15 @@ class StandardProjects extends StatelessWidget {
               Consumer<TerraformingSwitchState>(
                 builder: (BuildContext context, TerraformingSwitchState value,
                     Widget child) {
-                  var text = "Ozean bewässern";
+                  String text = 'Ozean bewässern';
                   if (value.currentState) {
-                    text += ": +1 TFW";
+                    text += ': +1 TFW';
                   }
                   return RessourceValueText(text);
                 },
               ),
               ActionButton(
-                text: "18 MC",
+                text: '18 MC',
                 onPressed: mc.isValueEnoughForOcean
                     ? () {
                         mc.standardProject(ActionType.BUILD_OCEAN);
@@ -98,15 +99,15 @@ class StandardProjects extends StatelessWidget {
               Consumer<TerraformingSwitchState>(
                 builder: (BuildContext context, TerraformingSwitchState value,
                     Widget child) {
-                  var text = "Wald pflanzen";
+                  String text = 'Wald pflanzen';
                   if (value.currentState) {
-                    text += ": +1 TFW";
+                    text += ': +1 TFW';
                   }
                   return RessourceValueText(text);
                 },
               ),
               ActionButton(
-                text: "23 MC",
+                text: '23 MC',
                 onPressed: mc.isValueEnoughForForest
                     ? () {
                         mc.standardProject(ActionType.BUILD_FOREST_WITH_MC);
@@ -122,9 +123,9 @@ class StandardProjects extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              RessourceValueText("Stadt bauen: +1 MC Produktion"),
+              const RessourceValueText('Stadt bauen: +1 MC Produktion'),
               ActionButton(
-                text: "25 MC",
+                text: '25 MC',
                 onPressed: mc.isValueEnoughForCity
                     ? () {
                         mc.standardProject(ActionType.BUILD_CITY);

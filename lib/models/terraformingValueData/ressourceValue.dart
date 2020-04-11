@@ -7,43 +7,43 @@ import 'package:terraforming_mars/models/terraformingValueData/terraformingValue
 import '../defaultValue.dart';
 
 abstract class RessourceValue extends TerraformingValue {
-  RessourceValue.startBy({@required int startBy, @required String title})
-      : super(title) {
-    value = value;
-  }
-
   RessourceValue(String title) : super(title) {
     value = DefaultRessourceValue.defaultValueValue;
+  }
+
+  RessourceValue.fromValue({@required int startBy, @required String title})
+      : super(title) {
+    value = startBy;
   }
 
   int production = DefaultRessourceValue.defaultProductionValue;
 
   bool get isProductionGreaterThenZero => production > 0;
 
-  String get productionToString => "${production}";
+  String get productionToString => '$production';
 
   @override
   void undo(HistoryMessage historyMessage) {
     switch (historyMessage.historyMessageType) {
-      case HistoryMessageType.VALUE:
-      case HistoryMessageType.NEXT_ROUND:
-      case HistoryMessageType.ACTION:
+      case HistoryMessageType.value:
+      case HistoryMessageType.nextRound:
+      case HistoryMessageType.action:
         undoValue(historyMessage);
         return;
-      case HistoryMessageType.PRODUCTION:
+      case HistoryMessageType.production:
         undoProduction(historyMessage);
         return;
-      case HistoryMessageType.SETTING:
-        print("HistoryMessageType.SETTING detectet in RessourceValue");
+      case HistoryMessageType.setting:
+        print('HistoryMessageType.SETTING detectet in RessourceValue');
         break;
     }
   }
 
   void undoProduction(HistoryMessage historyMessage) {
-    if (historyMessage.newValue == this.production) {
-      this.production = historyMessage.oldValue.intValue;
+    if (historyMessage.newValue.intValue == production) {
+      production = historyMessage.oldValue.intValue;
     } else {
-      throw UnequalValueException("HistoryMessage.newValue != this.value");
+      throw const UnequalValueException('HistoryMessage.newValue != this.value');
     }
   }
 
@@ -54,10 +54,10 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeProductionText(),
-        oldValue: HistoryMessageValue(intValue:production),
-        newValue: HistoryMessageValue(intValue:++production),
+        oldValue: HistoryMessageValue(intValue: production),
+        newValue: HistoryMessageValue(intValue: ++production),
         type: type,
-        historyMessageType: HistoryMessageType.PRODUCTION,
+        historyMessageType: HistoryMessageType.production,
       ),
     );
     notifyListeners();
@@ -70,10 +70,11 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeProductionText(),
-        oldValue: HistoryMessageValue(intValue:production),
-        newValue: HistoryMessageValue(intValue:isProductionGreaterThenZero ? --production : production),
+        oldValue: HistoryMessageValue(intValue: production),
+        newValue: HistoryMessageValue(
+            intValue: isProductionGreaterThenZero ? --production : production),
         type: type,
-        historyMessageType: HistoryMessageType.PRODUCTION,
+        historyMessageType: HistoryMessageType.production,
       ),
     );
     notifyListeners();
@@ -84,24 +85,18 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:value += production),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(intValue: value += production),
         production: production,
         type: type,
-        historyMessageType: HistoryMessageType.NEXT_ROUND,
+        historyMessageType: HistoryMessageType.nextRound,
       ),
     );
     notifyListeners();
   }
 
   @override
-  void decrementValue() {}
-
-  @override
-  void incrementValue() {}
-
-  @override
   String toString() {
-    return '$title{production: $production}, value: ${value}';
+    return '$title{production: $production}, value: $value';
   }
 }

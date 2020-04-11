@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:terraforming_mars/layout/mainLayout.dart';
 import 'package:terraforming_mars/models/history/history.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
@@ -15,50 +16,66 @@ class MyProviderApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+      providers: <SingleChildWidget>[
         ChangeNotifierProvider<History>(
           create: (_) => History(),
         ),
         ChangeNotifierProxyProvider<History, SettingsModel>(
           create: (_) => SettingsModel(),
-          update: (_, history, previous) => previous.updateHistory(history),
+          update: (_, History history, SettingsModel previous) =>
+              previous.updateHistory(history),
         ),
         ChangeNotifierProxyProvider2<History, SettingsModel, Terraforming>(
           create: (_) => Terraforming(),
-          update: (_, history, setting, previous) =>
+          update: (_, History history, SettingsModel setting,
+                  Terraforming previous) =>
               previous.updateHistory(history).updateSetting(setting),
         ),
         ChangeNotifierProxyProvider2<History, SettingsModel, Energy>(
           create: (_) => Energy(),
-          update: (_, history, setting, previous) =>
-              previous.updateHistory(history).updateSetting(setting),
+          update:
+              (_, History history, SettingsModel setting, Energy previous) =>
+                  previous.updateHistory(history).updateSetting(setting),
         ),
         ChangeNotifierProxyProvider2<History, SettingsModel, Steel>(
           create: (_) => Steel(),
-          update: (_, history, setting, previous) =>
+          update: (_, History history, SettingsModel setting, Steel previous) =>
               previous.updateHistory(history).updateSetting(setting),
         ),
         ChangeNotifierProxyProvider2<History, SettingsModel, Titan>(
           create: (_) => Titan(),
-          update: (_, history, setting, previous) =>
+          update: (_, History history, SettingsModel setting, Titan previous) =>
               previous.updateHistory(history).updateSetting(setting),
         ),
         ChangeNotifierProxyProvider2<History, SettingsModel, Crop>(
           create: (_) => Crop(),
-          update: (_, history, setting, previous) =>
+          update: (_, History history, SettingsModel setting, Crop previous) =>
               previous.updateHistory(history).updateSetting(setting),
         ),
         ChangeNotifierProxyProvider3<Energy, History, SettingsModel, Heat>(
           create: (_) => Heat(),
-          update: (context, energy, history, setting, previous) => previous
-              .updateEnergy(energy)
-              .updateHistory(history)
-              .updateSetting(setting),
+          update: (
+            BuildContext context,
+            Energy energy,
+            History history,
+            SettingsModel setting,
+            Heat previous,
+          ) =>
+              previous
+                  .updateEnergy(energy)
+                  .updateHistory(history)
+                  .updateSetting(setting),
         ),
         ChangeNotifierProxyProvider3<Terraforming, History, SettingsModel,
             MegaCredits>(
           create: (_) => MegaCredits(),
-          update: (context, terraformingValue, history, setting, previous) =>
+          update: (
+            BuildContext context,
+            Terraforming terraformingValue,
+            History history,
+            SettingsModel setting,
+            MegaCredits previous,
+          ) =>
               previous
                   .updateTerraformingValue(terraformingValue)
                   .updateHistory(history)
@@ -79,14 +96,14 @@ class MyApp extends StatelessWidget {
         primaryColor: AppColors.accentColor,
         fontFamily: 'Prototype',
         buttonTheme: globalButtonTheme,
-        pageTransitionsTheme: PageTransitionsTheme(
-          builders: {
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
             TargetPlatform.android: CupertinoPageTransitionsBuilder(),
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
       ),
-      debugShowCheckedModeBanner: false,
+//      debugShowCheckedModeBanner: false,
       home: MainLayout(),
     );
   }

@@ -7,9 +7,7 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/theme/colors.dart';
 
 class HistoryNextRoundWidget extends HistoryWidget {
-  final iconPadding = EdgeInsets.only(left: 8, right: 8);
-
-  HistoryNextRoundWidget({
+  const HistoryNextRoundWidget({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
@@ -29,7 +27,7 @@ class HistoryNextRoundWidget extends HistoryWidget {
             children: <Widget>[
               RessourceValueText(historyMessage.oldValue.intValue.toString()),
               Padding(
-                padding: iconPadding,
+                padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Icon(
                   historyMessage.production >= 0
                       ? CustomIcons.plus
@@ -42,7 +40,7 @@ class HistoryNextRoundWidget extends HistoryWidget {
                   ? historyMessage.production.toString()
                   : (historyMessage.production * (-1)).toString()),
               Padding(
-                padding: iconPadding,
+                padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Icon(
                   CustomIcons.equals,
                   color: AppColors.accentColor,

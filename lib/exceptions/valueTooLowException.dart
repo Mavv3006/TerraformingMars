@@ -1,8 +1,7 @@
 class ValueTooLowException implements Exception {
+  const ValueTooLowException(this.message);
+
   final String message;
 
-  ValueTooLowException(this.message);
-
   String errorMessage() => message;
-
 }

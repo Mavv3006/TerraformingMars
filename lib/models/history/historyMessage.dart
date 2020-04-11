@@ -4,14 +4,6 @@ import 'package:terraforming_mars/models/action/action_type.dart';
 import 'historyMessageType.dart';
 
 class HistoryMessage {
-  final String message;
-  final HistoryMessageValue oldValue;
-  final HistoryMessageValue newValue;
-  final int production;
-  final Type type;
-  final HistoryMessageType historyMessageType;
-  final ActionType actionType;
-
   HistoryMessage({
     @required this.message,
     @required this.oldValue,
@@ -20,10 +12,11 @@ class HistoryMessage {
     @required this.historyMessageType,
     this.actionType,
     this.production,
-  })  : assert(historyMessageType == HistoryMessageType.ACTION
+  })  : assert(historyMessageType == HistoryMessageType.action
             ? actionType != null
             : actionType == null),
-        assert( // oldValue == intValue
+        assert(
+          // oldValue == intValue
           oldValue.intValue != null
               ? (oldValue.boolValue == null &&
                   newValue.boolValue == null &&
@@ -32,7 +25,8 @@ class HistoryMessage {
                   newValue.boolValue != null &&
                   newValue.intValue == null),
         ),
-        assert( // oldValue == boolValue
+        assert(
+          // oldValue == boolValue
           oldValue.boolValue != null
               ? (oldValue.intValue == null &&
                   newValue.boolValue != null &&
@@ -41,7 +35,8 @@ class HistoryMessage {
                   newValue.boolValue == null &&
                   newValue.intValue != null),
         ),
-        assert( // newValue == intValue
+        assert(
+          // newValue == intValue
           newValue.intValue != null
               ? (oldValue.boolValue == null &&
                   newValue.boolValue == null &&
@@ -50,7 +45,8 @@ class HistoryMessage {
                   newValue.boolValue != null &&
                   oldValue.intValue == null),
         ),
-        assert(  // newValue == boolValue
+        assert(
+          // newValue == boolValue
           newValue.boolValue != null
               ? (oldValue.boolValue != null &&
                   oldValue.intValue == null &&
@@ -60,6 +56,14 @@ class HistoryMessage {
                   newValue.intValue != null),
         );
 
+  final String message;
+  final HistoryMessageValue oldValue;
+  final HistoryMessageValue newValue;
+  final int production;
+  final Type type;
+  final HistoryMessageType historyMessageType;
+  final ActionType actionType;
+
   @override
   String toString() {
     return 'HistoryMessage{message: $message, oldValue: $oldValue, newValue: $newValue, production: $production, type: $type, historyMessageType: $historyMessageType, actionType: $actionType}';
@@ -67,10 +71,10 @@ class HistoryMessage {
 }
 
 class HistoryMessageValue {
+  HistoryMessageValue({this.intValue, this.boolValue});
+
   int intValue;
   bool boolValue;
-
-  HistoryMessageValue({this.intValue, this.boolValue});
 
   @override
   String toString() {

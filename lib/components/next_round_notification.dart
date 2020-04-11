@@ -16,11 +16,11 @@ class NextRoundButton extends StatelessWidget {
         Provider.of<Titan>(context, listen: false).nextRound();
         Provider.of<Steel>(context, listen: false).nextRound();
         Scaffold.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Die nächste Runde wurde eingeläutet"),
+          const SnackBar(
+            content: Text('Die nächste Runde wurde eingeläutet'),
           ),
         );
-        Provider.of<Terraforming>(context,listen: false).nextRound();
+        Provider.of<Terraforming>(context, listen: false).nextRound();
       },
       icon: Icon(
         CustomIcons.nextRound,

@@ -23,7 +23,7 @@ class _BuyCardsState extends State<BuyCards> {
 
   @override
   Widget build(BuildContext context) {
-    var mc = Provider.of<MegaCredits>(context);
+    final MegaCredits mc = Provider.of<MegaCredits>(context);
     return CustomListElement(
       padding: EdgeInsets.only(
         left: outsidePadding,
@@ -36,18 +36,20 @@ class _BuyCardsState extends State<BuyCards> {
           ActionButton(
             onPressed: () {
               try {
-                int amount = int.parse(textEditingController.text);
-                if (amount <= 0) return;
+                final int amount = int.parse(textEditingController.text);
+                if (amount <= 0) {
+                  return;
+                }
                 mc.buyCards(amount);
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
-                    content: Text("Du hast eine Karte für $amount MC gekauft"),
+                    content: Text('Du hast eine Karte für $amount MC gekauft'),
                   ),
                 );
               } on FormatException catch (_) {
                 Scaffold.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Gebe eine Zahl ein."),
+                  const SnackBar(
+                    content: Text('Gebe eine Zahl ein.'),
                   ),
                 );
               } on ValueTooLowException catch (e) {
@@ -60,7 +62,7 @@ class _BuyCardsState extends State<BuyCards> {
                 );
               }
             },
-            text: "neue Karten kaufen",
+            text: 'neue Karten kaufen',
           )
         ],
       ),

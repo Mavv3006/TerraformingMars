@@ -6,18 +6,19 @@ import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
 
 class Crop extends RessourceValue {
-  Crop() : super("Pflanze");
+  Crop() : super('Pflanze');
 
   bool get isValueEnoughForForest => value >= setting.cropTradeValue;
 
   void buildForest() {
     history.log(
       HistoryMessage(
-        message: "Wald gepflanzt",
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:value -= setting.cropTradeValue),
+        message: 'Wald gepflanzt',
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue:
+            HistoryMessageValue(intValue: value -= setting.cropTradeValue),
         type: Crop,
-        historyMessageType: HistoryMessageType.ACTION,
+        historyMessageType: HistoryMessageType.action,
         actionType: ActionType.BUILD_FOREST_WITH_CROP,
       ),
     );

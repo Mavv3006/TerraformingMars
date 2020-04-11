@@ -6,9 +6,9 @@ import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 import 'ressourcesView.dart';
 
 class EnergyLayout extends StatelessWidget {
-  final Energy data;
+  const EnergyLayout(this.data);
 
-  EnergyLayout(this.data);
+  final Energy data;
 
   @override
   Widget build(BuildContext context) {

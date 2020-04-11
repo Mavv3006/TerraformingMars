@@ -5,9 +5,9 @@ import 'package:terraforming_mars/components/ressourceValueText.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 class Terraforminglayout extends StatelessWidget {
-  final Terraforming data;
+  const Terraforminglayout(this.data);
 
-  Terraforminglayout(this.data);
+  final Terraforming data;
 
   @override
   Widget build(BuildContext context) {

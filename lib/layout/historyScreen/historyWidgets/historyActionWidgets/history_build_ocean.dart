@@ -6,7 +6,7 @@ import 'package:terraforming_mars/layout/historyScreen/historyWidgets/history_wi
 import 'package:terraforming_mars/models/history/historyMessage.dart';
 
 class HistoryBuildOcean extends HistoryWidget {
-  HistoryBuildOcean({
+  const HistoryBuildOcean({
     Key key,
     @required HistoryMessage historyMessage,
   }) : super(key: key, historyMessage: historyMessage);
@@ -22,7 +22,7 @@ class HistoryBuildOcean extends HistoryWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RessourceValueText(historyMessage.message),
-              RessourceValueText("MegaCredits - Anzahl"),
+              const RessourceValueText('MegaCredits - Anzahl'),
             ],
           ),
           HistoryNewIntValue(
