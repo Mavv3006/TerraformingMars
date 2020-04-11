@@ -10,7 +10,7 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 import '../defaultValue.dart';
 import 'terraforming.dart';
 
-class MegaCredits extends RessourceValue with PlayCardMixin{
+class MegaCredits extends RessourceValue with PlayCardMixin {
   Terraforming terraformingValue;
 
   bool get isValueEnoughForFactory =>

@@ -15,9 +15,8 @@ class HistorySettingWidget extends HistoryWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    if (historyMessage.oldValue.intValue!=null) {
-      historyNewValue =  HistoryNewIntValue(
+    if (historyMessage.oldValue.intValue != null) {
+      historyNewValue = HistoryNewIntValue(
         oldValue: historyMessage.oldValue.intValue,
         newValue: historyMessage.newValue.intValue,
       );

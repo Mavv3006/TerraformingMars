@@ -6,4 +6,3 @@ class HistoryMessageTypeString {
 }
 
 enum HistoryMessageType { PRODUCTION, VALUE, SETTING, NEXT_ROUND, ACTION }
-

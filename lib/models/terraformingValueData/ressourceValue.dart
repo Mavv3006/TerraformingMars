@@ -54,8 +54,8 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeProductionText(),
-        oldValue: HistoryMessageValue(intValue:production),
-        newValue: HistoryMessageValue(intValue:++production),
+        oldValue: HistoryMessageValue(intValue: production),
+        newValue: HistoryMessageValue(intValue: ++production),
         type: type,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
@@ -70,8 +70,9 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeProductionText(),
-        oldValue: HistoryMessageValue(intValue:production),
-        newValue: HistoryMessageValue(intValue:isProductionGreaterThenZero ? --production : production),
+        oldValue: HistoryMessageValue(intValue: production),
+        newValue: HistoryMessageValue(
+            intValue: isProductionGreaterThenZero ? --production : production),
         type: type,
         historyMessageType: HistoryMessageType.PRODUCTION,
       ),
@@ -84,8 +85,8 @@ abstract class RessourceValue extends TerraformingValue {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:value += production),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(intValue: value += production),
         production: production,
         type: type,
         historyMessageType: HistoryMessageType.NEXT_ROUND,

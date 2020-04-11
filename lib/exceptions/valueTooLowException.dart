@@ -4,5 +4,4 @@ class ValueTooLowException implements Exception {
   ValueTooLowException(this.message);
 
   String errorMessage() => message;
-
 }

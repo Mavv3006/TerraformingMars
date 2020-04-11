@@ -10,7 +10,7 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 
 import 'energy.dart';
 
-class Heat extends RessourceValue with PlayCardMixin{
+class Heat extends RessourceValue with PlayCardMixin {
   Energy energy;
 
   Heat() : super("Wärme");
@@ -29,8 +29,9 @@ class Heat extends RessourceValue with PlayCardMixin{
     history.log(
       HistoryMessage(
         message: "Temperatur erhöht",
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:value -= setting.heatTradeValue),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue:
+            HistoryMessageValue(intValue: value -= setting.heatTradeValue),
         type: Heat,
         historyMessageType: HistoryMessageType.ACTION,
         actionType: ActionType.INCREASE_TEMPERATUR,
@@ -44,8 +45,9 @@ class Heat extends RessourceValue with PlayCardMixin{
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: HistoryMessageValue(intValue:value),
-        newValue: HistoryMessageValue(intValue:value += (energy.oldValue + production)),
+        oldValue: HistoryMessageValue(intValue: value),
+        newValue: HistoryMessageValue(
+            intValue: value += (energy.oldValue + production)),
         type: Heat,
         production: energy.oldValue + production,
         historyMessageType: HistoryMessageType.NEXT_ROUND,
@@ -92,8 +94,8 @@ class Heat extends RessourceValue with PlayCardMixin{
       history.log(
         HistoryMessage(
           message: "Karte für $amount Wärme ausgespielt",
-          oldValue: HistoryMessageValue(intValue:value),
-          newValue: HistoryMessageValue(intValue:value -= amount),
+          oldValue: HistoryMessageValue(intValue: value),
+          newValue: HistoryMessageValue(intValue: value -= amount),
           type: Heat,
           historyMessageType: HistoryMessageType.ACTION,
           actionType: ActionType.PLAY_CARDS_WITH_HEAT,

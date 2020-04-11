@@ -29,6 +29,7 @@ class HistoryNewIntValue extends StatelessWidget {
     );
   }
 }
+
 class HistoryNewBoolValue extends StatelessWidget {
   final iconPadding = EdgeInsets.only(left: 8, right: 8);
 

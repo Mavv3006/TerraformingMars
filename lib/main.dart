@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
           },
         ),
       ),
-      debugShowCheckedModeBanner: false,
+//      debugShowCheckedModeBanner: false,
       home: MainLayout(),
     );
   }

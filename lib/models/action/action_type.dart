@@ -13,4 +13,3 @@ enum ActionType {
   PLAY_CARDS_WITH_TITAN,
   PLAY_CARDS_WITH_HEAT
 }
-

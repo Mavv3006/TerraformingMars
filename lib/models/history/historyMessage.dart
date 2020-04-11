@@ -23,7 +23,8 @@ class HistoryMessage {
   })  : assert(historyMessageType == HistoryMessageType.ACTION
             ? actionType != null
             : actionType == null),
-        assert( // oldValue == intValue
+        assert(
+          // oldValue == intValue
           oldValue.intValue != null
               ? (oldValue.boolValue == null &&
                   newValue.boolValue == null &&
@@ -32,7 +33,8 @@ class HistoryMessage {
                   newValue.boolValue != null &&
                   newValue.intValue == null),
         ),
-        assert( // oldValue == boolValue
+        assert(
+          // oldValue == boolValue
           oldValue.boolValue != null
               ? (oldValue.intValue == null &&
                   newValue.boolValue != null &&
@@ -41,7 +43,8 @@ class HistoryMessage {
                   newValue.boolValue == null &&
                   newValue.intValue != null),
         ),
-        assert( // newValue == intValue
+        assert(
+          // newValue == intValue
           newValue.intValue != null
               ? (oldValue.boolValue == null &&
                   newValue.boolValue == null &&
@@ -50,7 +53,8 @@ class HistoryMessage {
                   newValue.boolValue != null &&
                   oldValue.intValue == null),
         ),
-        assert(  // newValue == boolValue
+        assert(
+          // newValue == boolValue
           newValue.boolValue != null
               ? (oldValue.boolValue != null &&
                   oldValue.intValue == null &&
