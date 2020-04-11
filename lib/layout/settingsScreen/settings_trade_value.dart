@@ -11,8 +11,10 @@ class SettingsTradeValue extends StatefulWidget {
 }
 
 class _SettingsTradeValueState extends State<SettingsTradeValue> {
-  final TextEditingController heatTradeValueController = TextEditingController();
-  final TextEditingController cropTradeValueController = TextEditingController();
+  final TextEditingController heatTradeValueController =
+  TextEditingController();
+  final TextEditingController cropTradeValueController =
+  TextEditingController();
 
   SettingsModel setting;
 

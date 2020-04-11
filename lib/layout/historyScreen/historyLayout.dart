@@ -21,8 +21,9 @@ class HistoryLayout extends StatelessWidget {
           onPressed: Provider.of<History>(context).isEmpty
               ? null
               : () {
-                  final HistoryMessage lastEvent = Provider.of<History>(context, listen: false)
-                      .getLastEntry();
+            final HistoryMessage lastEvent =
+            Provider.of<History>(context, listen: false)
+                .getLastEntry();
                   print('HistoryLayout -> Last History Event: ' +
                       lastEvent.toString());
                   switch (lastEvent.type) {

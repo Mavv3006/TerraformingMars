@@ -43,7 +43,8 @@ abstract class RessourceValue extends TerraformingValue {
     if (historyMessage.newValue.intValue == production) {
       production = historyMessage.oldValue.intValue;
     } else {
-      throw const UnequalValueException('HistoryMessage.newValue != this.value');
+      throw const UnequalValueException(
+          'HistoryMessage.newValue != this.value');
     }
   }
 

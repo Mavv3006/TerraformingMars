@@ -40,13 +40,31 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   }
 
   @override
-  void playCards(int amount) {
-    if (_isEnoughToPlayCards(amount)) {
+  bool canPlayCard(int amount) {
+    return value >= amount;
+  }
+
+  @override
+  void playCard(int amount) {
+    playAmount(amount);
+  }
+
+  @override
+  void playAmount(int amount) {
+    if (amount > 0) {
+      _lastCardValue = amount;
+      logPlayingCard();
+    }
+  }
+
+  @override
+  void logPlayingCard() {
+    if (canPlayCard(_lastCardValue)) {
       history.log(
         HistoryMessage(
-          message: 'Karte für $amount MC ausgespielt',
+          message: 'Karte für $_lastCardValue MC ausgespielt',
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= amount),
+          newValue: HistoryMessageValue(intValue: value -= _lastCardValue),
           type: MegaCredits,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_MC,
@@ -56,10 +74,6 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     } else {
       throw const ValueTooLowException('Du hast nicht genug MegaCredits');
     }
-  }
-
-  bool _isEnoughToPlayCards(int cardValue) {
-    return value >= cardValue;
   }
 
   void buyCards(int amount) {
@@ -86,6 +100,11 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   bool _isEnoughToBuyCards(int amount) {
     return value >= (amount * DefaultActionValue.defaultCardBuyingValue);
   }
+
+  int _lastCardValue;
+
+  @override
+  int get lastCardValue => _lastCardValue;
 
   void sellCards(int amount) {
     history.log(
@@ -251,10 +270,5 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   MegaCredits updateSetting(SettingsModel setting) {
     this.setting = setting;
     return this;
-  }
-
-  @override
-  bool canPlayCards(int amount) {
-    return _isEnoughToPlayCards(amount);
   }
 }

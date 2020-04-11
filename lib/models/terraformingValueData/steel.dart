@@ -10,25 +10,40 @@ import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.da
 class Steel extends RessourceValue with PlayCardMixin {
   Steel() : super('Stahl');
 
+  int _lastCardValue;
+
   @override
-  bool canPlayCards(int amount) {
+  int get lastCardValue => _lastCardValue;
+
+  @override
+  bool canPlayCard(int amount) {
     return value >= amount;
   }
 
   @override
-  void playCards(int amount) {
-    if (amount == 0) {
-      return;
+  void playCard(int amount) {
+    if (amount > 0) {
+      _lastCardValue = (amount / setting.steelBuyValue).round();
+      logPlayingCard();
     }
+  }
 
-    final int steelAmount = (amount / setting.steelBuyValue).round();
+  @override
+  void playAmount(int amount) {
+    if (amount > 0) {
+      _lastCardValue = amount;
+      logPlayingCard();
+    }
+  }
 
-    if (canPlayCards(steelAmount)) {
+  @override
+  void logPlayingCard() {
+    if (canPlayCard(_lastCardValue)) {
       history.log(
         HistoryMessage(
-          message: 'Karte für $amount Stahl gekauft',
+          message: 'Karte für $_lastCardValue Stahl gekauft',
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= steelAmount),
+          newValue: HistoryMessageValue(intValue: value -= _lastCardValue),
           type: Steel,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,

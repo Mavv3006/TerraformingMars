@@ -25,6 +25,11 @@ class Heat extends RessourceValue with PlayCardMixin {
   bool get isValueEnoughForTemperaturIncrease =>
       value >= setting.heatTradeValue;
 
+  int _lastCardValue;
+
+  @override
+  int get lastCardValue => _lastCardValue;
+
   void increaseTemperatur() {
     history.log(
       HistoryMessage(
@@ -89,13 +94,23 @@ class Heat extends RessourceValue with PlayCardMixin {
   }
 
   @override
-  void playCards(int amount) {
-    if (_isEnoughToPlayCards(amount)) {
+  void playCard(int amount) {
+    playAmount(amount);
+  }
+
+  @override
+  bool canPlayCard(int amount) {
+    return value >= amount;
+  }
+
+  @override
+  void logPlayingCard() {
+    if (canPlayCard(_lastCardValue)) {
       history.log(
         HistoryMessage(
-          message: 'Karte für $amount Wärme ausgespielt',
+          message: 'Karte für $_lastCardValue Wärme ausgespielt',
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= amount),
+          newValue: HistoryMessageValue(intValue: value -= _lastCardValue),
           type: Heat,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_HEAT,
@@ -107,12 +122,11 @@ class Heat extends RessourceValue with PlayCardMixin {
     }
   }
 
-  bool _isEnoughToPlayCards(int cardValue) {
-    return value >= cardValue;
-  }
-
   @override
-  bool canPlayCards(int amount) {
-    return _isEnoughToPlayCards(amount);
+  void playAmount(int amount) {
+    if (amount > 0) {
+      _lastCardValue = amount;
+      logPlayingCard();
+    }
   }
 }

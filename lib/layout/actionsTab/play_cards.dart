@@ -102,10 +102,11 @@ class _PlayCardsState extends State<PlayCards> {
           if (amount <= 0) {
             return;
           }
-          mc.playCards(amount);
+          mc.playCard(amount);
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content: Text('Du hast eine Karte für $amount MC ausgespielt'),
+              content: Text(
+                  'Du hast eine Karte für ${mc.lastCardValue} MC ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
@@ -136,11 +137,12 @@ class _PlayCardsState extends State<PlayCards> {
           if (cardValue <= 0) {
             return;
           }
-          heat.playCards(cardValue);
+          heat.playCard(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content:
-                  Text('Du hast eine Karte für $cardValue Wärme ausgespielt'),
+              Text('Du hast eine Karte für ${heat
+                  .lastCardValue} Wärme ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
@@ -170,11 +172,12 @@ class _PlayCardsState extends State<PlayCards> {
           if (cardValue <= 0) {
             return;
           }
-          titan.playCards(cardValue);
+          titan.playAmount(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content:
-                  Text('Du hast eine Karte für $cardValue Titan ausgespielt'),
+              Text('Du hast eine Karte für ${titan
+                  .lastCardValue} Titan ausgespielt'),
             ),
           );
         } on FormatException catch (_) {
@@ -218,11 +221,12 @@ class _PlayCardsState extends State<PlayCards> {
           if (cardValue <= 0) {
             return;
           }
-          steel.playCards(cardValue);
+          steel.playCard(cardValue);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content:
-                  Text('Du hast eine Karte für $cardValue Stahl ausgespielt'),
+              Text('Du hast eine Karte für ${steel
+                  .lastCardValue} Stahl ausgespielt'),
             ),
           );
         } on FormatException catch (_) {

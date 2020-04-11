@@ -42,7 +42,7 @@ void main() {
 
     setting.steelBuyValue = steelValue;
     steel.value += (cardValue / steelValue).round();
-    steel.playCards(cardValue);
+    steel.playCard(cardValue);
 
     assert(setting.steelBuyValue == steelValue);
     assert(steel.value == DefaultRessourceValue.defaultValueValue);
@@ -58,7 +58,7 @@ void main() {
 
     setting.titanBuyValue = titanValue;
     titan.value += (cardValue / titanValue).round();
-    titan.playCards(cardValue);
+    titan.playAmount(cardValue);
 
     assert(setting.titanBuyValue == titanValue);
     assert(titan.value == DefaultRessourceValue.defaultValueValue);
@@ -70,7 +70,7 @@ void main() {
     final Titan titan = Titan().updateSetting(setting).updateHistory(history);
 
     setting.titanBuyValue = 1;
-    titan.playCards(1);
+    titan.playAmount(1);
 
     assert(titan.value == 0);
   });
