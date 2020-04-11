@@ -4,7 +4,7 @@ import 'package:terraforming_mars/components/customButton.dart';
 import 'package:terraforming_mars/components/custom_list_element.dart';
 import 'package:terraforming_mars/components/custom_text_input.dart';
 import 'package:terraforming_mars/exceptions/valueTooLowException.dart';
-import 'package:terraforming_mars/models/terraformingValueData/megaCredits.dart';
+import 'package:terraforming_mars/models/terraformingValueData/mega_Credits.dart';
 
 class BuyCards extends StatefulWidget {
   @override

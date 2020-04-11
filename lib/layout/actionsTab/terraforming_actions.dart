@@ -20,7 +20,8 @@ class _TerraformingActionState extends State<TerraformingAction> {
     final Crop crop = Provider.of<Crop>(context);
     final Heat heat = Provider.of<Heat>(context);
     final Terraforming terra = Provider.of<Terraforming>(context);
-    final TerraformingSwitchState switchState = Provider.of<TerraformingSwitchState>(context);
+    final TerraformingSwitchState switchState =
+    Provider.of<TerraformingSwitchState>(context);
 
     return CustomListElement(
       padding: EdgeInsets.only(left: outsidePadding, right: outsidePadding),

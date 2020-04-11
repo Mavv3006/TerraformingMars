@@ -21,11 +21,11 @@ void main() {
     titan.history = History();
 
     titan.incrementValue();
-    expect(2, equals(titan.value));
+    expect(2, equals(titan.dataModel.value));
 
     titan.undo(titan.history.getLastEntry());
     expect(0, titan.history.length());
-    expect(1, titan.value);
+    expect(1, titan.dataModel.value);
   });
 
   test('history message type', () {
@@ -74,7 +74,7 @@ void main() {
         break;
     }
 
-    expect(5, titan.value);
+    expect(5, titan.dataModel.value);
   });
 
   test('Crop nextRound', () {
@@ -86,7 +86,7 @@ void main() {
     expect(
         DefaultRessourceValue.defaultValueValue +
             DefaultRessourceValue.defaultProductionValue,
-        crop.value);
+        crop.dataModel.value);
   });
 
   test('Crop increment Value', () {
@@ -95,7 +95,7 @@ void main() {
 
     crop.incrementValue();
 
-    expect(DefaultRessourceValue.defaultValueValue + 1, crop.value);
+    expect(DefaultRessourceValue.defaultValueValue + 1, crop.dataModel.value);
   });
 
   test('Crop decrement Value', () {
@@ -104,7 +104,7 @@ void main() {
 
     crop.decrementValue();
 
-    expect(DefaultRessourceValue.defaultValueValue - 1, crop.value);
+    expect(DefaultRessourceValue.defaultValueValue - 1, crop.dataModel.value);
   });
 
   test('Crop decrement Production', () {
@@ -113,7 +113,8 @@ void main() {
 
     crop.decrementProduction();
 
-    expect(DefaultRessourceValue.defaultProductionValue - 1, crop.production);
+    expect(DefaultRessourceValue.defaultProductionValue - 1,
+        crop.dataModel.production);
   });
 
   test('Crop increment Production', () {
@@ -122,7 +123,8 @@ void main() {
 
     crop.incrementProduction();
 
-    expect(DefaultRessourceValue.defaultProductionValue + 1, crop.production);
+    expect(DefaultRessourceValue.defaultProductionValue + 1,
+        crop.dataModel.production);
   });
 
   test('decrement Value', () {
@@ -131,8 +133,12 @@ void main() {
 
     steel.decrementValue();
 
-    expect(DefaultRessourceValue.defaultValueValue - 1, steel.value);
-    expect(steel.value, steel.history.getLastEntry().newValue.intValue);
+    expect(DefaultRessourceValue.defaultValueValue - 1, steel.dataModel.value);
+    expect(
+        steel.dataModel.value, steel.history
+        .getLastEntry()
+        .newValue
+        .intValue);
   });
 
   test('increment Value', () {
@@ -141,8 +147,12 @@ void main() {
 
     steel.incrementValue();
 
-    expect(DefaultRessourceValue.defaultValueValue + 1, steel.value);
-    expect(steel.value, steel.history.getLastEntry().newValue.intValue);
+    expect(DefaultRessourceValue.defaultValueValue + 1, steel.dataModel.value);
+    expect(
+        steel.dataModel.value, steel.history
+        .getLastEntry()
+        .newValue
+        .intValue);
   });
 
   test('HistoryMessageType without actionType', () {

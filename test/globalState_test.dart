@@ -39,15 +39,15 @@ void main() {
     energy.history = history;
     megacredits.history = history;
 
-    final int megaStartValue = megacredits.value;
-    final int energyStartValue = energy.value;
+    final int megaStartValue = megacredits.dataModel.value;
+    final int energyStartValue = energy.dataModel.value;
     final int terraStartValue = terraforming.value;
 
     final VoidCallback megaNextRound = () {
-      expect(megacredits.value, greaterThan(megaStartValue));
+      expect(megacredits.dataModel.value, greaterThan(megaStartValue));
     };
     final VoidCallback energyNextRound = () {
-      expect(energy.value, equals(energyStartValue));
+      expect(energy.dataModel.value, equals(energyStartValue));
     };
     final VoidCallback terraNextRound = () {
       expect(terraforming.value, greaterThan(terraStartValue));
@@ -78,10 +78,10 @@ void main() {
     megacredits.history = history;
 
     final VoidCallback megaNextRound = () {
-      expect(41, equals(megacredits.value));
+      expect(41, equals(megacredits.dataModel.value));
     };
     final VoidCallback energyNextRound = () {
-      expect(1, equals(energy.value));
+      expect(1, equals(energy.dataModel.value));
     };
     final VoidCallback terraNextRound = () {
       expect(21, equals(terraforming.value));

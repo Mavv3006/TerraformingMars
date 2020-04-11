@@ -5,7 +5,7 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
-import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
+import 'package:terraforming_mars/models/terraformingValueData/ressource_value.dart';
 
 import '../defaultValue.dart';
 import 'terraforming.dart';
@@ -20,19 +20,19 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   Terraforming terraformingValue;
 
   bool get isValueEnoughForFactory =>
-      value >= DefaultActionValue.defaultStandardProjectFactoryValue;
+      dataModel.value >= DefaultActionValue.defaultStandardProjectFactoryValue;
 
   bool get isValueEnoughForAsteroid =>
-      value >= DefaultActionValue.defaultStandardProjectAsteroidValue;
+      dataModel.value >= DefaultActionValue.defaultStandardProjectAsteroidValue;
 
   bool get isValueEnoughForOcean =>
-      value >= DefaultActionValue.defaultStandardProjectOceanValue;
+      dataModel.value >= DefaultActionValue.defaultStandardProjectOceanValue;
 
   bool get isValueEnoughForForest =>
-      value >= DefaultActionValue.defaultStandardProjectForestValue;
+      dataModel.value >= DefaultActionValue.defaultStandardProjectForestValue;
 
   bool get isValueEnoughForCity =>
-      value >= DefaultActionValue.defaultStandardProjectCityValue;
+      dataModel.value >= DefaultActionValue.defaultStandardProjectCityValue;
 
   MegaCredits updateTerraformingValue(Terraforming value) {
     terraformingValue = value;
@@ -40,13 +40,32 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   }
 
   @override
-  void playCards(int amount) {
-    if (_isEnoughToPlayCards(amount)) {
+  bool canPlayCard(int amount) {
+    return dataModel.value >= amount;
+  }
+
+  @override
+  void playCard(int amount) {
+    playAmount(amount);
+  }
+
+  @override
+  void playAmount(int amount) {
+    if (amount > 0) {
+      _lastCardValue = amount;
+      logPlayingCard();
+    }
+  }
+
+  @override
+  void logPlayingCard() {
+    if (canPlayCard(_lastCardValue)) {
       history.log(
         HistoryMessage(
-          message: 'Karte für $amount MC ausgespielt',
-          oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= amount),
+          message: 'Karte für $_lastCardValue MC ausgespielt',
+          oldValue: HistoryMessageValue(intValue: dataModel.value),
+          newValue:
+          HistoryMessageValue(intValue: dataModel.value -= _lastCardValue),
           type: MegaCredits,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_MC,
@@ -58,18 +77,14 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     }
   }
 
-  bool _isEnoughToPlayCards(int cardValue) {
-    return value >= cardValue;
-  }
-
   void buyCards(int amount) {
     if (_isEnoughToBuyCards(amount)) {
       history.log(
         HistoryMessage(
           message: '$amount Karten gekauft',
-          oldValue: HistoryMessageValue(intValue: value),
+          oldValue: HistoryMessageValue(intValue: dataModel.value),
           newValue: HistoryMessageValue(
-            intValue: value -=
+            intValue: dataModel.value -=
                 amount * DefaultActionValue.defaultCardBuyingValue,
           ),
           type: MegaCredits,
@@ -84,16 +99,22 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   }
 
   bool _isEnoughToBuyCards(int amount) {
-    return value >= (amount * DefaultActionValue.defaultCardBuyingValue);
+    return dataModel.value >=
+        (amount * DefaultActionValue.defaultCardBuyingValue);
   }
+
+  int _lastCardValue;
+
+  @override
+  int get lastCardValue => _lastCardValue;
 
   void sellCards(int amount) {
     history.log(
       HistoryMessage(
         message: '$amount Karten verkauft',
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-          intValue: value +=
+          intValue: dataModel.value +=
               amount * DefaultActionValue.defaultCardSellingValue,
         ),
         type: MegaCredits,
@@ -131,9 +152,9 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: 'Asteroid abgeschleppt',
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-            intValue: value -=
+            intValue: dataModel.value -=
                 DefaultActionValue.defaultStandardProjectAsteroidValue),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.action,
@@ -146,9 +167,9 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: 'Ozean bewässert',
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-            intValue: value -=
+            intValue: dataModel.value -=
                 DefaultActionValue.defaultStandardProjectOceanValue),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.action,
@@ -161,9 +182,9 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: 'Wald gepflanzt',
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-          intValue: value -=
+          intValue: dataModel.value -=
               DefaultActionValue.defaultStandardProjectForestValue,
         ),
         type: MegaCredits,
@@ -177,9 +198,10 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: 'Stadt gebaut',
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-          intValue: value -= DefaultActionValue.defaultStandardProjectCityValue,
+          intValue: dataModel.value -=
+              DefaultActionValue.defaultStandardProjectCityValue,
         ),
         type: MegaCredits,
         historyMessageType: HistoryMessageType.action,
@@ -192,9 +214,9 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: 'Kraftwerk errichtet',
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-          intValue: value -=
+          intValue: dataModel.value -=
               DefaultActionValue.defaultStandardProjectFactoryValue,
         ),
         type: MegaCredits,
@@ -209,12 +231,13 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-          intValue: value += terraformingValue.value + production,
+          intValue: dataModel.value +=
+              terraformingValue.value + dataModel.production,
         ),
         type: MegaCredits,
-        production: terraformingValue.value + production,
+        production: terraformingValue.value + dataModel.production,
         historyMessageType: HistoryMessageType.nextRound,
       ),
     );
@@ -251,10 +274,5 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
   MegaCredits updateSetting(SettingsModel setting) {
     this.setting = setting;
     return this;
-  }
-
-  @override
-  bool canPlayCards(int amount) {
-    return _isEnoughToPlayCards(amount);
   }
 }

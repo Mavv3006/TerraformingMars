@@ -6,7 +6,7 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
-import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
+import 'package:terraforming_mars/models/terraformingValueData/ressource_value.dart';
 
 import 'energy.dart';
 
@@ -23,15 +23,20 @@ class Heat extends RessourceValue with PlayCardMixin {
   }
 
   bool get isValueEnoughForTemperaturIncrease =>
-      value >= setting.heatTradeValue;
+      dataModel.value >= setting.heatTradeValue;
+
+  int _lastCardValue;
+
+  @override
+  int get lastCardValue => _lastCardValue;
 
   void increaseTemperatur() {
     history.log(
       HistoryMessage(
         message: 'Temperatur erhöht',
-        oldValue: HistoryMessageValue(intValue: value),
-        newValue:
-            HistoryMessageValue(intValue: value -= setting.heatTradeValue),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
+        newValue: HistoryMessageValue(
+            intValue: dataModel.value -= setting.heatTradeValue),
         type: Heat,
         historyMessageType: HistoryMessageType.action,
         actionType: ActionType.INCREASE_TEMPERATUR,
@@ -45,11 +50,12 @@ class Heat extends RessourceValue with PlayCardMixin {
     history.log(
       HistoryMessage(
         message: getHistoryMessgeNextRoundText(),
-        oldValue: HistoryMessageValue(intValue: value),
+        oldValue: HistoryMessageValue(intValue: dataModel.value),
         newValue: HistoryMessageValue(
-            intValue: value += energy.oldValue + production),
+            intValue: dataModel.value +=
+                energy.oldValue + dataModel.production),
         type: Heat,
-        production: energy.oldValue + production,
+        production: energy.oldValue + dataModel.production,
         historyMessageType: HistoryMessageType.nextRound,
       ),
     );
@@ -89,13 +95,24 @@ class Heat extends RessourceValue with PlayCardMixin {
   }
 
   @override
-  void playCards(int amount) {
-    if (_isEnoughToPlayCards(amount)) {
+  void playCard(int amount) {
+    playAmount(amount);
+  }
+
+  @override
+  bool canPlayCard(int amount) {
+    return dataModel.value >= amount;
+  }
+
+  @override
+  void logPlayingCard() {
+    if (canPlayCard(_lastCardValue)) {
       history.log(
         HistoryMessage(
-          message: 'Karte für $amount Wärme ausgespielt',
-          oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= amount),
+          message: 'Karte für $_lastCardValue Wärme ausgespielt',
+          oldValue: HistoryMessageValue(intValue: dataModel.value),
+          newValue:
+          HistoryMessageValue(intValue: dataModel.value -= _lastCardValue),
           type: Heat,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_HEAT,
@@ -107,12 +124,11 @@ class Heat extends RessourceValue with PlayCardMixin {
     }
   }
 
-  bool _isEnoughToPlayCards(int cardValue) {
-    return value >= cardValue;
-  }
-
   @override
-  bool canPlayCards(int amount) {
-    return _isEnoughToPlayCards(amount);
+  void playAmount(int amount) {
+    if (amount > 0) {
+      _lastCardValue = amount;
+      logPlayingCard();
+    }
   }
 }

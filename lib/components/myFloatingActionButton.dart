@@ -6,7 +6,6 @@ class MyFloatingActionButton extends StatelessWidget {
   final Function() onPressed;
   final IconData icon;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(

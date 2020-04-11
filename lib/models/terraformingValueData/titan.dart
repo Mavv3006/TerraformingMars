@@ -5,30 +5,46 @@ import 'package:terraforming_mars/models/history/historyMessage.dart';
 import 'package:terraforming_mars/models/history/historyMessageType.dart';
 import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/mixins/play_card_mixin.dart';
-import 'package:terraforming_mars/models/terraformingValueData/ressourceValue.dart';
+import 'package:terraforming_mars/models/terraformingValueData/ressource_value.dart';
 
 class Titan extends RessourceValue with PlayCardMixin {
   Titan() : super('Titan');
 
+  int _lastCardValue;
+
   @override
-  bool canPlayCards(int amount) {
-    return value >= amount;
+  int get lastCardValue => _lastCardValue;
+
+  @override
+  bool canPlayCard(int amount) {
+    return dataModel.value >= amount;
   }
 
   @override
-  void playCards(int amount) {
-    if (amount == 0) {
-      return;
+  void playAmount(int amount) {
+    if (amount > 0) {
+      _lastCardValue = (amount / setting.titanBuyValue).round();
+      logPlayingCard();
     }
+  }
 
-    final int titanAmount = (amount / setting.titanBuyValue).round();
+  @override
+  void playCard(int amount) {
+    if (amount > 0) {
+      _lastCardValue = amount;
+      logPlayingCard();
+    }
+  }
 
-    if (canPlayCards(titanAmount)) {
+  @override
+  void logPlayingCard() {
+    if (canPlayCard(_lastCardValue)) {
       history.log(
         HistoryMessage(
-          message: 'Karte für $amount Titan gekauft',
-          oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= titanAmount),
+          message: 'Karte für $_lastCardValue Titan gekauft',
+          oldValue: HistoryMessageValue(intValue: dataModel.value),
+          newValue:
+          HistoryMessageValue(intValue: dataModel.value -= _lastCardValue),
           type: Titan,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_TITAN,

@@ -192,16 +192,16 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     if (_canPlayCards(context)) {
       try {
         if (_mcValue > 0) {
-          Provider.of<MegaCredits>(context, listen: false).playCards(_mcValue);
+          Provider.of<MegaCredits>(context, listen: false).playAmount(_mcValue);
         }
         if (_titanValue > 0) {
-          Provider.of<Titan>(context, listen: false).playCards(_titanValue);
+          Provider.of<Titan>(context, listen: false).playAmount(_titanValue);
         }
         if (_steelValue > 0) {
-          Provider.of<Steel>(context, listen: false).playCards(_steelValue);
+          Provider.of<Steel>(context, listen: false).playAmount(_steelValue);
         }
         if (_heatValue > 0) {
-          Provider.of<Heat>(context, listen: false).playCards(_heatValue);
+          Provider.of<Heat>(context, listen: false).playAmount(_heatValue);
         }
 
         _showHasPlayedCard(context);
@@ -230,25 +230,25 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     final List<bool> enoughToPlayCards = <bool>[false, false, false, false];
     if ((_mcValue > 0 &&
             Provider.of<MegaCredits>(context, listen: false)
-                .canPlayCards(_mcValue)) ||
+                .canPlayCard(_mcValue)) ||
         _mcValue == 0) {
       enoughToPlayCards[0] = true;
     }
     if ((_titanValue > 0 &&
             Provider.of<Titan>(context, listen: false)
-                .canPlayCards(_titanValue)) ||
+                .canPlayCard(_titanValue)) ||
         _titanValue == 0) {
       enoughToPlayCards[1] = true;
     }
     if ((_steelValue > 0 &&
             Provider.of<Steel>(context, listen: false)
-                .canPlayCards(_steelValue)) ||
+                .canPlayCard(_steelValue)) ||
         _steelValue == 0) {
       enoughToPlayCards[2] = true;
     }
     if ((_heatValue > 0 &&
             Provider.of<Heat>(context, listen: false)
-                .canPlayCards(_heatValue)) ||
+                .canPlayCard(_heatValue)) ||
         _heatValue == 0) {
       enoughToPlayCards[3] = true;
     }
@@ -275,7 +275,7 @@ class _PlayCardsAlertDialogState extends State<PlayCardsAlertDialog> {
     setState(() {
       _hasPlayedCard = true;
     });
-    Timer(const Duration(milliseconds: 1250), () {
+    Timer(const Duration(milliseconds: 850), () {
       Navigator.of(context).pop();
     });
   }
