@@ -11,8 +11,8 @@ class Steel extends RessourceValue with PlayCardMixin {
   Steel() : super('Stahl');
 
   @override
-  bool canPlayCards(int cardValue) {
-    return value >= cardValue;
+  bool canPlayCards(int amount) {
+    return value >= amount;
   }
 
   @override
@@ -21,12 +21,14 @@ class Steel extends RessourceValue with PlayCardMixin {
       return;
     }
 
-    if (canPlayCards(amount)) {
+    final int steelAmount = (amount / setting.steelBuyValue).round();
+
+    if (canPlayCards(steelAmount)) {
       history.log(
         HistoryMessage(
           message: 'Karte für $amount Stahl gekauft',
           oldValue: HistoryMessageValue(intValue: value),
-          newValue: HistoryMessageValue(intValue: value -= amount),
+          newValue: HistoryMessageValue(intValue: value -= steelAmount),
           type: Steel,
           historyMessageType: HistoryMessageType.action,
           actionType: ActionType.PLAY_CARDS_WITH_STEEL,
@@ -65,13 +67,13 @@ class Steel extends RessourceValue with PlayCardMixin {
 
   @override
   Steel updateHistory(History history) {
-    history = history;
+    this.history = history;
     return this;
   }
 
   @override
   Steel updateSetting(SettingsModel setting) {
-    setting = setting;
+    this.setting = setting;
     return this;
   }
 }

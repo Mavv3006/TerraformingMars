@@ -243,18 +243,18 @@ class MegaCredits extends RessourceValue with PlayCardMixin {
 
   @override
   MegaCredits updateHistory(History history) {
-    history = history;
+    this.history = history;
     return this;
   }
 
   @override
   MegaCredits updateSetting(SettingsModel setting) {
-    setting = setting;
+    this.setting = setting;
     return this;
   }
 
   @override
-  bool canPlayCards(int cardValue) {
-    return _isEnoughToPlayCards(cardValue);
+  bool canPlayCards(int amount) {
+    return _isEnoughToPlayCards(amount);
   }
 }

@@ -112,7 +112,7 @@ class Heat extends RessourceValue with PlayCardMixin {
   }
 
   @override
-  bool canPlayCards(int cardValue) {
-    return _isEnoughToPlayCards(cardValue);
+  bool canPlayCards(int amount) {
+    return _isEnoughToPlayCards(amount);
   }
 }

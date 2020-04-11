@@ -93,7 +93,7 @@ class SettingsModel extends ChangeNotifier {
   }
 
   SettingsModel updateHistory(History history) {
-    history = history;
+    this.history = history;
     return this;
   }
 

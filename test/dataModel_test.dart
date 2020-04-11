@@ -8,30 +8,58 @@ import 'package:terraforming_mars/models/settings/settingsModel.dart';
 import 'package:terraforming_mars/models/terraformingValueData/values.dart';
 
 void main() {
+  test('update History', () {
+    final History history = History();
+    final Crop crop = Crop();
+
+    expect(null, crop.history);
+
+    crop.updateHistory(history);
+
+    expect(history, crop.history);
+  });
+
+  test('update Setting', () {
+    final SettingsModel settingsModel = SettingsModel();
+    final Crop crop = Crop();
+
+    expect(null, crop.setting);
+
+    crop.updateSetting(settingsModel);
+
+    expect(settingsModel, crop.setting);
+  });
+
   test('RessourceValue default value', () {
-    final ressoureModel = Titan();
+    final Titan ressoureModel = Titan();
     expect(1, equals(ressoureModel.value));
   });
 
   test('RessourceValue startBy value', () {
-    final ressourceModel = MegaCredits();
-    final startValue = ressourceModel.value;
+    final MegaCredits ressourceModel = MegaCredits();
+    final int startValue = ressourceModel.value;
     expect(20, equals(startValue));
   });
 
   test('incrementing StartValue of RessourceValue', () {
-    final ressourceModel =
-        MegaCredits().updateHistory(History()).updateSetting(SettingsModel());
-    ressourceModel.addListener(() {
-      expect(21, equals(ressourceModel.value));
+    final History history = History();
+    final SettingsModel settingsModel = SettingsModel();
+    final MegaCredits megaCredits = MegaCredits();
+    megaCredits.updateHistory(history);
+    megaCredits.updateSetting(settingsModel);
+
+    assert (megaCredits.history == history);
+
+    megaCredits.addListener(() {
+      expect(21, equals(megaCredits.value));
     });
-    ressourceModel.incrementValue();
+    megaCredits.incrementValue();
   });
 
   test('incrementing StartValue of RessourceValue', () {
-    final ressourceModel =
+    final MegaCredits ressourceModel =
         MegaCredits().updateHistory(History()).updateSetting(SettingsModel());
-    final startProduction = ressourceModel.production;
+    final int startProduction = ressourceModel.production;
     ressourceModel.addListener(() {
       expect(ressourceModel.production, greaterThan(startProduction));
     });
@@ -39,10 +67,10 @@ void main() {
   });
 
   test('nextRound Energy', () {
-    final energy = Energy();
+    final Energy energy = Energy();
     energy.history = History();
-    final startValue = energy.value;
-    VoidCallback listener = () {
+    final int startValue = energy.value;
+    final VoidCallback listener = () {
       expect(energy.value, equals(startValue));
     };
     energy.addListener(listener);
@@ -51,10 +79,10 @@ void main() {
   });
 
   test('nextRound Titan', () {
-    final titan = Titan();
+    final Titan titan = Titan();
     titan.history = History();
-    final startValue = titan.value;
-    VoidCallback listener = () {
+    final int startValue = titan.value;
+    final VoidCallback listener = () {
       expect(titan.value, greaterThan(startValue));
     };
     titan.addListener(listener);
@@ -63,18 +91,19 @@ void main() {
   });
 
   test('undo Value', () {
-    var energy = Energy();
+    final Energy energy = Energy();
     energy.history = History();
-    HistoryMessageValue startValue =
+    final HistoryMessageValue startValue =
         HistoryMessageValue(intValue: energy.value);
     energy.incrementValue();
-    HistoryMessageValue newValue = HistoryMessageValue(intValue: energy.value);
+    final HistoryMessageValue newValue =
+        HistoryMessageValue(intValue: energy.value);
 
-    var historyMessage = HistoryMessage(
+    final HistoryMessage historyMessage = HistoryMessage(
       oldValue: startValue,
       newValue: newValue,
-      message: "Increment Energy Value",
-      historyMessageType: HistoryMessageType.VALUE,
+      message: 'Increment Energy Value',
+      historyMessageType: HistoryMessageType.value,
       type: Energy,
     );
 

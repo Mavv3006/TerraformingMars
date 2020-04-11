@@ -96,12 +96,6 @@ abstract class RessourceValue extends TerraformingValue {
   }
 
   @override
-  void decrementValue() {}
-
-  @override
-  void incrementValue() {}
-
-  @override
   String toString() {
     return '$title{production: $production}, value: $value';
   }
